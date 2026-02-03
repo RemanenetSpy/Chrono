@@ -49,12 +49,12 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen pb-40 text-neutral-900">
-      {/* Subtle Atmospheric Depth */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-200/50 to-transparent pointer-events-none"></div>
+    <div className="min-h-screen flex flex-col text-neutral-900 bg-[#fdfbf7]">
+      {/* Subtle Atmospheric Depth Line */}
+      <div className="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-200/40 to-transparent pointer-events-none z-50"></div>
 
       {/* Navigation */}
-      <nav className="p-10 md:p-14 flex justify-between items-center max-w-7xl mx-auto border-b border-black/[0.03]">
+      <nav className="p-10 md:p-14 flex justify-between items-center max-w-7xl mx-auto w-full border-b border-black/[0.03]">
         <div 
           className="cursor-pointer group" 
           onClick={() => setCurrentView('VAULT')}
@@ -81,7 +81,7 @@ const App: React.FC = () => {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-10 md:px-14 py-20">
+      <main className="flex-grow max-w-7xl mx-auto px-10 md:px-14 py-20 w-full">
         {currentView === 'VAULT' && (
           <div className="fade-up">
             <header className="mb-24">
@@ -143,11 +143,12 @@ const App: React.FC = () => {
         )}
       </main>
 
-      <footer className="fixed bottom-12 left-0 w-full text-center pointer-events-none flex flex-col items-center gap-2">
-        <p className="text-[8px] tracking-[0.6em] uppercase text-neutral-300 font-black">
+      {/* Footer moved out of 'fixed' to prevent overlap with main content */}
+      <footer className="w-full py-24 flex flex-col items-center gap-4 border-t border-black/[0.01] opacity-30 hover:opacity-100 transition-opacity duration-1000 mt-20">
+        <p className="text-[8px] tracking-[0.6em] uppercase text-neutral-400 font-black">
           Curating Continuity
         </p>
-        <p className="text-[7px] tracking-[0.3em] uppercase text-neutral-200 font-bold">
+        <p className="text-[7px] tracking-[0.3em] uppercase text-neutral-300 font-bold">
           Released under MIT License
         </p>
       </footer>
