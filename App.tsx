@@ -54,18 +54,18 @@ const App: React.FC = () => {
       <div className="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-200/40 to-transparent pointer-events-none z-50"></div>
 
       {/* Navigation */}
-      <nav className="p-10 md:p-14 flex justify-between items-center max-w-7xl mx-auto w-full border-b border-black/[0.03]">
+      <nav className="p-8 md:p-10 flex justify-between items-center max-w-7xl mx-auto w-full border-b border-black/[0.03]">
         <div 
           className="cursor-pointer group" 
           onClick={() => setCurrentView('VAULT')}
         >
-          <h1 className="text-3xl tracking-[0.3em] font-light uppercase">
+          <h1 className="text-2xl tracking-[0.3em] font-light uppercase">
             Chronos
             <span className="block h-px w-0 group-hover:w-full bg-black transition-all duration-1000 mt-2"></span>
           </h1>
         </div>
 
-        <div className="flex gap-12 items-center">
+        <div className="flex gap-10 items-center">
           <button 
             onClick={() => setCurrentView('PROFILE')}
             className={`text-[9px] tracking-[0.4em] uppercase transition-all font-bold ${currentView === 'PROFILE' ? 'text-black' : 'text-neutral-300 hover:text-neutral-500'}`}
@@ -74,26 +74,26 @@ const App: React.FC = () => {
           </button>
           <button 
             onClick={() => setCurrentView('CREATE')}
-            className="w-10 h-10 flex items-center justify-center border border-black/5 rounded-full hover:bg-black hover:text-white transition-all duration-700 shadow-sm"
+            className="w-9 h-9 flex items-center justify-center border border-black/5 rounded-full hover:bg-black hover:text-white transition-all duration-700 shadow-sm"
           >
             <i className="fa-solid fa-plus text-[10px]"></i>
           </button>
         </div>
       </nav>
 
-      <main className="flex-grow max-w-7xl mx-auto px-10 md:px-14 py-20 w-full">
+      <main className="flex-grow max-w-7xl mx-auto px-8 md:px-10 py-12 w-full">
         {currentView === 'VAULT' && (
           <div className="fade-up">
-            <header className="mb-24">
-              <p className="serif italic text-3xl text-neutral-400 max-w-xl leading-relaxed font-light">
+            <header className="mb-16">
+              <p className="serif italic text-2xl text-neutral-400 max-w-xl leading-relaxed font-light">
                 "We are but time-travelers, leaving marks on a shore the tide has yet to reach."
               </p>
             </header>
 
             {capsules.length === 0 ? (
-              <div className="py-48 text-center border-y border-black/[0.03] flex flex-col items-center">
-                <h3 className="serif text-4xl mb-6 text-neutral-300 font-light italic">The chronicle is silent.</h3>
-                <p className="text-neutral-400 text-[9px] tracking-[0.5em] uppercase mb-12 font-bold">Will you write today?</p>
+              <div className="py-32 text-center border-y border-black/[0.03] flex flex-col items-center">
+                <h3 className="serif text-3xl mb-4 text-neutral-300 font-light italic">The chronicle is silent.</h3>
+                <p className="text-neutral-400 text-[9px] tracking-[0.5em] uppercase mb-10 font-bold">Will you write today?</p>
                 <Button variant="outline" onClick={() => setCurrentView('CREATE')}>Compose Entry</Button>
               </div>
             ) : (
@@ -143,8 +143,7 @@ const App: React.FC = () => {
         )}
       </main>
 
-      {/* Footer moved out of 'fixed' to prevent overlap with main content */}
-      <footer className="w-full py-24 flex flex-col items-center gap-4 border-t border-black/[0.01] opacity-30 hover:opacity-100 transition-opacity duration-1000 mt-20">
+      <footer className="w-full py-16 flex flex-col items-center gap-3 border-t border-black/[0.01] opacity-30 hover:opacity-100 transition-opacity duration-1000 mt-12">
         <p className="text-[8px] tracking-[0.6em] uppercase text-neutral-400 font-black">
           Curating Continuity
         </p>
