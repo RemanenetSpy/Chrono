@@ -5,6 +5,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chronos | Letters to the Future</title>
+  
+  <!-- Google Analytics 4 (Privacy Configuration) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E3ENW8VBDS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // Privacy-centric configuration with specific ID provided
+    gtag('config', 'G-E3ENW8VBDS', {
+      'anonymize_ip': true,
+      'allow_google_signals': false,
+      'allow_ad_personalization_signals': false,
+      'restricted_data_processing': true
+    });
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -48,10 +65,10 @@
     
     /* Elegant animations */
     .fade-up {
-      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>

@@ -6,6 +6,7 @@ import { CreateCapsule } from './components/CreateCapsule';
 import { CapsuleDetail } from './components/CapsuleDetail';
 import { Profile } from './components/Profile';
 import { Button } from './components/Button';
+import { analytics } from './services/analytics';
 
 const DEFAULT_PROFILE: UserProfile = {
   name: 'L. Van-Tassel',
@@ -24,6 +25,9 @@ const App: React.FC = () => {
     const savedProfile = localStorage.getItem('chronos_profile');
     if (savedCapsules) setCapsules(JSON.parse(savedCapsules));
     if (savedProfile) setProfile(JSON.parse(savedProfile));
+    
+    // Track initial page load
+    analytics.viewVault();
   }, []);
 
   useEffect(() => {
@@ -34,9 +38,19 @@ const App: React.FC = () => {
     localStorage.setItem('chronos_profile', JSON.stringify(profile));
   }, [profile]);
 
+  // Track view changes
+  const navigateTo = (view: ViewState) => {
+    setCurrentView(view);
+    switch(view) {
+      case 'VAULT': analytics.viewVault(); break;
+      case 'CREATE': analytics.viewCompose(); break;
+      case 'PROFILE': analytics.viewMemoir(); break;
+    }
+  };
+
   const handleSaveCapsule = (newCapsule: Capsule) => {
     setCapsules([newCapsule, ...capsules]);
-    setCurrentView('VAULT');
+    navigateTo('VAULT');
   };
 
   const handleUpdateCapsule = (updated: Capsule) => {
@@ -45,7 +59,7 @@ const App: React.FC = () => {
 
   const handleDeleteCapsule = (id: string) => {
     setCapsules(capsules.filter(c => c.id !== id));
-    setCurrentView('VAULT');
+    navigateTo('VAULT');
   };
 
   return (
@@ -53,48 +67,49 @@ const App: React.FC = () => {
       {/* Subtle Atmospheric Depth Line */}
       <div className="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-200/40 to-transparent pointer-events-none z-50"></div>
 
-      {/* Navigation */}
-      <nav className="p-8 md:p-10 flex justify-between items-center max-w-7xl mx-auto w-full border-b border-black/[0.03]">
+      {/* Navigation - Reduced padding */}
+      <nav className="p-6 md:p-8 flex justify-between items-center max-w-7xl mx-auto w-full border-b border-black/[0.03]">
         <div 
           className="cursor-pointer group" 
-          onClick={() => setCurrentView('VAULT')}
+          onClick={() => navigateTo('VAULT')}
         >
-          <h1 className="text-2xl tracking-[0.3em] font-light uppercase">
+          <h1 className="text-xl md:text-2xl tracking-[0.3em] font-light uppercase">
             Chronos
-            <span className="block h-px w-0 group-hover:w-full bg-black transition-all duration-1000 mt-2"></span>
+            <span className="block h-px w-0 group-hover:w-full bg-black transition-all duration-1000 mt-1"></span>
           </h1>
         </div>
 
-        <div className="flex gap-10 items-center">
+        <div className="flex gap-8 items-center">
           <button 
-            onClick={() => setCurrentView('PROFILE')}
-            className={`text-[9px] tracking-[0.4em] uppercase transition-all font-bold ${currentView === 'PROFILE' ? 'text-black' : 'text-neutral-300 hover:text-neutral-500'}`}
+            onClick={() => navigateTo('PROFILE')}
+            className={`text-[8px] tracking-[0.4em] uppercase transition-all font-bold ${currentView === 'PROFILE' ? 'text-black' : 'text-neutral-300 hover:text-neutral-500'}`}
           >
             Memoir
           </button>
           <button 
-            onClick={() => setCurrentView('CREATE')}
-            className="w-9 h-9 flex items-center justify-center border border-black/5 rounded-full hover:bg-black hover:text-white transition-all duration-700 shadow-sm"
+            onClick={() => navigateTo('CREATE')}
+            className="w-8 h-8 flex items-center justify-center border border-black/5 rounded-full hover:bg-black hover:text-white transition-all duration-700 shadow-sm"
           >
-            <i className="fa-solid fa-plus text-[10px]"></i>
+            <i className="fa-solid fa-plus text-[9px]"></i>
           </button>
         </div>
       </nav>
 
-      <main className="flex-grow max-w-7xl mx-auto px-8 md:px-10 py-12 w-full">
+      {/* Main Content - Reduced vertical padding */}
+      <main className="flex-grow max-w-7xl mx-auto px-6 md:px-8 py-8 md:py-10 w-full">
         {currentView === 'VAULT' && (
           <div className="fade-up">
-            <header className="mb-16">
-              <p className="serif italic text-2xl text-neutral-400 max-w-xl leading-relaxed font-light">
+            <header className="mb-8 md:mb-10">
+              <p className="serif italic text-xl md:text-2xl text-neutral-400 max-w-xl leading-relaxed font-light">
                 "We are but time-travelers, leaving marks on a shore the tide has yet to reach."
               </p>
             </header>
 
             {capsules.length === 0 ? (
-              <div className="py-32 text-center border-y border-black/[0.03] flex flex-col items-center">
-                <h3 className="serif text-3xl mb-4 text-neutral-300 font-light italic">The chronicle is silent.</h3>
-                <p className="text-neutral-400 text-[9px] tracking-[0.5em] uppercase mb-10 font-bold">Will you write today?</p>
-                <Button variant="outline" onClick={() => setCurrentView('CREATE')}>Compose Entry</Button>
+              <div className="py-20 text-center border-y border-black/[0.03] flex flex-col items-center">
+                <h3 className="serif text-2xl mb-3 text-neutral-300 font-light italic">The chronicle is silent.</h3>
+                <p className="text-neutral-400 text-[8px] tracking-[0.5em] uppercase mb-8 font-bold">Will you write today?</p>
+                <Button variant="outline" onClick={() => navigateTo('CREATE')}>Compose Entry</Button>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 border-t border-l border-black/[0.04]">
@@ -104,6 +119,7 @@ const App: React.FC = () => {
                     capsule={capsule} 
                     onClick={() => {
                       setSelectedCapsuleId(capsule.id);
+                      analytics.viewDetail(capsule.id);
                       setCurrentView('DETAIL');
                     }}
                   />
@@ -116,14 +132,14 @@ const App: React.FC = () => {
         {currentView === 'CREATE' && (
           <CreateCapsule 
             onSave={handleSaveCapsule} 
-            onCancel={() => setCurrentView('VAULT')} 
+            onCancel={() => navigateTo('VAULT')} 
           />
         )}
 
         {currentView === 'DETAIL' && selectedCapsuleId && (
           <CapsuleDetail 
             capsule={capsules.find(c => c.id === selectedCapsuleId)!} 
-            onClose={() => setCurrentView('VAULT')} 
+            onClose={() => navigateTo('VAULT')} 
             onUpdate={handleUpdateCapsule}
             onDelete={handleDeleteCapsule}
           />
@@ -135,19 +151,21 @@ const App: React.FC = () => {
             capsules={capsules}
             onUpdate={setProfile}
             onClearData={() => {
+              analytics.burnArchive();
               localStorage.clear();
               window.location.reload();
             }}
-            onBack={() => setCurrentView('VAULT')}
+            onBack={() => navigateTo('VAULT')}
           />
         )}
       </main>
 
-      <footer className="w-full py-16 flex flex-col items-center gap-3 border-t border-black/[0.01] opacity-30 hover:opacity-100 transition-opacity duration-1000 mt-12">
-        <p className="text-[8px] tracking-[0.6em] uppercase text-neutral-400 font-black">
+      {/* Footer - Reduced padding and margin */}
+      <footer className="w-full py-8 md:py-10 flex flex-col items-center gap-2 border-t border-black/[0.01] opacity-30 hover:opacity-100 transition-opacity duration-1000 mt-6">
+        <p className="text-[7px] tracking-[0.6em] uppercase text-neutral-400 font-black">
           Curating Continuity
         </p>
-        <p className="text-[7px] tracking-[0.3em] uppercase text-neutral-300 font-bold">
+        <p className="text-[6px] tracking-[0.3em] uppercase text-neutral-300 font-bold">
           Released under MIT License
         </p>
       </footer>
