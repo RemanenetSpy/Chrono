@@ -6,10 +6,16 @@ export const THEMES = {
   minimal: 'from-zinc-800 to-zinc-900 border-white/10',
 };
 
-export const TIME_OPTIONS = [
-  { label: 'Moments', value: 60 * 1000 },
-  { label: 'A Day', value: 24 * 60 * 60 * 1000 },
-  { label: 'A Moon', value: 30 * 24 * 60 * 60 * 1000 },
-  { label: 'A Year', value: 365 * 24 * 60 * 60 * 1000 },
-  { label: 'A Decade', value: 10 * 365 * 24 * 60 * 60 * 1000 },
+export interface TimeOption {
+  label: string;
+  value: number;
+  isPublic: boolean;
+}
+
+export const TIME_OPTIONS: TimeOption[] = [
+  { label: 'Moments', value: 60 * 1000, isPublic: true },
+  { label: 'A Day', value: 24 * 60 * 60 * 1000, isPublic: true },
+  { label: 'A Moon', value: 30 * 24 * 60 * 60 * 1000, isPublic: true },
+  { label: 'A Year', value: 365 * 24 * 60 * 60 * 1000, isPublic: false },
+  { label: 'A Decade', value: 10 * 365 * 24 * 60 * 60 * 1000, isPublic: false },
 ];

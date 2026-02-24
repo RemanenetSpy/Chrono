@@ -23,10 +23,21 @@ const App: React.FC = () => {
   useEffect(() => {
     const savedCapsules = localStorage.getItem('chronos_capsules');
     const savedProfile = localStorage.getItem('chronos_profile');
-    if (savedCapsules) setCapsules(JSON.parse(savedCapsules));
-    if (savedProfile) setProfile(JSON.parse(savedProfile));
+    if (savedCapsules) {
+      try {
+        setCapsules(JSON.parse(savedCapsules));
+      } catch (e) {
+        console.error("Failed to parse saved capsules", e);
+      }
+    }
+    if (savedProfile) {
+      try {
+        setProfile(JSON.parse(savedProfile));
+      } catch (e) {
+        console.error("Failed to parse saved profile", e);
+      }
+    }
     
-    // Track initial page load
     analytics.viewVault();
   }, []);
 
@@ -38,7 +49,6 @@ const App: React.FC = () => {
     localStorage.setItem('chronos_profile', JSON.stringify(profile));
   }, [profile]);
 
-  // Track view changes
   const navigateTo = (view: ViewState) => {
     setCurrentView(view);
     switch(view) {
@@ -62,12 +72,35 @@ const App: React.FC = () => {
     navigateTo('VAULT');
   };
 
+  const handleImportData = (newProfile: UserProfile, newCapsules: Capsule[]) => {
+    setProfile(newProfile);
+    
+    setCapsules(prev => {
+      const merged = [...prev];
+      newCapsules.forEach(cap => {
+        if (!merged.find(existing => existing.id === cap.id)) {
+          merged.push(cap);
+        }
+      });
+      // Sort by creation date descending
+      return merged.sort((a, b) => b.createdAt - a.createdAt);
+    });
+    
+    navigateTo('VAULT');
+  };
+
+  const handleClearData = () => {
+    if (window.confirm('This will permanently erase all entries and your memoir. Are you absolutely certain you wish to burn the archive?')) {
+      analytics.burnArchive();
+      localStorage.clear();
+      window.location.reload();
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col text-neutral-900 bg-[#fdfbf7]">
-      {/* Subtle Atmospheric Depth Line */}
       <div className="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-200/40 to-transparent pointer-events-none z-50"></div>
 
-      {/* Navigation - Reduced padding */}
       <nav className="p-6 md:p-8 flex justify-between items-center max-w-7xl mx-auto w-full border-b border-black/[0.03]">
         <div 
           className="cursor-pointer group" 
@@ -95,7 +128,6 @@ const App: React.FC = () => {
         </div>
       </nav>
 
-      {/* Main Content - Reduced vertical padding */}
       <main className="flex-grow max-w-7xl mx-auto px-6 md:px-8 py-8 md:py-10 w-full">
         {currentView === 'VAULT' && (
           <div className="fade-up">
@@ -131,6 +163,7 @@ const App: React.FC = () => {
 
         {currentView === 'CREATE' && (
           <CreateCapsule 
+            capsules={capsules}
             onSave={handleSaveCapsule} 
             onCancel={() => navigateTo('VAULT')} 
           />
@@ -150,17 +183,13 @@ const App: React.FC = () => {
             profile={profile}
             capsules={capsules}
             onUpdate={setProfile}
-            onClearData={() => {
-              analytics.burnArchive();
-              localStorage.clear();
-              window.location.reload();
-            }}
+            onImport={handleImportData}
+            onClearData={handleClearData}
             onBack={() => navigateTo('VAULT')}
           />
         )}
       </main>
 
-      {/* Footer - Reduced padding and margin */}
       <footer className="w-full py-8 md:py-10 flex flex-col items-center gap-2 border-t border-black/[0.01] opacity-30 hover:opacity-100 transition-opacity duration-1000 mt-6">
         <p className="text-[7px] tracking-[0.6em] uppercase text-neutral-400 font-black">
           Curating Continuity
