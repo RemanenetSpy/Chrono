@@ -29,6 +29,12 @@ export const CapsuleDetail: React.FC<CapsuleDetailProps> = ({ capsule, onClose, 
     setIsEditingReflection(false);
   };
 
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you wish to erase this memory forever? This action cannot be undone.')) {
+      onDelete?.(capsule.id);
+    }
+  };
+
   return (
     <div className="fade-up max-w-2xl mx-auto pb-10">
       <div className="flex justify-between items-center mb-8 border-b border-black/[0.04] pb-4">
@@ -103,7 +109,7 @@ export const CapsuleDetail: React.FC<CapsuleDetailProps> = ({ capsule, onClose, 
 
           <div className="pt-10 flex justify-between items-center opacity-30 hover:opacity-100 transition-all duration-1000">
             <button 
-              onClick={() => { if(confirm('Erase this memory forever?')) onDelete?.(capsule.id); }}
+              onClick={handleDelete}
               className="text-[7px] tracking-[0.3em] uppercase text-red-400 font-bold"
             >
               Burn this record

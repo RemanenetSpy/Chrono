@@ -6,15 +6,20 @@ import { TIME_OPTIONS } from '../constants';
 import { analytics } from '../services/analytics';
 
 interface CreateCapsuleProps {
+  capsules: Capsule[];
   onSave: (capsule: Capsule) => void;
   onCancel: () => void;
 }
 
-export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ onSave, onCancel }) => {
+const MOON_DURATION = 30 * 24 * 60 * 60 * 1000;
+const MOON_LIMIT = 3;
+
+export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, onSave, onCancel }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [unlockDuration, setUnlockDuration] = useState(TIME_OPTIONS[1].value);
   const [image, setImage] = useState<string | null>(null);
+  const [appNotice, setAppNotice] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,11 +42,46 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ onSave, onCancel }
     });
   };
 
+  const handleCancel = () => {
+    if (title.trim() || content.trim() || image) {
+      if (window.confirm('Discard your draft? Your words will be lost to the void.')) {
+        onCancel();
+      }
+    } else {
+      onCancel();
+    }
+  };
+
+  const handleOptionClick = (opt: typeof TIME_OPTIONS[0]) => {
+    // Logic for "A Moon" (30 days)
+    if (opt.value === MOON_DURATION) {
+      const moonCount = capsules.filter(c => c.unlockAt - c.createdAt === MOON_DURATION).length;
+      if (moonCount < MOON_LIMIT) {
+        setUnlockDuration(opt.value);
+        setAppNotice(null);
+      } else {
+        setAppNotice("Web limit reached. Unlimited 'Moon' capsules coming soon to our app!");
+        setTimeout(() => setAppNotice(null), 4000);
+      }
+      return;
+    }
+
+    // Logic for other public options
+    if (opt.isPublic) {
+      setUnlockDuration(opt.value);
+      setAppNotice(null);
+    } else {
+      // For Year, Decade
+      setAppNotice("Long-term horizons (Years/Decades) coming soon to our app!");
+      setTimeout(() => setAppNotice(null), 4000);
+    }
+  };
+
   return (
     <div className="fade-up pb-8 max-w-2xl mx-auto">
       <div className="flex justify-between items-baseline mb-8 border-b border-black/[0.03] pb-4">
         <h2 className="serif text-3xl md:text-4xl font-light text-neutral-800">Compose</h2>
-        <button onClick={onCancel} className="text-neutral-400 hover:text-black transition-colors text-[8px] tracking-[0.3em] uppercase font-bold">Discard Entry</button>
+        <button onClick={handleCancel} className="text-neutral-400 hover:text-black transition-colors text-[8px] tracking-[0.3em] uppercase font-bold">Discard Entry</button>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
@@ -69,24 +109,42 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ onSave, onCancel }
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-6 border-y border-black/[0.03]">
-          <div className="space-y-3">
+          <div className="space-y-3 relative">
             <p className="text-[8px] tracking-[0.3em] uppercase text-neutral-400 font-bold">Time Horizon</p>
             <div className="flex flex-wrap gap-x-4 gap-y-2">
-              {TIME_OPTIONS.map((opt) => (
-                <button
-                  key={opt.label}
-                  type="button"
-                  onClick={() => setUnlockDuration(opt.value)}
-                  className={`text-[8px] font-bold tracking-widest transition-all uppercase ${
-                    unlockDuration === opt.value 
-                      ? 'text-black border-b border-black pb-0.5' 
-                      : 'text-neutral-300 hover:text-neutral-500'
-                  }`}
-                >
-                  {opt.label}
-                </button>
-              ))}
+              {TIME_OPTIONS.map((opt) => {
+                const isMoon = opt.value === MOON_DURATION;
+                const moonCount = capsules.filter(c => c.unlockAt - c.createdAt === MOON_DURATION).length;
+                const moonDisabled = isMoon && moonCount >= MOON_LIMIT;
+                
+                return (
+                  <button
+                    key={opt.label}
+                    type="button"
+                    onClick={() => handleOptionClick(opt)}
+                    className={`text-[8px] font-bold tracking-widest transition-all uppercase relative group/opt ${
+                      unlockDuration === opt.value && (opt.isPublic && !moonDisabled)
+                        ? 'text-black border-b border-black pb-0.5' 
+                        : (!opt.isPublic || moonDisabled)
+                          ? 'text-neutral-200 cursor-help' 
+                          : 'text-neutral-300 hover:text-neutral-500'
+                    }`}
+                  >
+                    {opt.label}
+                    {(!opt.isPublic || moonDisabled) && (
+                      <i className="fa-solid fa-lock text-[6px] ml-1 opacity-40 group-hover/opt:opacity-100 transition-opacity"></i>
+                    )}
+                  </button>
+                );
+              })}
             </div>
+            {appNotice && (
+              <div className="absolute -bottom-6 left-0 animate-in fade-in slide-in-from-top-1 duration-500">
+                <p className="text-[7px] tracking-[0.1em] text-amber-600 font-bold uppercase italic max-w-[250px]">
+                  {appNotice}
+                </p>
+              </div>
+            )}
           </div>
           
           <div className="space-y-3">
