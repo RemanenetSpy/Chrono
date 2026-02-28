@@ -88,11 +88,12 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, onSave, 
         <div className="space-y-2">
           <label className="text-[8px] tracking-[0.3em] uppercase text-neutral-400 font-bold">Subject</label>
           <input 
+            id="capsule-title"
             type="text" 
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="A title for your future self..."
-            className="w-full bg-transparent border-b border-black/10 py-2 text-xl md:text-2xl serif focus:outline-none focus:border-black transition-all placeholder:text-neutral-200"
+            className={`w-full bg-transparent border-b border-black/10 py-2 text-xl md:text-2xl serif focus:outline-none focus:border-black transition-all duration-700 placeholder:text-[#433422]/50 ${title ? 'text-[#1a1a1a]' : 'text-[#433422]/50'}`}
             required
           />
         </div>
@@ -100,10 +101,11 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, onSave, 
         <div className="space-y-2">
           <label className="text-[8px] tracking-[0.3em] uppercase text-neutral-400 font-bold">The Message</label>
           <textarea 
+            id="capsule-content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Speak across time..."
-            className="w-full bg-transparent border-none py-1 text-base md:text-lg serif italic leading-relaxed focus:outline-none min-h-[250px] resize-none placeholder:text-neutral-200"
+            className={`w-full bg-transparent border-none py-1 text-base md:text-lg serif italic leading-relaxed focus:outline-none min-h-[250px] resize-none transition-all duration-700 placeholder:text-[#433422]/50 ${content ? 'text-[#1a1a1a]' : 'text-[#433422]/50'}`}
             required
           />
         </div>

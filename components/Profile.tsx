@@ -241,11 +241,12 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                 <div className="space-y-2">
                   <label className="text-[8px] tracking-[0.3em] uppercase text-neutral-400 font-bold">Security Passphrase</label>
                   <input 
+                    id="vault-passphrase"
                     type="password"
                     value={passphrase}
                     onChange={(e) => setPassphrase(e.target.value)}
                     placeholder="Enter key to sign the vault..."
-                    className="w-full bg-white border border-black/5 px-4 py-3 serif italic focus:outline-none focus:border-black/10 text-lg"
+                    className={`w-full bg-white border border-black/5 px-4 py-3 serif italic focus:outline-none focus:border-black/10 text-lg transition-all duration-700 placeholder:text-[#433422]/50 ${passphrase ? 'text-[#1a1a1a]' : 'text-[#433422]/50'}`}
                   />
                   <p className="text-[6px] tracking-widest text-neutral-300 uppercase">Vaults are identity-locked to Chronos. They cannot be opened by standard software.</p>
                 </div>

@@ -91,10 +91,11 @@ export const CapsuleDetail: React.FC<CapsuleDetailProps> = ({ capsule, onClose, 
             {isEditingReflection ? (
               <div className="space-y-4">
                 <textarea
+                  id="reflection-input"
                   value={reflectionText}
                   onChange={(e) => setReflectionText(e.target.value)}
                   placeholder="What does this memory mean to you now?"
-                  className="w-full bg-transparent border-none py-1 text-base md:text-lg serif italic leading-relaxed focus:outline-none min-h-[100px] resize-none placeholder:text-neutral-200"
+                  className={`w-full bg-transparent border-none py-1 text-base md:text-lg serif italic leading-relaxed focus:outline-none min-h-[100px] resize-none transition-all duration-700 placeholder:text-[#433422]/50 ${reflectionText ? 'text-[#1a1a1a]' : 'text-[#433422]/50'}`}
                 />
                 <button onClick={handleSaveReflection} className="text-[8px] tracking-[0.3em] uppercase font-black text-black border-b border-black pb-0.5">
                   Commit Reflection
