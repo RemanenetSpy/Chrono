@@ -132,14 +132,14 @@ const App: React.FC = () => {
         {currentView === 'VAULT' && (
           <div className="fade-up">
             <header className="mb-8 md:mb-10">
-              <p className="serif italic text-xl md:text-2xl text-neutral-400 max-w-xl leading-relaxed font-light">
+              <p className="serif italic text-xl md:text-2xl text-neutral-500 max-w-xl leading-relaxed font-light">
                 "We are but time-travelers, leaving marks on a shore the tide has yet to reach."
               </p>
             </header>
 
             {capsules.length === 0 ? (
               <div className="py-20 text-center border-y border-black/[0.03] flex flex-col items-center">
-                <h3 className="serif text-2xl mb-3 text-neutral-300 font-light italic">The chronicle is silent.</h3>
+                <h3 className="serif text-2xl mb-3 text-neutral-400 font-light italic">The chronicle is silent.</h3>
                 <p className="text-neutral-400 text-[8px] tracking-[0.5em] uppercase mb-8 font-bold">Will you write today?</p>
                 <Button variant="outline" onClick={() => navigateTo('CREATE')}>Compose Entry</Button>
               </div>
