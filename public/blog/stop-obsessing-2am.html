@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stop Obsessing at 2 AM | Chronos</title>
+  <meta name="description" content="Why your brain won't shut off at 2 AM and how a simple temporal anchor can help you finally sleep.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            neutral: {
+              200: '#b5b5b5',
+              300: '#8f8f8f',
+              400: '#696969',
+              500: '#4d4d4d',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f2f2f0;
+      --ink: #1a1a1a;
+      --f-serif: 'Cormorant Garamond', serif;
+      --f-sans: 'Inter', sans-serif;
+      --f-mono: 'JetBrains Mono', monospace;
+    }
+    body {
+      font-family: var(--f-sans);
+      background-color: var(--bg);
+      color: var(--ink);
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, .serif { font-family: var(--f-serif); }
+    .mono { font-family: var(--f-mono); }
+    .grain {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+      opacity: 0.25; pointer-events: none; z-index: 50;
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="min-h-screen flex flex-col text-neutral-900 bg-[#fdfbf7] selection:bg-neutral-900 selection:text-[#fdfbf7] relative z-10">
+    <header class="py-6 px-6 md:px-12 border-b border-neutral-200 flex justify-between items-center">
+       <a href="/" class="serif text-2xl font-semibold tracking-tight text-neutral-900 no-underline">Chronos</a>
+       <a href="/" class="text-sm tracking-[0.1em] uppercase text-neutral-500 hover:text-neutral-900 transition-colors">Open Vault</a>
+    </header>
+    <main class="flex-grow max-w-2xl mx-auto px-6 py-16 md:py-24 w-full">
+       <article>
+         <h1 class="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.1] mb-6">
+            Stop Obsessing at 2 AM
+         </h1>
+         <p class="text-neutral-500 mb-12 mono text-xs uppercase tracking-widest border-b border-neutral-200 pb-6">
+            By The Archivist &nbsp;&nbsp;&bull;&nbsp;&nbsp; Reading Time: 3 min
+         </p>
+         <div class="space-y-8 text-lg text-neutral-800 font-light leading-relaxed">
+           <p>It's 2:14 AM. The screen is burning into your retinas. You've scrolled past the same three posts twice, yet you can't put the phone down. Your brain has 50 open tabs, and melatonin won't close them.</p>
+           <p>We've all been trapped in the 3 AM loop. You try to fix your productivity by day, but by night, your brain is so exhausted that it defaults to doomscrolling just to numb the noise. App blockers don't work because you just bypass them. Willpower fails when you are tired.</p>
+           <p>The problem isn't a lack of discipline. The problem is a lack of closure. When the boundary between "day" and "night" blurs into an endless stream of content, your nervous system never receives the signal that it's safe to power down.</p>
+           
+           <h2 class="serif text-3xl mt-12 mb-6">The Temporal Anchor</h2>
+           <p>Instead of a chemical knockout or punishing yourself with more restrictions, try a psychological hard reset.</p>
+           <p>You don't need a complex journaling routine. You just need a physical place for your brain to land. A temporal anchor. A single, intentional action that seals the day.</p>
+           <p>That's why we built Chronos. It exists to do one thing: force you to write exactly <em class="serif italic">one</em> sentence before bed. That tiny bit of intentional friction tells your nervous system the day is actually over.</p>
+         </div>
+         <div class="mt-20 pt-12 border-t border-neutral-200 text-center">
+           <h3 class="serif text-2xl mb-6 italic text-neutral-600">Ready to close your tabs?</h3>
+           <a href="/" class="inline-block bg-neutral-900 text-[#fdfbf7] text-sm tracking-[0.2em] uppercase py-4 px-8 hover:bg-neutral-800 transition-colors no-underline">
+             Build Your First Anchor &rarr;
+           </a>
+         </div>
+       </article>
+    </main>
+  </div>
+</body>
+</html>
