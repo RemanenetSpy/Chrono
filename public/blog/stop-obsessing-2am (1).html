@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PRIMARY SEO -->
+  <title>How to Stop Obsessing Over Tomorrow's Problems at 2 AM | Chronos</title>
+  <meta name="description" content="Lying awake at 2 AM, mind racing about tomorrow? This guide explains why your brain does this — and introduces a cognitive offloading method that actually works." />
+  <meta name="keywords" content="stop obsessing over tomorrow, 2am anxiety, intrusive thoughts at night, cognitive offloading, racing mind at night, can't stop worrying, doomscrolling anxiety, mental clarity before sleep" />
+  <meta name="author" content="Chronos" />
+  <link rel="canonical" href="https://chronos-snowy.vercel.app/blog/stop-obsessing-2am.html" />
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://chronos-snowy.vercel.app/blog/stop-obsessing-2am.html" />
+  <meta property="og:title" content="How to Stop Obsessing Over Tomorrow's Problems at 2 AM" />
+  <meta property="og:description" content="Lying awake at 2 AM, mind racing about tomorrow? This guide explains why your brain does this — and introduces a cognitive offloading method that actually works." />
+  <meta property="og:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta property="og:site_name" content="Chronos" />
+
+  <!-- TWITTER -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to Stop Obsessing Over Tomorrow's Problems at 2 AM" />
+  <meta name="twitter:description" content="Lying awake at 2 AM, mind racing about tomorrow? Here's the cognitive offloading method that quiets the noise." />
+  <meta name="twitter:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+
+  <!-- ARTICLE STRUCTURED DATA -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Stop Obsessing Over Tomorrow's Problems at 2 AM",
+    "description": "Lying awake at 2 AM, mind racing about tomorrow? This guide explains why your brain does this and introduces a cognitive offloading method that actually works.",
+    "author": { "@type": "Organization", "name": "Chronos" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Chronos",
+      "url": "https://chronos-snowy.vercel.app"
+    },
+    "datePublished": "2026-03-21",
+    "dateModified": "2026-03-21",
+    "mainEntityOfPage": "https://chronos-snowy.vercel.app/blog/stop-obsessing-2am.html",
+    "keywords": ["2am anxiety", "cognitive offloading", "racing mind", "intrusive thoughts", "digital time capsule", "mental clarity"]
+  }
+  </script>
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:        #0e0e0f;
+      --bg-2:      #141416;
+      --bg-3:      #1a1a1d;
+      --border:    rgba(255,255,255,0.07);
+      --text:      #e8e4dc;
+      --text-mid:  #9e9a93;
+      --text-dim:  #5a5750;
+      --gold:      #c8a96e;
+      --gold-dim:  #8a6e40;
+      --seal:      #7a2a1a;
+      --accent:    #c8a96e;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Lora', Georgia, serif;
+      font-weight: 400;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* Grain */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem clamp(1.25rem, 5vw, 4rem);
+      background: rgba(14,14,15,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 2rem; }
+
+    .nav-link {
+      font-family: 'Lora', serif;
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover { color: var(--gold); }
+
+    .nav-cta {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-family: 'Lora', serif;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 62vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 10rem clamp(1.25rem, 10vw, 12rem) 5rem;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 20% 60%, rgba(200,169,110,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.1s forwards;
+    }
+
+    .hero-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold-dim);
+      padding: 0.25rem 0.7rem;
+    }
+
+    .hero-date {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    .hero-read {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--text);
+      max-width: 820px;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.25s forwards;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: var(--text-mid);
+      max-width: 580px;
+      line-height: 1.75;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    /* ── ARTICLE LAYOUT ── */
+    .article-wrap {
+      display: grid;
+      grid-template-columns: 1fr min(680px, 100%) 1fr;
+      padding: 0 clamp(1.25rem, 5vw, 2rem);
+    }
+
+    .article-wrap > * { grid-column: 2; }
+
+    article {
+      padding: 5rem 0 8rem;
+    }
+
+    /* ── PROSE ── */
+    .prose h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 400;
+      color: var(--text);
+      margin: 3.5rem 0 1.2rem;
+      line-height: 1.2;
+    }
+
+    .prose h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold);
+      margin: 2.5rem 0 0.8rem;
+    }
+
+    .prose p {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      margin-bottom: 1.6rem;
+      line-height: 1.9;
+    }
+
+    .prose p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .prose ul, .prose ol {
+      margin: 1rem 0 1.8rem 1.2rem;
+    }
+
+    .prose li {
+      font-size: 1rem;
+      color: var(--text-mid);
+      margin-bottom: 0.6rem;
+      line-height: 1.8;
+      padding-left: 0.5rem;
+    }
+
+    .prose li::marker { color: var(--gold-dim); }
+
+    /* Pull quote */
+    .pull-quote {
+      border-left: 2px solid var(--gold);
+      padding: 1.5rem 2rem;
+      margin: 3rem 0;
+      background: var(--bg-2);
+    }
+
+    .pull-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-style: italic;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Callout box */
+    .callout {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--gold);
+      padding: 2rem 2.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .callout-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .callout p {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    /* Step boxes */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin: 2.5rem 0;
+      background: var(--border);
+    }
+
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      background: var(--bg-2);
+      padding: 1.75rem 2rem;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--gold-dim);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 2.5rem;
+      text-align: center;
+    }
+
+    .step-content h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .step-content p {
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    /* Divider */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 3rem 0;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* CTA block */
+    .article-cta {
+      margin-top: 5rem;
+      padding: 3rem;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .article-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(200,169,110,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .article-cta-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .article-cta h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+      font-style: normal;
+    }
+
+    .article-cta p {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      max-width: 440px;
+      margin: 0 auto 2rem;
+      line-height: 1.75;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2.5rem;
+      background: var(--gold);
+      color: var(--bg);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-family: 'Lora', serif;
+      transition: opacity 0.2s, transform 0.2s;
+      position: relative;
+    }
+
+    .btn-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* Related articles */
+    .related {
+      margin-top: 6rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .related-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .related-card {
+      background: var(--bg-2);
+      padding: 1.5rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .related-card:hover { background: var(--bg-3); }
+
+    .related-card-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .related-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem clamp(1.25rem, 5vw, 4rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+
+    @media (max-width: 600px) {
+      .hero { padding-bottom: 3.5rem; }
+      .article-cta { padding: 2rem 1.5rem; }
+      .step { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav aria-label="Main navigation">
+    <a href="https://chronos-snowy.vercel.app/" class="nav-logo">CHRONOS</a>
+    <div class="nav-right">
+      <a href="https://chronos-snowy.vercel.app/blog/" class="nav-link">All Articles</a>
+      <a href="https://chronos-snowy.vercel.app/" class="nav-cta">Open App</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" aria-label="Article header">
+    <div class="hero-meta">
+      <span class="hero-tag">Pain Points · Anxiety</span>
+      <span class="hero-date">March 21, 2026</span>
+      <span class="hero-read">9 min read</span>
+    </div>
+    <h1>How to stop obsessing over <em>tomorrow's problems</em> at 2 AM</h1>
+    <p class="hero-sub">
+      Your brain isn't broken. It's doing exactly what evolution designed it to do at the worst possible time. Here's how to interrupt the loop — and finally sleep.
+    </p>
+  </header>
+
+  <!-- ARTICLE -->
+  <div class="article-wrap">
+    <article class="prose">
+
+      <p>
+        It is 2 AM. You have been staring at the ceiling for forty minutes. The meeting is tomorrow. The email you haven't sent. The decision you need to make. The thing you said last week that you can't stop replaying. <strong>None of it is solvable right now.</strong> And yet your brain refuses to file it away.
+      </p>
+
+      <p>
+        You are not anxious because something is wrong with you. You are anxious because something is working exactly as designed — just at entirely the wrong time.
+      </p>
+
+      <div class="pull-quote reveal">
+        <p>"The mind at rest is not actually at rest. It is running its maintenance cycle — and it chose 2 AM to do it."</p>
+      </div>
+
+      <h2>Why your brain does this at night</h2>
+
+      <p>
+        During the day, your prefrontal cortex — the rational, executive part of your brain — is active and dominant. It filters, prioritises, and suppresses. Most anxious thoughts are processed and set aside before they reach full consciousness.
+      </p>
+
+      <p>
+        At night, that filter relaxes. <strong>The default mode network activates</strong> — the part of your brain responsible for self-referential thinking, future simulation, and social processing. This is the network that runs when you are not actively focused on a task. It is also the network responsible for rumination.
+      </p>
+
+      <p>
+        In other words: your brain saves its most difficult problems for the moment you are least equipped to solve them.
+      </p>
+
+      <div class="callout reveal">
+        <p class="callout-label">What neuroscience says</p>
+        <p>
+          Studies on the default mode network show that nocturnal rumination is not random — it tends to cluster around unresolved emotional events and near-future threats. Your brain is not catastrophising for no reason. It is trying to prepare you. The problem is it has no off switch.
+        </p>
+      </div>
+
+      <h2>The real problem: cognitive load with nowhere to go</h2>
+
+      <p>
+        Modern life creates an unprecedented volume of <strong>open loops</strong> — unfinished tasks, unresolved conversations, unmade decisions, unprocessed emotions. Each one sits in your working memory consuming space and energy, waiting to be closed.
+      </p>
+
+      <p>
+        Psychologists call the phenomenon the <strong>Zeigarnik Effect</strong>: humans remember uncompleted tasks far more persistently than completed ones. Your brain treats every open loop as an active priority. It will keep surfacing them until you either complete the task or explicitly offload it somewhere you trust.
+      </p>
+
+      <p>
+        At 2 AM, there is nowhere to offload. There is no notebook open. No trusted system. No place to put the thought where it will not be forgotten. So the brain keeps the loop open — and keeps surfacing it — until exhaustion eventually wins.
+      </p>
+
+      <div class="section-divider" aria-hidden="true">✦</div>
+
+      <h2>What actually works: cognitive offloading before sleep</h2>
+
+      <p>
+        The most effective intervention for nocturnal rumination is not meditation, not breathing exercises, not white noise. It is <strong>externalising the thought before it becomes a loop.</strong>
+      </p>
+
+      <p>
+        A landmark study by Michael Scullin at Baylor University found that writing a to-do list before bed — specifically writing out tasks for the next day — reduced time to fall asleep by an average of nine minutes. That may sound modest. But consider: the participants who wrote about completed tasks saw no benefit. Only the act of writing forward — offloading future concerns onto paper — closed the loop in the brain.
+      </p>
+
+      <p>
+        The mechanism is simple: <strong>your brain stops rehearsing something when it believes it has been safely stored.</strong> The act of writing is the signal that triggers that belief.
+      </p>
+
+      <h2>The method: the pre-sleep thought dump</h2>
+
+      <p>
+        This is not journaling in the traditional sense. You are not processing emotions or writing for posterity. You are doing a targeted cognitive offload — draining the working memory of everything it is holding onto.
+      </p>
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Set a container for the thought</h4>
+            <p>Open a private, distraction-free space — not your phone's notes app with its notifications and distractions. A space that feels sealed and safe. The act of choosing the container matters psychologically.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Write the thought in full, once</h4>
+            <p>Do not summarise. Write the actual thought — the full catastrophic version if necessary. "I am worried that tomorrow's meeting will go badly and my manager will lose confidence in me." Specificity closes the loop. Vague notes do not.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Set a time horizon for it</h4>
+            <p>Assign the thought a future moment. "I will deal with this tomorrow at 9 AM." Or "I will look at this in a week." This is the critical step — it tells your brain when the loop will be picked up again, so it can safely release it now.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Seal it and walk away</h4>
+            <p>The act of closing the entry — physically or digitally — completes the ritual. Your brain needs a clear signal that the offload is complete. Closing the container is that signal.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <p class="callout-label">Why this works differently from a normal notes app</p>
+        <p>
+          A notes app keeps everything accessible, editable, and visible. That openness keeps the loop active. A <strong>time-locked cognitive offloading tool</strong> — one where you seal the thought and cannot immediately re-read it — creates the psychological closure your brain needs. The thought is stored. It is trusted. It is gone until the moment you assigned it.
+        </p>
+      </div>
+
+      <h2>The anti-doomscrolling vault approach</h2>
+
+      <p>
+        There is a second category of 2 AM thought that the pre-sleep dump does not address: the impulsive reaction. The text you want to send. The angry email. The decision you want to make right now but know you shouldn't. The thing you want to post.
+      </p>
+
+      <p>
+        For these, the intervention is different. You do not need to process the thought. You need to <strong>quarantine it</strong> — give it a place to live that is not your drafts folder, not your thumb hovering over send.
+      </p>
+
+      <p>
+        Write it out completely. Say everything you would say if you were going to send it. Then lock it away with a time horizon of 24 hours. When that period opens, you will almost certainly not want to send it anymore. The act of writing it was the release. The waiting was the wisdom.
+      </p>
+
+      <div class="pull-quote reveal">
+        <p>"You do not need to solve the problem at 2 AM. You need to convince your brain that it is safe to stop thinking about it until morning."</p>
+      </div>
+
+      <h2>Building the habit: intentional friction before sleep</h2>
+
+      <p>
+        The goal is not a one-time fix. It is building a pre-sleep ritual that your brain learns to trust over time. Consistency is what closes the loop permanently — not just tonight, but every night.
+      </p>
+
+      <p>
+        The ritual does not need to be long. <strong>Five minutes of genuine cognitive offloading does more than an hour of lying awake</strong> in the dark trying to think your way out of thinking.
+      </p>
+
+      <ul>
+        <li>Do it at the same time each night — before you get into bed, not after.</li>
+        <li>Use a tool that feels <em>sealed</em> rather than open. Closure is the mechanism.</li>
+        <li>Set the time horizon deliberately. Vague future dates do not work.</li>
+        <li>Keep the entry private. The act of writing changes when you know no one else will read it.</li>
+      </ul>
+
+      <h2>What Chronos was built for</h2>
+
+      <p>
+        Chronos is a <strong>zero-knowledge, client-side encrypted time capsule</strong> — a space to write thoughts, feelings, worries, or unsent messages and seal them with a time horizon. You choose when they surface: a day, a moon, a year, a decade.
+      </p>
+
+      <p>
+        It was designed precisely for this use case: the thoughts that need somewhere to go at 2 AM. The entries no one else should read. The version of yourself at 3 AM that needs to be heard — but not necessarily acted on right now.
+      </p>
+
+      <p>
+        You can add a <strong>Visual Echo</strong> — an image that captures the emotional context. You can record a <strong>Voice Echo</strong> — up to five minutes of audio, because some thoughts are not meant to be typed. Every entry is encrypted in your browser before it is stored. No server reads it. No algorithm sees it. Not even us.
+      </p>
+
+      <p>
+        The chronicle holds it. You sleep.
+      </p>
+
+      <!-- CTA -->
+      <div class="article-cta reveal">
+        <p class="article-cta-label">CHRONOS</p>
+        <h3>The chronicle holds it. You sleep.</h3>
+        <p>Your brain cannot let go of what has nowhere to go. Give it somewhere.</p>
+        <a href="https://chronos-snowy.vercel.app/" class="btn-cta">
+          Open CHRONOS
+        </a>
+      </div>
+
+    </article>
+  </div>
+
+  <!-- RELATED — outside article grid, full width -->
+  <section style="padding: 4rem clamp(1.25rem, 10vw, 12rem); border-top: 1px solid var(--border);">
+    <p style="font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 2rem;">Continue Reading</p>
+    <div class="related-grid">
+      <a href="/blog/revenge-bedtime-procrastination.html" class="related-card">
+        <p class="related-card-tag">Pillar 1 · Anxiety</p>
+        <h4>How to fix revenge bedtime procrastination using intentional friction</h4>
+      </a>
+      <a href="/blog/decision-fatigue.html" class="related-card">
+        <p class="related-card-tag">Pillar 1 · Focus</p>
+        <h4>Why decision fatigue is ruining your focus — and how to offload it</h4>
+      </a>
+      <a href="/blog/digital-lockbox-doomscrolling.html" class="related-card">
+        <p class="related-card-tag">Pillar 1 · Habits</p>
+        <h4>The digital lockbox method for severe doomscrolling</h4>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="https://chronos-snowy.vercel.app/" class="footer-logo">CHRONOS</a>
+    <p class="footer-copy">© 2026 Chronos · Curating Continuity</p>
+  </footer>
+
+  <!-- REVEAL SCRIPT -->
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
