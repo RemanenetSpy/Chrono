@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PRIMARY SEO -->
+  <title>The Digital Lockbox Method for Severe Doomscrolling | CHRONOS</title>
+  <meta name="description" content="Doomscrolling isn't a willpower problem. It's a dopamine loop your brain can't exit without a structural intervention. Here's the digital lockbox method that actually breaks the cycle." />
+  <meta name="keywords" content="doomscrolling fix, how to stop doomscrolling, digital lockbox, dopamine detox, anti-doomscrolling, screen time anxiety, cognitive offloading tool, intentional friction app, break phone addiction" />
+  <meta name="author" content="CHRONOS" />
+  <link rel="canonical" href="https://chronos-snowy.vercel.app/blog/digital-lockbox-doomscrolling.html" />
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://chronos-snowy.vercel.app/blog/digital-lockbox-doomscrolling.html" />
+  <meta property="og:title" content="The Digital Lockbox Method for Severe Doomscrolling" />
+  <meta property="og:description" content="Doomscrolling isn't a willpower problem. It's a dopamine loop your brain can't exit without a structural intervention." />
+  <meta property="og:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta property="og:site_name" content="CHRONOS" />
+
+  <!-- TWITTER -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Digital Lockbox Method for Severe Doomscrolling" />
+  <meta name="twitter:description" content="Doomscrolling isn't a willpower problem. It's a dopamine loop your brain can't exit without structural intervention." />
+  <meta name="twitter:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+
+  <!-- STRUCTURED DATA -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The Digital Lockbox Method for Severe Doomscrolling",
+    "description": "Doomscrolling isn't a willpower problem. It's a dopamine loop your brain can't exit without a structural intervention. Here's the digital lockbox method that actually breaks the cycle.",
+    "author": { "@type": "Organization", "name": "CHRONOS" },
+    "publisher": { "@type": "Organization", "name": "CHRONOS", "url": "https://chronos-snowy.vercel.app" },
+    "datePublished": "2026-03-22",
+    "dateModified": "2026-03-22",
+    "mainEntityOfPage": "https://chronos-snowy.vercel.app/blog/digital-lockbox-doomscrolling.html",
+    "keywords": ["doomscrolling", "digital lockbox", "dopamine loop", "intentional friction", "cognitive offloading", "screen time"]
+  }
+  </script>
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:        #f5f0e8;
+      --bg-2:      #ede7d9;
+      --bg-3:      #e4ddd0;
+      --ink:       #1a1714;
+      --ink-mid:   #4a4540;
+      --ink-soft:  #8a8278;
+      --ink-dim:   #b8b0a4;
+      --rust:      #8b3a1a;
+      --rust-dim:  #6b2a10;
+      --rust-pale: rgba(139,58,26,0.08);
+      --border:    rgba(26,23,20,0.1);
+      --border-2:  rgba(26,23,20,0.06);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem clamp(1.25rem, 5vw, 4rem);
+      background: rgba(245,240,232,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 2rem; }
+
+    .nav-link {
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover { color: var(--rust); }
+
+    .nav-cta {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .nav-cta:hover { background: var(--ink); color: var(--bg); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 9rem clamp(1.25rem, 12vw, 16rem) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Big background word */
+    .hero-bg-word {
+      position: absolute;
+      top: 3rem; right: -2rem;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(8rem, 20vw, 18rem);
+      font-weight: 700;
+      font-style: italic;
+      color: rgba(139,58,26,0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-inner { position: relative; z-index: 1; max-width: 760px; }
+
+    .hero-meta {
+      display: flex; align-items: center; gap: 1.5rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.1s forwards;
+    }
+
+    .hero-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rust);
+      border: 1px solid rgba(139,58,26,0.3);
+      padding: 0.25rem 0.7rem;
+    }
+
+    .hero-date, .hero-read {
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      letter-spacing: 0.08em;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.25s forwards;
+    }
+
+    h1 em { font-style: italic; color: var(--rust); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: var(--ink-mid);
+      max-width: 560px;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── ARTICLE ── */
+    .article-wrap {
+      display: grid;
+      grid-template-columns: 1fr min(660px, 100%) 1fr;
+      padding: 0 clamp(1.25rem, 5vw, 2rem);
+    }
+
+    .article-wrap > * { grid-column: 2; }
+
+    article { padding: 4rem 0 6rem; }
+
+    /* ── PROSE ── */
+    .prose h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 400;
+      color: var(--ink);
+      margin: 3.5rem 0 1.2rem;
+      line-height: 1.2;
+    }
+
+    .prose h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--rust);
+      margin: 2.5rem 0 0.8rem;
+    }
+
+    .prose p {
+      font-size: 1.05rem;
+      color: var(--ink-mid);
+      margin-bottom: 1.6rem;
+      line-height: 1.9;
+    }
+
+    .prose p strong { color: var(--ink); font-weight: 400; }
+    .prose p em { font-style: italic; color: var(--ink); }
+
+    .prose ul, .prose ol {
+      margin: 1rem 0 1.8rem 1.2rem;
+    }
+
+    .prose li {
+      font-size: 1rem;
+      color: var(--ink-mid);
+      margin-bottom: 0.7rem;
+      line-height: 1.8;
+      padding-left: 0.4rem;
+    }
+
+    .prose li::marker { color: var(--rust); }
+
+    /* Pull quote */
+    .pull-quote {
+      margin: 3rem -2rem;
+      padding: 2rem 2.5rem;
+      background: var(--bg-2);
+      border-left: 3px solid var(--rust);
+      position: relative;
+    }
+
+    .pull-quote::before {
+      content: '"';
+      position: absolute;
+      top: -1rem; left: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      color: rgba(139,58,26,0.12);
+      line-height: 1;
+    }
+
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      font-style: italic;
+      color: var(--ink);
+      margin: 0;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    /* Callout */
+    .callout {
+      background: var(--rust-pale);
+      border: 1px solid rgba(139,58,26,0.15);
+      border-left: 3px solid var(--rust);
+      padding: 1.75rem 2rem;
+      margin: 2.5rem 0;
+    }
+
+    .callout-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 0.7rem;
+    }
+
+    .callout p {
+      font-size: 0.95rem;
+      color: var(--ink-mid);
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    /* Loop diagram */
+    .loop-diagram {
+      margin: 2.5rem 0;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .loop-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+    }
+
+    .loop-node {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.9rem 2rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      text-align: center;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .loop-node.active {
+      background: var(--rust);
+      color: var(--bg);
+      border-color: var(--rust);
+    }
+
+    .loop-arrow {
+      font-size: 1.2rem;
+      color: var(--ink-dim);
+      padding: 0.4rem 0;
+      line-height: 1;
+    }
+
+    .loop-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-bottom: 1rem;
+    }
+
+    /* Steps */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin: 2.5rem 0;
+      background: var(--border);
+    }
+
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      background: var(--bg);
+      padding: 1.75rem 2rem;
+    }
+
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: rgba(139,58,26,0.2);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 2.5rem;
+      text-align: center;
+    }
+
+    .step-content h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+
+    .step-content p {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    /* Section divider */
+    .section-divider {
+      display: flex; align-items: center; gap: 1rem;
+      margin: 3rem 0;
+      color: var(--ink-dim);
+    }
+
+    .section-divider::before, .section-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: var(--border);
+    }
+
+    .section-divider span {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+    }
+
+    /* CTA */
+    .article-cta {
+      margin-top: 4rem;
+      padding: 3rem;
+      background: var(--ink);
+      color: var(--bg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .article-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(139,58,26,0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .article-cta-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.4);
+      margin-bottom: 1rem;
+    }
+
+    .article-cta h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--bg);
+      margin-bottom: 0.8rem;
+    }
+
+    .article-cta p {
+      font-size: 0.92rem;
+      color: rgba(245,240,232,0.6);
+      max-width: 400px;
+      margin: 0 auto 2rem;
+      line-height: 1.75;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.9rem 2.5rem;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-family: 'Source Serif 4', serif;
+      transition: opacity 0.2s, transform 0.2s;
+      position: relative;
+    }
+
+    .btn-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem clamp(1.25rem, 5vw, 4rem);
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .footer-copy { font-size: 0.72rem; color: var(--ink-dim); }
+
+    /* Related */
+    .related-section {
+      padding: 4rem clamp(1.25rem, 12vw, 16rem);
+      border-top: 1px solid var(--border);
+    }
+
+    .related-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-bottom: 2rem;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .related-card {
+      background: var(--bg);
+      padding: 1.5rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .related-card:hover { background: var(--bg-2); }
+
+    .related-card-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 0.6rem;
+    }
+
+    .related-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    .related-card-dead h4 { color: var(--ink-dim); }
+    .coming-soon {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--ink-dim);
+      margin-top: 0.4rem;
+      text-transform: uppercase;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+
+    @media (max-width: 600px) {
+      .pull-quote { margin: 2rem 0; }
+      .article-cta { padding: 2rem 1.5rem; }
+      .step { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav aria-label="Main navigation">
+    <a href="https://chronos-snowy.vercel.app/" class="nav-logo">CHRONOS</a>
+    <div class="nav-right">
+      <a href="https://chronos-snowy.vercel.app/blog/" class="nav-link">All Articles</a>
+      <a href="https://chronos-snowy.vercel.app/" class="nav-cta">Open App</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" aria-label="Article header">
+    <div class="hero-bg-word" aria-hidden="true">Scroll</div>
+    <div class="hero-inner">
+      <div class="hero-meta">
+        <span class="hero-tag">Pain Points · Habits</span>
+        <span class="hero-date">March 22, 2026</span>
+        <span class="hero-read">10 min read</span>
+      </div>
+      <h1>The digital lockbox method<br/>for <em>severe doomscrolling</em></h1>
+      <p class="hero-sub">
+        Doomscrolling isn't a willpower problem. It's a dopamine loop your brain cannot exit without a structural intervention. Screen time limits don't work. App blockers don't work. Here's what does.
+      </p>
+    </div>
+  </header>
+
+  <!-- ARTICLE -->
+  <div class="article-wrap">
+    <article class="prose">
+
+      <p>
+        You open your phone to check the time. Forty minutes later you are reading a thread about an economic crisis in a country you've never visited, heart rate elevated, unable to remember why you picked up your phone in the first place.
+      </p>
+
+      <p>
+        This is not a character flaw. It is not laziness. It is not even really a choice — at least not in the way we usually mean the word. <strong>Doomscrolling is an engineered response to an engineered stimulus.</strong> Understanding the mechanism is the first step to breaking free of it.
+      </p>
+
+      <div class="pull-quote reveal">
+        <p>The algorithm was not designed to inform you. It was designed to keep you inside it. Those are not the same objective.</p>
+      </div>
+
+      <h2>The dopamine loop you cannot willpower your way out of</h2>
+
+      <p>
+        Every major social and news platform is built on a variable reward schedule — the same psychological architecture as a slot machine. You scroll not because you expect to find something good, but because you <em>might</em>. The unpredictability of the reward is precisely what makes the loop self-sustaining.
+      </p>
+
+      <p>
+        Dopamine, contrary to popular belief, is not the pleasure chemical. It is the <strong>anticipation chemical</strong>. It fires hardest not when you receive a reward, but when you are about to. Every scroll is a pull of the lever. Every notification is a potential jackpot. Your brain cannot look away from a variable reward loop any more than it can ignore hunger.
+      </p>
+
+      <div class="loop-diagram reveal" role="img" aria-label="Dopamine loop diagram">
+        <p class="loop-label">The Doomscrolling Loop</p>
+        <div class="loop-step">
+          <div class="loop-node active">Boredom / Anxiety trigger</div>
+          <div class="loop-arrow">↓</div>
+          <div class="loop-node">Open phone / platform</div>
+          <div class="loop-arrow">↓</div>
+          <div class="loop-node">Variable reward fires dopamine</div>
+          <div class="loop-arrow">↓</div>
+          <div class="loop-node">Temporary relief</div>
+          <div class="loop-arrow">↓</div>
+          <div class="loop-node active">Increased baseline anxiety</div>
+          <div class="loop-arrow">↓ (loop repeats, faster)</div>
+        </div>
+      </div>
+
+      <p>
+        Notice what the loop produces on exit: <strong>increased baseline anxiety</strong>, not relief. Every session leaves you slightly more agitated than before, which lowers the threshold for the next trigger, which shortens the interval before you pick the phone up again.
+      </p>
+
+      <div class="callout reveal">
+        <p class="callout-label">The research</p>
+        <p>
+          Studies on compulsive scrolling behaviour show that heavy news consumption correlates with elevated cortisol levels, reduced attention span, and a measurable decrease in a person's perceived ability to control their environment. You are not just wasting time. You are actively degrading your cognitive infrastructure.
+        </p>
+      </div>
+
+      <h2>Why every standard fix fails</h2>
+
+      <p>
+        The conventional responses to doomscrolling all share a common flaw: they treat the symptom, not the structure.
+      </p>
+
+      <p>
+        <strong>Screen time limits</strong> add friction at the surface level — a modal that says "you've used Instagram for 2 hours." You tap "ignore limit" and continue. The loop is unbroken.
+      </p>
+
+      <p>
+        <strong>App blockers</strong> work until they don't. The moment you feel the pull strongly enough, you disable the blocker, tell yourself it's just for five minutes, and re-enter the loop with the added guilt of having broken your own rule.
+      </p>
+
+      <p>
+        <strong>Cold turkey / digital detox</strong> approaches have a rebound problem. Complete abstinence from a dopamine source creates a rebound effect — the first time you re-engage, consumption spikes well above baseline.
+      </p>
+
+      <p>
+        All of these interventions operate at the level of <em>restraint</em>. They try to stop you from entering the loop. What actually works operates at the level of <em>substitution</em> — giving the underlying anxiety somewhere to go before the loop begins.
+      </p>
+
+      <div class="section-divider" aria-hidden="true"><span>✦</span></div>
+
+      <h2>The digital lockbox method</h2>
+
+      <p>
+        The digital lockbox method is not an app blocker. It is a <strong>cognitive offloading tool with intentional friction</strong> — a place to put the thought or feeling that is driving the scroll before the scroll begins.
+      </p>
+
+      <p>
+        The core insight: <strong>you do not doomscroll because you enjoy it. You doomscroll because you are trying to escape something.</strong> Boredom. Anxiety. An unresolved thought. A feeling you don't want to sit with. The scroll is the avoidance mechanism.
+      </p>
+
+      <p>
+        The lockbox method intercepts at the moment of trigger — before you open the platform — and gives the underlying feeling a direct outlet. Write it down. Lock it away. Set a time horizon. Then the urge has nowhere to go, because it has already been addressed.
+      </p>
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Identify the trigger, not the behaviour</h4>
+            <p>Before you reach for the phone, name what you're actually feeling. Boredom. Dread. The urge to check if something bad has happened. Naming the trigger breaks the automaticity of the response.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Write the feeling into the vault</h4>
+            <p>Open a private, sealed space — not your notes app, not your journal. A tool with intentional friction. Write exactly what you're trying to escape. The full thought. Unfiltered. Nobody will read it.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Set the time horizon and seal it</h4>
+            <p>Assign it a future moment. "I will look at this in a week." "This opens in a month." The act of setting the lock tells your nervous system: this is handled. It has a destination. You can release it now.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Do not open the platform</h4>
+            <p>You will find that after completing steps 1–3, the urgency to scroll has significantly reduced. Not always to zero. But enough that the loop does not engage. The dopamine trigger has been redirected.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <p class="callout-label">Why sealing matters</p>
+        <p>
+          A standard notes app keeps everything open, editable, re-readable. That openness keeps the anxiety loop active — you can always go back and ruminate. A <strong>time-locked vault</strong> creates genuine closure. The entry is sealed. It cannot be re-opened until the time you set. This is not a metaphor — it is a mathematical constraint. Your brain registers the difference.
+        </p>
+      </div>
+
+      <h2>The role of intentional friction</h2>
+
+      <p>
+        Intentional friction is the deliberate introduction of resistance into a digital workflow — not to frustrate, but to interrupt automaticity. The best UX for an impulsive behaviour is not a smoother experience. It is a pause long enough for your prefrontal cortex to re-engage.
+      </p>
+
+      <p>
+        Most apps are designed to eliminate friction. Every removed barrier to engagement is a feature to their product teams. The lockbox philosophy inverts this entirely: <strong>friction is the product.</strong> The slight resistance of opening a vault, writing the feeling, setting the lock — that is not a bug in the experience. It is the mechanism.
+      </p>
+
+      <div class="pull-quote reveal">
+        <p>The best tool for an impulsive thought isn't faster access. It's a deliberate pause between the feeling and the action.</p>
+      </div>
+
+      <h2>Building the habit over time</h2>
+
+      <p>
+        The lockbox method does not work perfectly on day one. The dopamine loop is a conditioned response — it has been reinforced thousands of times. A new response pathway takes repetition to establish.
+      </p>
+
+      <p>
+        What you are training is a competing automatic behaviour: <em>feel the trigger → open the vault → write → seal</em>, instead of <em>feel the trigger → open the platform → scroll</em>. The sequence takes roughly the same time. The neurological outcome is entirely different.
+      </p>
+
+      <ul>
+        <li>Use it consistently for seven days before evaluating whether it works.</li>
+        <li>Don't use it as an additional tool alongside the platforms — use it instead of the platforms, at least for the first trigger of the day.</li>
+        <li>The entries you seal are not the point. The sealing is the point.</li>
+        <li>When the time horizon opens on an old entry, read it. The distance between who wrote it and who you are now is the proof of concept.</li>
+      </ul>
+
+      <h2>What CHRONOS was built for</h2>
+
+      <p>
+        CHRONOS is an <strong>offline-first, zero-knowledge digital vault</strong> built on this exact philosophy. Every entry is encrypted client-side using AES-256-GCM before it is stored — not on a server, not in the cloud, in your browser. No algorithm reads it. No notification pulls you back in.
+      </p>
+
+      <p>
+        You set a time horizon — <em>A Day, A Moon, A Year, A Decade</em> — and the vault mathematically refuses to surface the entry before that moment. You can add a <strong>Visual Echo</strong> — an image that captures the emotional context. You can record a <strong>Voice Echo</strong> — up to five minutes of audio, for the feelings that don't have words yet.
+      </p>
+
+      <p>
+        It was not designed to be used for hours. It was designed to be used for five minutes — and then put down. That is the entire point.
+      </p>
+
+      <!-- CTA -->
+      <div class="article-cta reveal">
+        <p class="article-cta-label">CHRONOS</p>
+        <h3>The scroll has nowhere to go<br/>if the vault is already open.</h3>
+        <p>Write the feeling. Seal it. Set the time. Walk away.</p>
+        <a href="https://chronos-snowy.vercel.app/" class="btn-cta">Open CHRONOS</a>
+      </div>
+
+    </article>
+  </div>
+
+  <!-- RELATED — auto-wired -->
+  <link rel="stylesheet" href="/blog/blog-styles.css" />
+  <section id="chronos-related-section" style="color: var(--ink);">
+    <div id="chronos-related"></div>
+  </section>
+  <script src="/blog/blog-components.js"></script>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="https://chronos-snowy.vercel.app/" class="footer-logo">CHRONOS</a>
+    <p class="footer-copy">© 2026 CHRONOS · Curating Continuity</p>
+  </footer>
+
+  <!-- REVEAL -->
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
