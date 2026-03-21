@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+User-agent: Googlebot
+Allow: /sitemap.xml
+
 Sitemap: https://chronos-snowy.vercel.app/sitemap.xml
