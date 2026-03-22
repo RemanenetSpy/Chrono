@@ -1,19 +1,84 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chronos | Letters to the Future</title>
-  
-  <!-- Google Analytics 4 (Privacy Configuration) -->
+
+  <!-- ═══════════════════════════════════════
+       PRIMARY SEO
+  ═══════════════════════════════════════ -->
+  <title>CHRONOS — Write Encrypted Letters to Your Future Self</title>
+  <meta name="description" content="CHRONOS is an offline-first, zero-knowledge digital vault. Write time-locked entries to your future self — sealed with AES-256 encryption, delivered by time itself." />
+  <meta name="keywords" content="letters to future self, time capsule app, encrypted journal, digital lockbox, cognitive offloading, zero knowledge vault, offline first app, doomscrolling fix" />
+  <meta name="author" content="CHRONOS" />
+  <link rel="canonical" href="https://chronos-snowy.vercel.app/" />
+
+  <!-- ═══════════════════════════════════════
+       OPEN GRAPH
+  ═══════════════════════════════════════ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://chronos-snowy.vercel.app/" />
+  <meta property="og:title" content="CHRONOS — Write Encrypted Letters to Your Future Self" />
+  <meta property="og:description" content="An offline-first digital vault. Write time-locked entries to your future self — sealed with AES-256 encryption. Your thoughts stay yours." />
+  <meta property="og:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="CHRONOS" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- ═══════════════════════════════════════
+       TWITTER / X CARD
+  ═══════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://chronos-snowy.vercel.app/" />
+  <meta name="twitter:title" content="CHRONOS — Write Encrypted Letters to Your Future Self" />
+  <meta name="twitter:description" content="An offline-first digital vault. Write time-locked entries to your future self — sealed with AES-256 encryption. Your thoughts stay yours." />
+  <meta name="twitter:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta name="twitter:site" content="@Shivsha44422762" />
+
+  <!-- ═══════════════════════════════════════
+       SCHEMA.ORG STRUCTURED DATA
+  ═══════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CHRONOS",
+    "alternateName": "Chronos Time Capsule",
+    "url": "https://chronos-snowy.vercel.app/",
+    "description": "An offline-first, zero-knowledge digital vault for writing encrypted, time-locked entries to your future self.",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "Web",
+    "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "AES-256-GCM client-side encryption",
+      "Time-locked entries",
+      "Voice Echo — audio recording",
+      "Visual Echo — image attachments",
+      "Zero cloud storage",
+      "Offline-first architecture"
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "CHRONOS",
+      "url": "https://chronos-snowy.vercel.app/"
+    }
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════
+       GOOGLE ANALYTICS (unchanged)
+  ═══════════════════════════════════════ -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-E3ENW8VBDS"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
-    // Privacy-centric configuration with specific ID provided
     gtag('config', 'G-E3ENW8VBDS', {
       'anonymize_ip': true,
       'allow_google_signals': false,
@@ -22,6 +87,9 @@
     });
   </script>
 
+  <!-- ═══════════════════════════════════════
+       TAILWIND + FONTS + STYLES (unchanged)
+  ═══════════════════════════════════════ -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -41,58 +109,48 @@
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --bg: #f2f2f0;
-        --ink: #1a1a1a;
-        --sepia: #a68b36;
-        --paper: #ffffff;
-        --f-serif: 'Cormorant Garamond', serif;
-        --f-sans: 'Inter', sans-serif;
-        --f-mono: 'JetBrains Mono', monospace;
-      }
-      body {
-        font-family: var(--f-sans);
-        background-color: var(--bg);
-        color: var(--ink);
-        margin: 0;
-        padding: 0;
-        -webkit-font-smoothing: antialiased;
-      }
-      h1, h2, h3, h4, .serif {
-        font-family: var(--f-serif);
-      }
-      .mono {
-        font-family: var(--f-mono);
-      }
-      .grain {
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
-        opacity: 0.25;
-        pointer-events: none;
-        z-index: 50;
-      }
-      ::-webkit-scrollbar { width: 4px; }
-      ::-webkit-scrollbar-track { background: transparent; }
-      ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 10px; }
-      
-      @media (max-width: 640px) {
-        body {
-          font-size: 14px;
-        }
-      }
-      
-      .fade-up {
-        animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      }
-      @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-    </style>
+  <style>
+    :root {
+      --bg: #f2f2f0;
+      --ink: #1a1a1a;
+      --sepia: #a68b36;
+      --paper: #ffffff;
+      --f-serif: 'Cormorant Garamond', serif;
+      --f-sans: 'Inter', sans-serif;
+      --f-mono: 'JetBrains Mono', monospace;
+    }
+    body {
+      font-family: var(--f-sans);
+      background-color: var(--bg);
+      color: var(--ink);
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, .serif { font-family: var(--f-serif); }
+    .mono { font-family: var(--f-mono); }
+    .grain {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 50;
+    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 10px; }
+    @media (max-width: 640px) { body { font-size: 14px; } }
+    .fade-up {
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
   <meta name="google-site-verification" content="LcpqtTeE5e5DzzsqX8lIU8UCePd6v1-WaDjgDS6xIh0" />
 </head>
 <body>
