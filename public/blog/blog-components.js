@@ -23,7 +23,7 @@ const CHRONOS_ARTICLES = [
     url: "/blog/revenge-bedtime-procrastination.html",
     title: "How to fix revenge bedtime procrastination using intentional friction",
     tag: "Pillar 1 · Anxiety",
-    live: false
+    live: true
   },
   {
     url: "/blog/decision-fatigue.html",
