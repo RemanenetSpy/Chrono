@@ -19,6 +19,7 @@ const MainApp: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile>(DEFAULT_PROFILE);
   const [currentView, setCurrentView] = useState<ViewState>('VAULT');
   const [selectedCapsuleId, setSelectedCapsuleId] = useState<string | null>(null);
+  const [premiumModalFeature, setPremiumModalFeature] = useState<string | null>(null);
 
   useEffect(() => {
     const savedCapsules = localStorage.getItem('chronos_capsules');
@@ -32,7 +33,10 @@ const MainApp: React.FC = () => {
     }
     if (savedProfile) {
       try {
-        setProfile(JSON.parse(savedProfile));
+        const parsed = JSON.parse(savedProfile);
+        if (parsed) {
+          setProfile(parsed);
+        }
       } catch (e) {
         console.error("Failed to parse saved profile", e);
       }
@@ -95,6 +99,10 @@ const MainApp: React.FC = () => {
       localStorage.clear();
       window.location.reload();
     }
+  };
+
+  const handleRequestPremium = (feature: string) => {
+    setPremiumModalFeature(feature);
   };
 
   return (
@@ -164,8 +172,10 @@ const MainApp: React.FC = () => {
         {currentView === 'CREATE' && (
           <CreateCapsule 
             capsules={capsules}
+            profile={profile}
             onSave={handleSaveCapsule} 
             onCancel={() => navigateTo('VAULT')} 
+            onRequestPremium={handleRequestPremium}
           />
         )}
 
@@ -186,6 +196,7 @@ const MainApp: React.FC = () => {
             onImport={handleImportData}
             onClearData={handleClearData}
             onBack={() => navigateTo('VAULT')}
+            onRequestPremium={handleRequestPremium}
           />
         )}
       </main>
@@ -198,6 +209,34 @@ const MainApp: React.FC = () => {
           Released under MIT License
         </p>
       </footer>
+
+      {premiumModalFeature && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#fdfbf7]/80 backdrop-blur-sm p-6">
+          <div className="bg-white border border-black/10 p-8 max-w-md w-full shadow-2xl animate-in fade-in zoom-in-95 duration-300">
+            <div className="w-12 h-12 rounded-full bg-neutral-100 flex items-center justify-center mb-6">
+              <i className="fa-solid fa-lock text-neutral-400"></i>
+            </div>
+            <h3 className="serif text-3xl font-light mb-3 text-neutral-900">Coming Soon</h3>
+            <p className="text-neutral-500 font-light leading-relaxed mb-8">
+              The <span className="font-medium text-neutral-800">{premiumModalFeature}</span> feature will be available in the upcoming native app. Join the waitlist to be notified the exact second the locks engage.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a 
+                href="/waitlist.html" 
+                className="flex-1 bg-neutral-900 text-[#fdfbf7] text-[10px] tracking-[0.2em] uppercase py-4 px-6 text-center hover:bg-neutral-800 transition-colors font-bold no-underline"
+              >
+                Join Waitlist
+              </a>
+              <button 
+                onClick={() => setPremiumModalFeature(null)}
+                className="flex-1 border border-black/10 text-neutral-500 text-[10px] tracking-[0.2em] uppercase py-4 px-6 text-center hover:text-black hover:border-black/30 transition-colors font-bold"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
