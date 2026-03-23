@@ -11,9 +11,10 @@ interface ProfileProps {
   onImport: (profile: UserProfile, capsules: Capsule[]) => void;
   onClearData: () => void;
   onBack: () => void;
+  onRequestPremium: (feature: string) => void;
 }
 
-export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, onImport, onClearData, onBack }) => {
+export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, onImport, onClearData, onBack, onRequestPremium }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(profile.name);
   const [bio, setBio] = useState(profile.bio);
@@ -222,18 +223,34 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
             ) : backupMode === 'IDLE' ? (
               <div className="flex flex-col sm:flex-row gap-6 items-center">
                 <button 
-                  onClick={() => { setBackupMode('EXPORT'); setStatus(null); }}
-                  className="flex-1 text-center py-4 border border-dashed border-black/10 hover:border-black/30 transition-all group"
+                  onClick={() => { 
+                    if (!profile.isPremium) {
+                      onRequestPremium('ChronosVault Export');
+                      return;
+                    }
+                    setBackupMode('EXPORT'); 
+                    setStatus(null); 
+                  }}
+                  className="flex-1 text-center py-4 border border-dashed border-black/10 hover:border-black/30 transition-all group relative"
                 >
                   <i className="fa-solid fa-file-export text-neutral-200 group-hover:text-neutral-400 mb-2 block"></i>
                   <span className="text-[8px] tracking-[0.4em] uppercase font-bold text-neutral-400 group-hover:text-black">Seal ChronosVault</span>
+                  {!profile.isPremium && <i className="fa-solid fa-lock absolute top-4 right-4 text-[8px] text-amber-600/50 group-hover:text-amber-600 transition-colors"></i>}
                 </button>
                 <button 
-                  onClick={() => { setBackupMode('IMPORT'); setStatus(null); }}
-                  className="flex-1 text-center py-4 border border-dashed border-black/10 hover:border-black/30 transition-all group"
+                  onClick={() => { 
+                    if (!profile.isPremium) {
+                      onRequestPremium('ChronosVault Import');
+                      return;
+                    }
+                    setBackupMode('IMPORT'); 
+                    setStatus(null); 
+                  }}
+                  className="flex-1 text-center py-4 border border-dashed border-black/10 hover:border-black/30 transition-all group relative"
                 >
                   <i className="fa-solid fa-file-import text-neutral-200 group-hover:text-neutral-400 mb-2 block"></i>
                   <span className="text-[8px] tracking-[0.4em] uppercase font-bold text-neutral-400 group-hover:text-black">Restore Vault</span>
+                  {!profile.isPremium && <i className="fa-solid fa-lock absolute top-4 right-4 text-[8px] text-amber-600/50 group-hover:text-amber-600 transition-colors"></i>}
                 </button>
               </div>
             ) : (

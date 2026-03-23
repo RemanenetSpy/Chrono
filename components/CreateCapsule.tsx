@@ -1,24 +1,30 @@
 
-import React, { useState } from 'react';
-import { Capsule } from '../types';
+import React, { useState, useRef } from 'react';
+import { Capsule, UserProfile } from '../types';
 import { Button } from './Button';
 import { TIME_OPTIONS } from '../constants';
 import { analytics } from '../services/analytics';
 
 interface CreateCapsuleProps {
   capsules: Capsule[];
+  profile: UserProfile;
   onSave: (capsule: Capsule) => void;
   onCancel: () => void;
+  onRequestPremium: (feature: string) => void;
 }
 
 const MOON_DURATION = 30 * 24 * 60 * 60 * 1000;
 const MOON_LIMIT = 3;
 
-export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, onSave, onCancel }) => {
+export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, profile, onSave, onCancel, onRequestPremium }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [unlockDuration, setUnlockDuration] = useState(TIME_OPTIONS[1].value);
   const [image, setImage] = useState<string | null>(null);
+  const [audio, setAudio] = useState<string | null>(null);
+  const [isRecording, setIsRecording] = useState(false);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
   const [appNotice, setAppNotice] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -34,6 +40,7 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, onSave, 
       title,
       content,
       imageUrl: image || undefined,
+      audioUrl: audio || undefined,
       createdAt: now,
       unlockAt: now + unlockDuration,
       isUnlocked: false,
@@ -43,7 +50,7 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, onSave, 
   };
 
   const handleCancel = () => {
-    if (title.trim() || content.trim() || image) {
+    if (title.trim() || content.trim() || image || audio) {
       if (window.confirm('Discard your draft? Your words will be lost to the void.')) {
         onCancel();
       }
@@ -52,28 +59,64 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, onSave, 
     }
   };
 
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorderRef.current = mediaRecorder;
+      audioChunksRef.current = [];
+
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data.size > 0) {
+          audioChunksRef.current.push(e.data);
+        }
+      };
+
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        const reader = new FileReader();
+        reader.readAsDataURL(audioBlob);
+        reader.onloadend = () => {
+          setAudio(reader.result as string);
+        };
+        stream.getTracks().forEach(track => track.stop());
+      };
+
+      mediaRecorder.start();
+      setIsRecording(true);
+    } catch (err) {
+      console.error("Error accessing microphone:", err);
+      alert("Could not access microphone. Please check permissions.");
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && isRecording) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+    }
+  };
+
   const handleOptionClick = (opt: typeof TIME_OPTIONS[0]) => {
     // Logic for "A Moon" (30 days)
     if (opt.value === MOON_DURATION) {
       const moonCount = capsules.filter(c => c.unlockAt - c.createdAt === MOON_DURATION).length;
-      if (moonCount < MOON_LIMIT) {
+      if (moonCount < MOON_LIMIT || profile.isPremium) {
         setUnlockDuration(opt.value);
         setAppNotice(null);
       } else {
-        setAppNotice("Web limit reached. Unlimited 'Moon' capsules coming soon to our app!");
-        setTimeout(() => setAppNotice(null), 4000);
+        onRequestPremium('Unlimited Moon Capsules');
       }
       return;
     }
 
     // Logic for other public options
-    if (opt.isPublic) {
+    if (opt.isPublic || profile.isPremium) {
       setUnlockDuration(opt.value);
       setAppNotice(null);
     } else {
       // For Year, Decade
-      setAppNotice("Long-term horizons (Years/Decades) coming soon to our app!");
-      setTimeout(() => setAppNotice(null), 4000);
+      onRequestPremium(`${opt.label} Horizon`);
     }
   };
 
@@ -117,7 +160,9 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, onSave, 
               {TIME_OPTIONS.map((opt) => {
                 const isMoon = opt.value === MOON_DURATION;
                 const moonCount = capsules.filter(c => c.unlockAt - c.createdAt === MOON_DURATION).length;
-                const moonDisabled = isMoon && moonCount >= MOON_LIMIT;
+                const moonDisabled = isMoon && moonCount >= MOON_LIMIT && !profile.isPremium;
+                const isPremiumLocked = !opt.isPublic && !profile.isPremium;
+                const isDisabled = moonDisabled || isPremiumLocked;
                 
                 return (
                   <button
@@ -125,16 +170,16 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, onSave, 
                     type="button"
                     onClick={() => handleOptionClick(opt)}
                     className={`text-[8px] font-bold tracking-widest transition-all uppercase relative group/opt ${
-                      unlockDuration === opt.value && (opt.isPublic && !moonDisabled)
+                      unlockDuration === opt.value && !isDisabled
                         ? 'text-black border-b border-black pb-0.5' 
-                        : (!opt.isPublic || moonDisabled)
+                        : isDisabled
                           ? 'text-neutral-200 cursor-help' 
                           : 'text-neutral-300 hover:text-neutral-500'
                     }`}
                   >
                     {opt.label}
-                    {(!opt.isPublic || moonDisabled) && (
-                      <i className="fa-solid fa-lock text-[6px] ml-1 opacity-40 group-hover/opt:opacity-100 transition-opacity"></i>
+                    {isDisabled && (
+                      <i className="fa-solid fa-lock text-[6px] ml-1 opacity-40 group-hover/opt:opacity-100 transition-opacity text-amber-600"></i>
                     )}
                   </button>
                 );
@@ -150,27 +195,59 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, onSave, 
           </div>
           
           <div className="space-y-3">
-             <p className="text-[8px] tracking-[0.3em] uppercase text-neutral-400 font-bold">Visual Context</p>
-             <input 
-                type="file" 
-                accept="image/*" 
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) {
-                    const reader = new FileReader();
-                    reader.onloadend = () => setImage(reader.result as string);
-                    reader.readAsDataURL(file);
-                  }
-                }}
-                className="hidden" 
-                id="file-upload"
-              />
-              <label 
-                htmlFor="file-upload" 
-                className={`inline-block text-[8px] tracking-widest font-bold uppercase cursor-pointer transition-all ${image ? 'text-amber-600 border-b border-amber-600 pb-0.5' : 'text-neutral-400 border-b border-neutral-100 hover:text-black hover:border-black pb-0.5'}`}
-              >
-                {image ? 'Memory Attached' : 'Add visual echo'}
-              </label>
+             <p className="text-[8px] tracking-[0.3em] uppercase text-neutral-400 font-bold">Context</p>
+             <div className="flex flex-col gap-4">
+               <div>
+                 <input 
+                    type="file" 
+                    accept="image/*" 
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => setImage(reader.result as string);
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                    className="hidden" 
+                    id="file-upload"
+                  />
+                  <label 
+                    htmlFor="file-upload" 
+                    className={`inline-block text-[8px] tracking-widest font-bold uppercase cursor-pointer transition-all ${image ? 'text-amber-600 border-b border-amber-600 pb-0.5' : 'text-neutral-400 border-b border-neutral-100 hover:text-black hover:border-black pb-0.5'}`}
+                  >
+                    <i className="fa-regular fa-image mr-2"></i>
+                    {image ? 'Visual Attached' : 'Add visual echo'}
+                  </label>
+               </div>
+               
+               <div>
+                 {audio ? (
+                   <div className="flex items-center gap-3">
+                     <span className="text-[8px] tracking-widest font-bold uppercase text-amber-600 border-b border-amber-600 pb-0.5">
+                       <i className="fa-solid fa-microphone-lines mr-2"></i>
+                       Voice Attached
+                     </span>
+                     <button 
+                       type="button" 
+                       onClick={() => setAudio(null)}
+                       className="text-neutral-400 hover:text-red-500 transition-colors"
+                     >
+                       <i className="fa-solid fa-xmark text-xs"></i>
+                     </button>
+                   </div>
+                 ) : (
+                   <button
+                     type="button"
+                     onClick={isRecording ? stopRecording : startRecording}
+                     className={`inline-block text-[8px] tracking-widest font-bold uppercase cursor-pointer transition-all ${isRecording ? 'text-red-500 animate-pulse' : 'text-neutral-400 border-b border-neutral-100 hover:text-black hover:border-black pb-0.5'}`}
+                   >
+                     <i className={`fa-solid ${isRecording ? 'fa-stop' : 'fa-microphone'} mr-2`}></i>
+                     {isRecording ? 'Recording...' : 'Add voice echo'}
+                   </button>
+                 )}
+               </div>
+             </div>
           </div>
         </div>
 

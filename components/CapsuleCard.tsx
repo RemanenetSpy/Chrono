@@ -60,7 +60,15 @@ export const CapsuleCard: React.FC<CapsuleCardProps> = ({ capsule, onClick }) =>
             {isUnlocked ? 'Available now' : `Unlocks ${new Date(capsule.unlockAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}`}
           </span>
         </div>
-        <div className={`w-2 h-2 rounded-full ${isUnlocked ? 'bg-[#a68b36] shadow-[0_0_8px_rgba(166,139,54,0.4)]' : 'bg-neutral-200'}`}></div>
+        <div className="flex items-center gap-4">
+          {capsule.audioUrl && (
+            <i className="fa-solid fa-microphone-lines text-neutral-300 text-xs sm:text-sm" title="Voice Echo Attached"></i>
+          )}
+          {capsule.imageUrl && (
+            <i className="fa-regular fa-image text-neutral-300 text-xs sm:text-sm" title="Visual Attached"></i>
+          )}
+          <div className={`w-2 h-2 rounded-full ${isUnlocked ? 'bg-[#a68b36] shadow-[0_0_8px_rgba(166,139,54,0.4)]' : 'bg-neutral-200'}`}></div>
+        </div>
       </div>
     </div>
   );

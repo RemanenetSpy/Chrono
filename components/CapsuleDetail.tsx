@@ -80,6 +80,18 @@ export const CapsuleDetail: React.FC<CapsuleDetailProps> = ({ capsule, onClose, 
                 <img src={capsule.imageUrl} className="w-full grayscale-[0.4] hover:grayscale-0 transition-all duration-1000" alt="Memory" />
               </div>
             )}
+
+            {capsule.audioUrl && (
+              <div className="max-w-md mx-auto mt-8 p-4 border border-black/5 bg-white/50 rounded-xl shadow-sm flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 shrink-0">
+                  <i className="fa-solid fa-microphone-lines"></i>
+                </div>
+                <div className="flex-1">
+                  <p className="text-[8px] tracking-widest font-bold uppercase text-neutral-400 mb-2">Voice Echo</p>
+                  <audio controls src={capsule.audioUrl} className="w-full h-8 outline-none" />
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="pt-8 border-t border-black/[0.04] space-y-6">
