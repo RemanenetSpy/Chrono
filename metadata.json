@@ -1,5 +1,5 @@
 {
   "name": "Chronos: Temporal Legacy Vault",
   "description": "Send messages, photos, and thoughts to your future self. A digital sanctuary where memories wait for the perfect moment to reveal themselves.",
-  "requestFramePermissions": []
+  "requestFramePermissions": ["microphone"]
 }
