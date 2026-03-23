@@ -29,7 +29,7 @@ const CHRONOS_ARTICLES = [
     url: "/blog/decision-fatigue.html",
     title: "Why decision fatigue is ruining your focus — and how to offload it",
     tag: "Pillar 1 · Focus",
-    live: false
+    live: true
   },
   {
     url: "/blog/cognitive-load-overwhelmed-founders.html",
