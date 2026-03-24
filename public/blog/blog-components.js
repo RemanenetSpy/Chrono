@@ -41,7 +41,7 @@ const CHRONOS_ARTICLES = [
     url: "/blog/social-media-comparison-trap.html",
     title: "How to stop the social media comparison trap offline",
     tag: "Pillar 1 · Mental Health",
-    live: false
+    live: true
   },
   {
     url: "/blog/information-fatigue-syndrome.html",
