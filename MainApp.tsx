@@ -7,6 +7,7 @@ import { CapsuleDetail } from './components/CapsuleDetail';
 import { Profile } from './components/Profile';
 import { Button } from './components/Button';
 import { analytics } from './services/analytics';
+import { encryptCapsuleData, decryptCapsuleData } from './utils/encryption';
 
 const DEFAULT_PROFILE: UserProfile = {
   name: 'L. Van-Tassel',
@@ -26,7 +27,9 @@ const MainApp: React.FC = () => {
     const savedProfile = localStorage.getItem('chronos_profile');
     if (savedCapsules) {
       try {
-        setCapsules(JSON.parse(savedCapsules));
+        const parsed = JSON.parse(savedCapsules);
+        const decryptedCapsules = parsed.map((cap: any) => decryptCapsuleData(cap));
+        setCapsules(decryptedCapsules);
       } catch (e) {
         console.error("Failed to parse saved capsules", e);
       }
@@ -46,7 +49,8 @@ const MainApp: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('chronos_capsules', JSON.stringify(capsules));
+    const encryptedCapsules = capsules.map(cap => encryptCapsuleData(cap));
+    localStorage.setItem('chronos_capsules', JSON.stringify(encryptedCapsules));
   }, [capsules]);
 
   useEffect(() => {
