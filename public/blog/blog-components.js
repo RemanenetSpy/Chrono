@@ -47,7 +47,7 @@ const CHRONOS_ARTICLES = [
     url: "/blog/information-fatigue-syndrome.html",
     title: "Tools to cure information fatigue syndrome",
     tag: "Pillar 1 · Digital Wellness",
-    live: false
+    live: true
   },
   {
     url: "/blog/context-switching-deep-work.html",
