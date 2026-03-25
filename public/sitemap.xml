@@ -51,6 +51,12 @@
   <priority>0.8</priority>
 </url>
   <url>
+  <loc>https://chronos-snowy.vercel.app/blog/information-fatigue-syndrome.html</loc>
+  <lastmod>2026-03-26</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
+</url>
+  <url>
   <loc>https://chronos-snowy.vercel.app/blog/social-media-comparison-trap.html</loc>
   <lastmod>2026-03-25</lastmod>
   <changefreq>monthly</changefreq>
