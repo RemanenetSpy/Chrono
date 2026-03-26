@@ -53,7 +53,7 @@ const CHRONOS_ARTICLES = [
     url: "/blog/context-switching-deep-work.html",
     title: "How to stop constant context switching during deep work",
     tag: "Pillar 1 · Focus",
-    live: false
+    live: true
   },
   {
     url: "/blog/intrusive-thoughts-at-work.html",
