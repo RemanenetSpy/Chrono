@@ -211,14 +211,27 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, profile,
                     }}
                     className="hidden" 
                     id="file-upload"
+                    disabled={!profile.isPremium}
                   />
-                  <label 
-                    htmlFor="file-upload" 
-                    className={`inline-block text-[8px] tracking-widest font-bold uppercase cursor-pointer transition-all ${image ? 'text-amber-600 border-b border-amber-600 pb-0.5' : 'text-neutral-400 border-b border-neutral-100 hover:text-black hover:border-black pb-0.5'}`}
-                  >
-                    <i className="fa-regular fa-image mr-2"></i>
-                    {image ? 'Visual Attached' : 'Add visual echo'}
-                  </label>
+                  {profile.isPremium ? (
+                    <label 
+                      htmlFor="file-upload" 
+                      className={`inline-block text-[8px] tracking-widest font-bold uppercase cursor-pointer transition-all ${image ? 'text-amber-600 border-b border-amber-600 pb-0.5' : 'text-neutral-400 border-b border-neutral-100 hover:text-black hover:border-black pb-0.5'}`}
+                    >
+                      <i className="fa-regular fa-image mr-2"></i>
+                      {image ? 'Visual Attached' : 'Add visual echo'}
+                    </label>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => onRequestPremium('Visual Echoes')}
+                      className="inline-block text-[8px] tracking-widest font-bold uppercase cursor-pointer transition-all text-neutral-300 hover:text-neutral-500 group/opt"
+                    >
+                      <i className="fa-regular fa-image mr-2"></i>
+                      Add visual echo
+                      <i className="fa-solid fa-lock text-[6px] ml-1 opacity-40 group-hover/opt:opacity-100 transition-opacity text-amber-600"></i>
+                    </button>
+                  )}
                </div>
                
                <div>
