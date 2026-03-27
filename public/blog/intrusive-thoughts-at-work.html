@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A System to Manage Intrusive Thoughts at Work | CHRONOS</title>
+  <meta name="description" content="Intrusive thoughts at work aren't a sign of weakness — they're unprocessed emotional material trying to surface. Here's the cognitive system that gives them somewhere to go without derailing your day." />
+  <meta name="keywords" content="intrusive thoughts at work, how to manage intrusive thoughts, intrusive thoughts system, unwanted thoughts work, intrusive thought loop, stop intrusive thoughts, cognitive offloading intrusive thoughts, manage anxiety at work" />
+  <meta name="author" content="CHRONOS" />
+  <link rel="canonical" href="https://chronos-snowy.vercel.app/blog/intrusive-thoughts-at-work.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://chronos-snowy.vercel.app/blog/intrusive-thoughts-at-work.html" />
+  <meta property="og:title" content="A System to Manage Intrusive Thoughts at Work" />
+  <meta property="og:description" content="Intrusive thoughts at work aren't a sign of weakness. They're unprocessed emotional material trying to surface. Here's the system that gives them somewhere to go." />
+  <meta property="og:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta property="og:site_name" content="CHRONOS" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="A System to Manage Intrusive Thoughts at Work" />
+  <meta name="twitter:description" content="Intrusive thoughts at work aren't weakness. They're unprocessed material trying to surface. Here's the system." />
+  <meta name="twitter:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta name="twitter:site" content="@Shivsha44422762" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"A System to Manage Intrusive Thoughts at Work","description":"Intrusive thoughts at work aren't a sign of weakness — they're unprocessed emotional material trying to surface. Here's the cognitive system that gives them somewhere to go without derailing your day.","author":{"@type":"Organization","name":"CHRONOS"},"publisher":{"@type":"Organization","name":"CHRONOS","url":"https://chronos-snowy.vercel.app"},"datePublished":"2026-03-27","dateModified":"2026-03-27","mainEntityOfPage":"https://chronos-snowy.vercel.app/blog/intrusive-thoughts-at-work.html"}</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Figtree:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:        #faf8fb;
+      --bg-2:      #f0ecf4;
+      --bg-dark:   #1a1120;
+      --ink:       #1a1120;
+      --ink-mid:   #3d2f4a;
+      --ink-soft:  #7a6888;
+      --ink-dim:   #b4a8c0;
+      --plum:      #7c3aed;
+      --plum-2:    #5b21b6;
+      --plum-pale: rgba(124,58,237,0.06);
+      --border:    rgba(26,17,32,0.1);
+      --border-2:  rgba(26,17,32,0.05);
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--ink);font-family:'Figtree',sans-serif;font-weight:300;line-height:1.8;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1.25rem,5vw,4rem);background:rgba(250,248,251,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'EB Garamond',serif;font-size:.9rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+    .nav-right{display:flex;align-items:center;gap:2rem}
+    .nav-link{font-size:.78rem;color:var(--ink-soft);text-decoration:none;letter-spacing:.05em;transition:color .2s}
+    .nav-link:hover{color:var(--plum)}
+    .nav-cta{padding:.5rem 1.25rem;background:var(--plum);color:#fff;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:background .2s}
+    .nav-cta:hover{background:var(--plum-2)}
+
+    /* Hero — centered, intimate */
+    .hero{min-height:65vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:9rem clamp(1.25rem,8vw,10rem) 4rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;border:1px solid rgba(124,58,237,0.07);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+    .hero::after{content:'';position:absolute;width:900px;height:900px;border-radius:50%;border:1px solid rgba(124,58,237,0.04);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+    .hero-meta{display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;justify-content:center;opacity:0;animation:fadeUp .7s .1s forwards}
+    .hero-tag{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--plum);border:1px solid rgba(124,58,237,0.3);padding:.25rem .7rem}
+    .hero-date,.hero-read{font-size:.72rem;color:var(--ink-dim);letter-spacing:.06em}
+    h1{font-family:'EB Garamond',serif;font-size:clamp(2.4rem,6vw,5.5rem);font-weight:400;line-height:1.1;color:var(--ink);margin-bottom:1.5rem;max-width:760px;opacity:0;animation:fadeUp .8s .25s forwards}
+    h1 em{font-style:italic;color:var(--plum)}
+    .hero-sub{font-size:clamp(.95rem,1.7vw,1.1rem);color:var(--ink-soft);max-width:520px;line-height:1.8;opacity:0;animation:fadeUp .8s .4s forwards}
+
+    .article-wrap{display:grid;grid-template-columns:1fr min(660px,100%) 1fr;padding:0 clamp(1.25rem,5vw,2rem)}
+    .article-wrap>*{grid-column:2}
+    article{padding:4rem 0 6rem}
+
+    .prose h2{font-family:'EB Garamond',serif;font-size:clamp(1.7rem,3vw,2.5rem);font-weight:400;color:var(--ink);margin:3.5rem 0 1.2rem;line-height:1.2}
+    .prose h3{font-family:'EB Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--plum);margin:2.5rem 0 .8rem}
+    .prose p{font-size:1.05rem;color:var(--ink-mid);margin-bottom:1.6rem;line-height:1.9}
+    .prose p strong{color:var(--ink);font-weight:500}
+    .prose p em{font-style:italic}
+    .prose ul,.prose ol{margin:1rem 0 1.8rem 1.2rem}
+    .prose li{font-size:1rem;color:var(--ink-mid);margin-bottom:.7rem;line-height:1.8;padding-left:.4rem}
+    .prose li::marker{color:var(--plum)}
+
+    .pull-quote{border-left:2px solid var(--plum);padding:1.5rem 2rem;margin:3rem 0;background:var(--plum-pale)}
+    .pull-quote p{font-family:'EB Garamond',serif;font-size:clamp(1.2rem,2.2vw,1.75rem);font-style:italic;color:var(--ink);margin:0;line-height:1.45}
+
+    .callout{background:var(--bg-2);border:1px solid var(--border);border-top:2px solid var(--plum);padding:1.75rem 2rem;margin:2.5rem 0}
+    .callout-label{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--plum);margin-bottom:.7rem}
+    .callout p{font-size:.95rem;color:var(--ink-mid);margin:0;line-height:1.8}
+
+    /* Thought type cards */
+    .thought-types{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border);margin:2.5rem 0}
+    .thought-card{background:var(--bg);padding:1.75rem}
+    .thought-icon{font-family:'EB Garamond',serif;font-size:1.8rem;font-style:italic;color:rgba(124,58,237,0.2);margin-bottom:.75rem;display:block}
+    .thought-title{font-family:'EB Garamond',serif;font-size:1.1rem;color:var(--ink);margin-bottom:.4rem}
+    .thought-desc{font-size:.82rem;color:var(--ink-soft);line-height:1.65}
+    .thought-tag{display:inline-block;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--plum);background:var(--plum-pale);padding:.2rem .5rem;margin-bottom:.5rem}
+
+    /* The STOP method */
+    .stop-method{margin:2.5rem 0;background:var(--bg-dark);padding:2.5rem}
+    .stop-title{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,248,251,0.3);margin-bottom:2rem}
+    .stop-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(250,248,251,0.06)}
+    @media(max-width:500px){.stop-steps{grid-template-columns:1fr 1fr}}
+    .stop-step{padding:1.5rem 1.25rem;background:var(--bg-dark)}
+    .stop-letter{font-family:'EB Garamond',serif;font-size:3rem;font-weight:400;color:var(--plum);line-height:1;display:block;margin-bottom:.5rem}
+    .stop-word{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,248,251,0.5);display:block;margin-bottom:.5rem}
+    .stop-desc{font-size:.8rem;color:rgba(250,248,251,0.4);line-height:1.6}
+
+    /* Steps */
+    .steps{display:flex;flex-direction:column;gap:1px;margin:2.5rem 0;background:var(--border)}
+    .step{display:flex;gap:1.5rem;background:var(--bg);padding:1.75rem 2rem}
+    .step-num{font-family:'EB Garamond',serif;font-size:2rem;color:rgba(124,58,237,0.18);line-height:1;flex-shrink:0;width:2.5rem;text-align:center}
+    .step-content h4{font-family:'EB Garamond',serif;font-size:1.1rem;color:var(--ink);margin-bottom:.4rem}
+    .step-content p{font-size:.92rem;color:var(--ink-soft);margin:0;line-height:1.75}
+
+    .section-divider{display:flex;align-items:center;gap:1rem;margin:3rem 0;color:var(--ink-dim)}
+    .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .section-divider span{font-size:.7rem;letter-spacing:.15em}
+
+    .article-cta{margin-top:4rem;padding:3rem;background:var(--bg-dark);text-align:center;position:relative;overflow:hidden}
+    .article-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 120%,rgba(124,58,237,0.2) 0%,transparent 70%);pointer-events:none}
+    .article-cta-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(250,248,251,0.3);margin-bottom:1rem}
+    .article-cta h3{font-family:'EB Garamond',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-style:italic;color:rgba(250,248,251,0.92);margin-bottom:.8rem}
+    .article-cta p{font-size:.92rem;color:rgba(250,248,251,0.45);max-width:400px;margin:0 auto 2rem;line-height:1.75}
+    .btn-cta{display:inline-flex;align-items:center;padding:.9rem 2.5rem;background:var(--plum);color:#fff;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:background .2s,transform .2s}
+    .btn-cta:hover{background:var(--plum-2);transform:translateY(-1px)}
+
+    footer{border-top:1px solid var(--border);padding:2rem clamp(1.25rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .footer-logo{font-family:'EB Garamond',serif;font-size:.9rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+    .footer-copy{font-size:.72rem;color:var(--ink-dim)}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @media(max-width:600px){.article-cta{padding:2rem 1.5rem}.step{flex-direction:column;gap:.5rem}}
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Main navigation">
+    <a href="https://chronos-snowy.vercel.app/" class="nav-logo">CHRONOS</a>
+    <div class="nav-right">
+      <a href="https://chronos-snowy.vercel.app/blog/" class="nav-link">All Articles</a>
+      <a href="https://chronos-snowy.vercel.app/" class="nav-cta">Open App</a>
+    </div>
+  </nav>
+
+  <header class="hero" aria-label="Article header">
+    <div class="hero-meta">
+      <span class="hero-tag">Pillar 1 · Mental Health</span>
+      <span class="hero-date">March 27, 2026</span>
+      <span class="hero-read">10 min read</span>
+    </div>
+    <h1>A system to manage <em>intrusive thoughts</em> at work</h1>
+    <p class="hero-sub">Intrusive thoughts at work are not a sign of weakness or instability. They are unprocessed emotional material trying to surface at the worst possible time. Here's the system that gives them somewhere to go.</p>
+  </header>
+
+  <div class="article-wrap">
+    <article class="prose">
+
+      <p>You are in the middle of something that matters. And then — unbidden, uninvited — a thought arrives. Something you said last week that you cannot stop replaying. A fear about tomorrow. A memory you did not choose to recall. A catastrophic scenario your brain has decided to run, at full resolution, right now.</p>
+
+      <p>You try to push it away. It returns. You try to ignore it. It returns louder. You try to reason with it. It has no interest in reason.</p>
+
+      <p>This is the nature of intrusive thought: <strong>it does not respond to suppression</strong>. The act of trying not to think about something is, neurologically, the act of thinking about it. The white bear problem, as psychologists call it — the harder you try not to think about a white bear, the more insistently the white bear appears.</p>
+
+      <div class="pull-quote reveal">
+        <p>You cannot think your way out of an intrusive thought. You can only give it somewhere to go.</p>
+      </div>
+
+      <h2>What intrusive thoughts actually are</h2>
+
+      <p>The term "intrusive thought" in clinical psychology refers to any unwanted thought, image, or impulse that enters consciousness involuntarily and is experienced as distressing or unwanted. They are universal — research consistently shows that over 90% of people experience intrusive thoughts regularly, including people with no mental health diagnoses whatsoever.</p>
+
+      <p>The thoughts themselves are not the problem. <strong>The relationship with the thoughts is the problem.</strong> Specifically: the attempts to suppress, the rumination loops that form when suppression fails, and the secondary anxiety generated by the thought's presence.</p>
+
+      <p>At work, intrusive thoughts are particularly disruptive because the professional context adds a layer of pressure to appear composed. You cannot sit with the thought. You cannot process it. You must appear functional while your internal experience is anything but. This creates a pressure cooker — the thought intensifies precisely because it has nowhere to go.</p>
+
+      <div class="callout reveal">
+        <p class="callout-label">The suppression paradox</p>
+        <p>Daniel Wegner's 1987 white bear experiment demonstrated that actively trying not to think about something increases the frequency of that thought. Suppression creates a monitoring process — the brain checks repeatedly to confirm the thought is not present, which repeatedly activates the very neural circuits it is trying to suppress. The harder you push, the more persistently the thought returns.</p>
+      </div>
+
+      <h2>The three categories of workplace intrusive thought</h2>
+
+      <p>Not all intrusive thoughts at work are the same. Understanding the category helps determine the right response.</p>
+
+      <div class="thought-types reveal">
+        <div class="thought-card">
+          <span class="thought-tag">Retrospective</span>
+          <span class="thought-icon">I</span>
+          <div class="thought-title">The replay loop</div>
+          <div class="thought-desc">Something you said, did, or failed to do. Replaying a conversation, a decision, an embarrassment. The brain is trying to process an unresolved emotional event.</div>
+        </div>
+        <div class="thought-card">
+          <span class="thought-tag">Anticipatory</span>
+          <span class="thought-icon">II</span>
+          <div class="thought-title">The catastrophe rehearsal</div>
+          <div class="thought-desc">A feared future event, played out in detail. The meeting that will go wrong, the email that will cause a problem, the thing that might fail. Threat simulation running without an off switch.</div>
+        </div>
+        <div class="thought-card">
+          <span class="thought-tag">Intrusive</span>
+          <span class="thought-icon">III</span>
+          <div class="thought-title">The non-sequitur</div>
+          <div class="thought-desc">An entirely unrelated thought — personal, emotional, sometimes disturbing — that surfaces during work with no apparent trigger. Unprocessed material from elsewhere in your life.</div>
+        </div>
+      </div>
+
+      <p>Each category has a different root cause but the same structural problem: the thought has no trusted container. It has nowhere to go except back into your working memory, on repeat, until something gives it an exit.</p>
+
+      <div class="section-divider" aria-hidden="true"><span>✦</span></div>
+
+      <h2>The system — four steps</h2>
+
+      <p>The system works by interrupting the suppression cycle before it begins, and replacing it with a structured externalisation and closure process. It is not a therapeutic intervention — it is a cognitive workflow.</p>
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Name it, don't fight it</h4>
+            <p>The moment the intrusive thought appears, name it without judgment. "This is the replay loop about the meeting." "This is anticipatory anxiety about tomorrow." Naming activates the prefrontal cortex and reduces the amygdala's grip on the thought. You are not suppressing — you are observing. This small shift breaks the suppression paradox before it begins.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Write the full thought — uncensored</h4>
+            <p>Open a private, sealed space and write the thought in its full form. Not a summary — the actual content. The fear, the catastrophe, the replay, the embarrassment. The private container matters: you write differently when you know no one will read it. The act of writing externalises the thought from working memory into a trusted external location.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Assign it a time horizon and seal it</h4>
+            <p>For retrospective thoughts: "I will return to this tonight." For anticipatory thoughts: "I will address this when the event actually arrives." For non-sequiturs: "I will process this at the end of the day." Then seal the entry. The sealing is the mechanism — it creates the psychological closure that suppression never can.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Return to work — without checking</h4>
+            <p>The thought is stored. The loop is closed. Return to the current task without reopening the entry to re-read it. The seal must hold. Any re-reading restarts the loop. If the thought returns, write it again — same process. Each iteration, it loses force. Usually, two or three cycles is sufficient.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2>The STOP framework for acute episodes</h2>
+
+      <p>For intrusive thoughts that arrive with particular force — in a meeting, mid-presentation, during a difficult conversation — a faster micro-intervention is needed. The STOP framework is a four-second pattern interrupt that can be executed invisibly.</p>
+
+      <div class="stop-method reveal">
+        <p class="stop-title">The STOP framework</p>
+        <div class="stop-steps">
+          <div class="stop-step">
+            <span class="stop-letter">S</span>
+            <span class="stop-word">Stop</span>
+            <span class="stop-desc">Pause for one second. Do not fight the thought. Simply stop and notice it is there.</span>
+          </div>
+          <div class="stop-step">
+            <span class="stop-letter">T</span>
+            <span class="stop-word">Take a breath</span>
+            <span class="stop-desc">One slow exhale. This activates the parasympathetic system and reduces the amygdala response.</span>
+          </div>
+          <div class="stop-step">
+            <span class="stop-letter">O</span>
+            <span class="stop-word">Observe</span>
+            <span class="stop-desc">Name the category. "Replay." "Anticipation." "Non-sequitur." Observation without judgment.</span>
+          </div>
+          <div class="stop-step">
+            <span class="stop-letter">P</span>
+            <span class="stop-word">Proceed</span>
+            <span class="stop-desc">Return to the current moment. The thought is noted. It will be addressed — later, in the vault.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <p class="callout-label">Why the vault works where a notebook doesn't</p>
+        <p>A standard notebook or notes app keeps the written thought visible and accessible. You can re-read it, edit it, spiral into it. The loop remains open. A <strong>time-locked, sealed vault</strong> — one that prevents re-reading until the assigned moment — creates genuine closure. The thought is trusted to the container. The brain releases its grip. This is the structural difference between externalisation and cognitive offloading.</p>
+      </div>
+
+      <h2>Building the daily container practice</h2>
+
+      <p>The system is most effective when it becomes a daily ritual rather than an emergency intervention. A morning pre-work offload — five minutes of writing whatever is already surfacing before the day begins — significantly reduces the volume of intrusive thought that appears during working hours.</p>
+
+      <ul>
+        <li>Morning: write whatever is already present before opening any work tools. Seal it. Give it a time horizon.</li>
+        <li>During work: when a thought intrudes, write and seal immediately — no elaboration required.</li>
+        <li>Lunchtime: brief mid-day offload of anything that has accumulated. Prevents the afternoon pile-up.</li>
+        <li>End of day: full offload of everything unresolved. This is the practice that most directly reduces evening and nighttime intrusive thought.</li>
+      </ul>
+
+      <p>The container does not need to be large. <strong>The practice needs to be consistent.</strong> A daily five-minute offload creates a brain that trusts the system — and a brain that trusts the system stops rehearsing its open loops continuously.</p>
+
+      <div class="pull-quote reveal">
+        <p>The thought is not the enemy. The loop is the enemy. Break the loop and the thought loses its power.</p>
+      </div>
+
+      <h2>What CHRONOS was built for</h2>
+
+      <p>CHRONOS is a <strong>zero-knowledge, offline-first digital vault</strong> — the private, sealed container at the centre of this system. Write the intrusive thought in full. Set a time horizon. The vault locks the entry with AES-256-GCM encryption until that exact moment. No notification resurfaces it at the wrong time. No algorithm reads it. It is sealed — genuinely, mathematically sealed.</p>
+
+      <p>Add a <strong>Voice Echo</strong> — speak the thought if writing it feels too slow or too clinical. Up to five minutes of audio, encrypted and time-locked alongside the text. Add a <strong>Visual Echo</strong> — attach the image or context that is part of the thought's emotional weight.</p>
+
+      <p>The thought needs somewhere to go. The vault is that place. Not a journal anyone might read. Not a notes app that keeps it visible. A sealed container that holds it until you are ready — and not a moment before.</p>
+
+      <div class="article-cta reveal">
+        <p class="article-cta-label">CHRONOS</p>
+        <h3>The thought arrived uninvited.<br/>Give it somewhere to go.</h3>
+        <p>Write it. Name it. Seal it. The loop breaks the moment it has a container.</p>
+        <a href="https://chronos-snowy.vercel.app/" class="btn-cta">Open CHRONOS</a>
+      </div>
+
+    </article>
+  </div>
+
+  <link rel="stylesheet" href="/blog/blog-styles.css" />
+  <section id="chronos-related-section" style="color: var(--ink);">
+    <div id="chronos-related"></div>
+  </section>
+  <script src="/blog/blog-components.js"></script>
+
+  <footer>
+    <a href="https://chronos-snowy.vercel.app/" class="footer-logo">CHRONOS</a>
+    <p class="footer-copy">© 2026 CHRONOS · Curating Continuity</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)} });
+    },{threshold:0.1});
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
