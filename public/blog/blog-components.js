@@ -59,7 +59,7 @@ const CHRONOS_ARTICLES = [
     url: "/blog/intrusive-thoughts-at-work.html",
     title: "A system to manage intrusive thoughts at work",
     tag: "Pillar 1 · Mental Health",
-    live: false
+    live: true
   },
   {
     url: "/blog/wait-24-hours-rule.html",
