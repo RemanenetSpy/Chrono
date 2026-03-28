@@ -65,7 +65,7 @@ const CHRONOS_ARTICLES = [
     url: "/blog/wait-24-hours-rule.html",
     title: "The wait 24 hours rule for impulsive texts and emails",
     tag: "Pillar 1 · Habits",
-    live: false
+    live: true 
   }
   // Add more as they go live...
 ];
