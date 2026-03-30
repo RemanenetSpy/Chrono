@@ -142,7 +142,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/digital-minimalism-principles.html",
     title: "Core principles of digital minimalism in a noisy world",
     tag:   "Pillar 2 · Minimalism",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/cognitive-offloading-neuroscience.html",
