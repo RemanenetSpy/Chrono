@@ -148,7 +148,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/cognitive-offloading-neuroscience.html",
     title: "What is cognitive offloading? The neuroscience of writing things down",
     tag:   "Pillar 2 · Neuroscience",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/intentional-friction-ux.html",
