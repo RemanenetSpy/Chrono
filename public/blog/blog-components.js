@@ -154,7 +154,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/intentional-friction-ux.html",
     title: "Intentional friction: Why good UX is sometimes making things harder",
     tag:   "Pillar 2 · Philosophy",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/jomo-joy-of-missing-out.html",
