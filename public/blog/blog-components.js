@@ -172,7 +172,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/psychology-delayed-gratification.html",
     title: "The psychology of delayed gratification in software design",
     tag:   "Pillar 2 · Philosophy",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/ephemeral-journaling.html",
