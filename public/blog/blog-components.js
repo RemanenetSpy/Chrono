@@ -178,7 +178,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/ephemeral-journaling.html",
     title: "Ephemeral journaling: Why your thoughts shouldn't live forever",
     tag:   "Pillar 2 · Minimalism",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/slow-web-movement.html",
