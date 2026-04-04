@@ -22,6 +22,12 @@
   <priority>0.7</priority>
 </url>
   <url>
+  <loc>https://chronos-snowy.vercel.app/blog/ephemeral-journaling.html</loc>
+  <lastmod>2026-04-03</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
+</url>
+  <url>
     <loc>https://chronos-snowy.vercel.app/blog/stop-obsessing-2am.html</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
