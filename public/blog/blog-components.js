@@ -184,7 +184,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/slow-web-movement.html",
     title: "The Slow Web movement explained",
     tag:   "Pillar 2 · Philosophy",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/attention-as-finite-currency.html",
