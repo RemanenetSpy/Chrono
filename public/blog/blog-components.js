@@ -160,7 +160,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/jomo-joy-of-missing-out.html",
     title: "JOMO — Joy of Missing Out — and how to actually achieve it",
     tag:   "Pillar 2 · Lifestyle",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/stoicism-technology.html",
