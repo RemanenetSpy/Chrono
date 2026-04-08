@@ -166,7 +166,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/stoicism-technology.html",
     title: "Stoicism and technology: How to control your digital environment",
     tag:   "Pillar 2 · Philosophy",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/psychology-delayed-gratification.html",
