@@ -190,7 +190,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/attention-as-finite-currency.html",
     title: "Treating your attention span as a finite currency",
     tag:   "Pillar 2 · Minimalism",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/digital-boredom-creativity.html",
