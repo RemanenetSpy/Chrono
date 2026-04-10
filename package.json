@@ -12,6 +12,7 @@
   "dependencies": {
     "crypto-js": "^4.2.0",
     "express": "^5.2.1",
+    "html2canvas": "^1.4.1",
     "lucide-react": "^0.577.0",
     "motion": "^12.35.0",
     "react": "19.0.0",
