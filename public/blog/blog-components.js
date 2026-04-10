@@ -196,7 +196,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/digital-boredom-creativity.html",
     title: "Embracing digital boredom to unlock creativity",
     tag:   "Pillar 2 · Lifestyle",
-    live:  false
+    live:  true
   },
 
   // ── PILLAR 3 — Architecture & Privacy ────────────────────
