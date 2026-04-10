@@ -12,6 +12,11 @@
   <priority>0.7</priority>
 </url>
   <url>
+  <loc>https://chronos-snowy.vercel.app/blog/digital-boredom-creativity.html</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+  <url>
   <loc>https://chronos-snowy.vercel.app/blog/attention-as-finite-currency.html</loc>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
