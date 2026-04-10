@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Capsule } from '../types';
 import { Button } from './Button';
+import { ShareCard } from './ShareCard';
 
 interface CapsuleDetailProps {
   capsule: Capsule;
@@ -14,6 +15,7 @@ export const CapsuleDetail: React.FC<CapsuleDetailProps> = ({ capsule, onClose, 
   const [isUnlocked, setIsUnlocked] = useState(Date.now() >= capsule.unlockAt);
   const [reflectionText, setReflectionText] = useState(capsule.reflection || '');
   const [isEditingReflection, setIsEditingReflection] = useState(!capsule.reflection);
+  const [showShareCard, setShowShareCard] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -57,6 +59,14 @@ export const CapsuleDetail: React.FC<CapsuleDetailProps> = ({ capsule, onClose, 
               This message is drifting in the stream. It will arrive on:
               <span className="block text-neutral-900 mt-2 font-normal not-italic text-base">{new Date(capsule.unlockAt).toLocaleString(undefined, { dateStyle: 'long', timeStyle: 'short' })}</span>
             </p>
+          </div>
+          <div className="pt-8">
+            <button 
+              onClick={() => setShowShareCard(true)}
+              className="text-[9px] tracking-[0.3em] uppercase text-neutral-500 hover:text-black transition-colors font-bold border border-black/10 px-6 py-3 rounded-full"
+            >
+              <i className="fa-solid fa-share-nodes mr-2"></i> Share the Void
+            </button>
           </div>
         </div>
       ) : (
@@ -130,6 +140,10 @@ export const CapsuleDetail: React.FC<CapsuleDetailProps> = ({ capsule, onClose, 
             <span className="text-[6px] tracking-[0.4em] uppercase text-neutral-300 font-bold">Private Archive System</span>
           </div>
         </div>
+      )}
+
+      {showShareCard && (
+        <ShareCard capsule={capsule} onClose={() => setShowShareCard(false)} />
       )}
     </div>
   );
