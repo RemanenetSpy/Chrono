@@ -205,7 +205,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/offline-first-architecture.html",
     title: "What is offline-first architecture in web development?",
     tag:   "Pillar 3 · Privacy",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/cloud-worst-place-journal.html",
