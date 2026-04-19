@@ -211,7 +211,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/cloud-worst-place-journal.html",
     title: "Why the cloud is the worst place for your personal journal",
     tag:   "Pillar 3 · Privacy",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/zero-knowledge-web-app.html",
