@@ -3,40 +3,54 @@
 
 > "Capturing the fragments of today for the clarity of tomorrow."
 
-**Chronos** is a luxury minimalist digital sanctuary designed for intentional reflection. It allows you to compose letters and attach "visual echoes" (photos) to be delivered to your future self. By locking memories behind a temporal gate, Chronos transforms social posting into a private ritual of mindfulness.
+**Chronos** is a luxury minimalist digital sanctuary designed for intentional reflection. It acts as a **nervous system regulator**—an anti-doomscrolling tool that allows you to compose letters, attach "visual echoes" (photos), and record audio to be delivered to your future self. By locking memories behind a temporal gate, Chronos transforms social posting into a private ritual of mindfulness, quarantining your mental noise.
 
 ---
 
 ## 📜 The Purpose
 
-In an era of instant gratification and ephemeral content, Chronos asks you to slow down. The purpose of this project is to create a space where thoughts can mature. Whether it's a message of encouragement for a difficult week ahead, a photo of a fleeting moment you want to revisit in a year, or a "moon"-long commitment to a goal, Chronos ensures your message arrives exactly when it's meant to.
+In an era of instant gratification and ephemeral content, Chronos asks you to slow down. Human brains hate "open loops." If you have an intrusive thought and put it in a standard notes app, you just keep re-reading it. If you lock it in Chronos and the math physically refuses to let you see it for a month, your brain is forced to drop the loop. 
 
 ## ✨ Key Features
 
 - **Compose Across Time**: Write rich, serif-styled letters to the future with an elegant editor.
-- **Visual Echoes**: Attach images to your capsules to ground your memories in reality.
-- **Temporal Gates**: Choose your horizon—from a single "Moon" (30 days) to a full "Decade."
-- **Proprietary Vaults**: Export your memories as `.chronosvault` files. These use app-bound AES-256 encryption combined with HMAC integrity signatures, making them unreadable outside the Chronos ecosystem.
+- **Visual & Voice Echoes**: Attach images and audio recordings to your capsules to ground your memories in reality.
+- **Temporal Gates**: Choose your horizon—from a single "Moment" (1 day) to a full "Decade."
 - **The Vault**: A curated gallery of your pending and revealed history, styled as an elegant stationery collection with a dramatic editorial layout.
-- **Memoir**: A personal profile and analytics suite to track your growth and manage your temporal legacy.
 - **Reflections**: Once a capsule is revealed, add a modern perspective to your past thoughts to see how much you've grown.
-- **Privacy-First**: All data is stored locally in your chronicle (browser storage), ensuring your letters remain your own.
+- **Premium Waitlist**: Long-term horizons (Year, Decade) and unlimited Moon capsules are locked behind a premium tier (currently a demo waitlist).
+- **Share the Void**: Generate a high-resolution, cryptographic-style "tombstone" card to share on social media, proving you locked a thought without revealing the content.
 
-## 🎨 Design Philosophy: "Luxury Minimal"
+---
 
-Chronos moves away from the aggressive "tech" aesthetic of modern social media. It utilizes:
-- **Warm Light Themes**: A parchment-inspired background (`#f2f2f0`) that is easy on the eyes and feels tactile.
-- **Literary Typography**: The use of *Cormorant Garamond* provides a classic, timeless feel for your most important thoughts.
-- **Minimalist Animation**: Subtle "fade-up" transitions and fine-line borders that mimic high-quality stationery.
-- **Atmospheric Depth**: A soft grain overlay and deep, sophisticated shadows to give the digital interface a physical, paper-like soul.
+## ⚙️ Technical Deep Dive & Architecture
 
-## 🛠️ Tech Stack
+Chronos is built as a **Local-First Single Page Application (SPA)**. The architecture is designed to prioritize absolute user privacy, meaning the application logic runs entirely within the client's browser.
 
-- **Frontend**: React 19, TypeScript, Tailwind CSS
-- **Icons**: Font Awesome 6
-- **Typography**: Cormorant Garamond (Serif), Inter (Sans), JetBrains Mono (Mono)
-- **Security**: SubtleCrypto API for AES-256-GCM encryption
-- **Build Tool**: Vite
+### 1. Data Persistence & Media Handling
+- **Storage Engine**: Data is persisted using the browser's native `localStorage` API. 
+- **Media Encoding**: Images and audio are not uploaded to a CDN. Instead, the `FileReader` API converts images, and the `MediaRecorder` API converts microphone streams (`audio/webm`), directly into **Base64 Data URIs**. These strings are then encrypted and stored locally.
+- *Note on Scaling*: `localStorage` typically has a 5MB limit. Future iterations will migrate to `IndexedDB` to support larger media payloads.
+
+### 2. Security & Encryption (Local-First)
+- **AES-256 Encryption at Rest**: Before any capsule is committed to `localStorage`, the sensitive fields (`content`, `reflection`, `imageUrl`, `audioUrl`) are mathematically locked using `crypto-js` AES encryption. 
+- **Targeted Encryption**: The UI metadata (`unlockAt`, `title`, `id`) remains in plain text. This allows the React frontend to render the Vault gallery, calculate countdown timers, and manage state without needing to decrypt the private payloads.
+- **Zero-Knowledge**: Your data never leaves your device. There is no database, no cloud sync, and no backend API receiving your thoughts. You can verify this by monitoring the Network tab in your browser's Developer Tools.
+- *MVP Note*: The current iteration uses a static client-side key for AES encryption. A production release will implement PBKDF2 to derive a unique encryption key from a user-provided master password.
+
+### 3. "Share the Void" Card Generation
+To allow users to share their commitment on social media without compromising privacy, Chronos features a client-side image generator.
+- **html2canvas**: When a user clicks "Share the Void", the app renders a hidden DOM element containing the "tombstone" design (using the *Spectral* typeface).
+- **Canvas Export**: `html2canvas` traverses this DOM node, paints it to an HTML5 `<canvas>` at 3x scale for high-resolution retina displays, and exports it as an `image/png` Data URI, triggering a native browser download.
+
+### 4. Tech Stack
+- **Frontend Framework**: React 19, TypeScript, Vite
+- **Styling**: Tailwind CSS
+- **Typography**: Cormorant Garamond (Serif), Spectral (Serif), Inter (Sans), JetBrains Mono (Mono)
+- **Cryptography**: `crypto-js`
+- **Backend (Payments Only)**: Express.js server utilizing the `stripe` Node SDK to generate secure Checkout Sessions for the Premium tier.
+
+---
 
 ## 🚀 Getting Started
 
@@ -56,13 +70,6 @@ Chronos moves away from the aggressive "tech" aesthetic of modern social media. 
    ```bash
    npm run dev
    ```
-
-## 🔐 Security & Privacy
-
-Chronos is built on the principle of **Local-First**. 
-- **Zero-Knowledge**: Your letters are encrypted on your device.
-- **No Cloud Sync**: By default, your data never leaves your browser's local storage.
-- **Vault Backups**: Use the "Export Vault" feature to create encrypted backups of your chronicle.
 
 ## ⚖️ License
 

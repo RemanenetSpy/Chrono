@@ -6,6 +6,9 @@ import { CreateCapsule } from './components/CreateCapsule';
 import { CapsuleDetail } from './components/CapsuleDetail';
 import { Profile } from './components/Profile';
 import { Button } from './components/Button';
+import { Logo } from './components/Logo';
+import { KeyIcon } from './components/KeyIcon';
+import { SplashScreen } from './components/SplashScreen';
 import { analytics } from './services/analytics';
 import { encryptCapsuleData, decryptCapsuleData } from './utils/encryption';
 
@@ -21,6 +24,7 @@ const MainApp: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>('VAULT');
   const [selectedCapsuleId, setSelectedCapsuleId] = useState<string | null>(null);
   const [premiumModalFeature, setPremiumModalFeature] = useState<string | null>(null);
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
     const savedCapsules = localStorage.getItem('chronos_capsules');
@@ -111,6 +115,8 @@ const MainApp: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col text-neutral-900 bg-[#fdfbf7]">
+      {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
+      
       <div className="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-200/40 to-transparent pointer-events-none z-50"></div>
 
       <nav className="p-6 md:p-8 flex justify-between items-center max-w-7xl mx-auto w-full border-b border-black/[0.03]">
@@ -118,10 +124,7 @@ const MainApp: React.FC = () => {
           className="cursor-pointer group" 
           onClick={() => navigateTo('VAULT')}
         >
-          <h1 className="text-xl md:text-2xl tracking-[0.3em] font-light uppercase">
-            Chronos
-            <span className="block h-px w-0 group-hover:w-full bg-black transition-all duration-1000 mt-1"></span>
-          </h1>
+          <Logo variant="compact" />
         </div>
 
         <div className="flex gap-8 items-center">
@@ -150,10 +153,23 @@ const MainApp: React.FC = () => {
             </header>
 
             {capsules.length === 0 ? (
-              <div className="py-20 text-center border-y border-black/[0.03] flex flex-col items-center">
-                <h3 className="serif text-2xl mb-3 text-neutral-400 font-light italic">The chronicle is silent.</h3>
-                <p className="text-neutral-400 text-[8px] tracking-[0.5em] uppercase mb-8 font-bold">Will you write today?</p>
-                <Button variant="outline" onClick={() => navigateTo('CREATE')}>Compose Entry</Button>
+              <div className="py-24 text-center border-y border-black/[0.03] flex flex-col items-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neutral-100/30 to-transparent opacity-50"></div>
+                <h3 className="serif text-3xl mb-4 text-neutral-800 font-light relative z-10">The archive awaits.</h3>
+                <p className="text-neutral-400 text-sm font-light mb-12 max-w-md leading-relaxed relative z-10">
+                  Capture a fragment of the present. Whether it is a cherished memory, a quiet promise, or a fleeting thought—entrust it to the vault and let time reveal its meaning.
+                </p>
+                <button 
+                  onClick={() => navigateTo('CREATE')}
+                  className="group flex flex-col items-center gap-5 transition-all relative z-10 mt-2 outline-none focus:outline-none [-webkit-tap-highlight-color:transparent]"
+                >
+                  <div className="animate-breathe rounded-full">
+                    <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center group-hover:bg-black group-hover:scale-105 transition-all duration-700 shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-black/[0.02]">
+                      <i className="fa-solid fa-feather-pointed text-neutral-400 group-hover:text-white transition-colors text-xl"></i>
+                    </div>
+                  </div>
+                  <span className="text-[9px] tracking-[0.4em] uppercase text-neutral-500 group-hover:text-black transition-colors font-bold">Draft a Letter</span>
+                </button>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 border-t border-l border-black/[0.04]">
