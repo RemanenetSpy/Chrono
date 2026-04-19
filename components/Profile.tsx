@@ -221,7 +221,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                 </div>
               </div>
             ) : backupMode === 'IDLE' ? (
-              <div className="flex flex-col sm:flex-row gap-6 items-center">
+              <div className="flex flex-col sm:flex-row gap-4 w-full">
                 <button 
                   onClick={() => { 
                     if (!profile.isPremium) {
@@ -231,11 +231,13 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                     setBackupMode('EXPORT'); 
                     setStatus(null); 
                   }}
-                  className="flex-1 text-center py-4 border border-dashed border-black/10 hover:border-black/30 transition-all group relative"
+                  className="w-full sm:flex-1 flex flex-col items-center justify-center py-8 px-4 bg-white border border-black/5 hover:border-black/10 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl transition-all duration-500 group relative outline-none focus:outline-none [-webkit-tap-highlight-color:transparent]"
                 >
-                  <i className="fa-solid fa-file-export text-neutral-200 group-hover:text-neutral-400 mb-2 block"></i>
-                  <span className="text-[8px] tracking-[0.4em] uppercase font-bold text-neutral-400 group-hover:text-black">Seal ChronosVault</span>
-                  {!profile.isPremium && <i className="fa-solid fa-lock absolute top-4 right-4 text-[8px] text-amber-600/50 group-hover:text-amber-600 transition-colors"></i>}
+                  <div className="w-12 h-12 rounded-full bg-neutral-50 flex items-center justify-center mb-4 group-hover:bg-neutral-900 group-hover:scale-110 transition-all duration-500">
+                    <i className="fa-solid fa-file-export text-neutral-400 group-hover:text-white transition-colors"></i>
+                  </div>
+                  <span className="text-[9px] tracking-[0.3em] uppercase font-bold text-neutral-500 group-hover:text-black transition-colors">Seal ChronosVault</span>
+                  {!profile.isPremium && <i className="fa-solid fa-lock absolute top-5 right-5 text-[10px] text-amber-600/40 group-hover:text-amber-600 transition-colors"></i>}
                 </button>
                 <button 
                   onClick={() => { 
@@ -246,11 +248,13 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                     setBackupMode('IMPORT'); 
                     setStatus(null); 
                   }}
-                  className="flex-1 text-center py-4 border border-dashed border-black/10 hover:border-black/30 transition-all group relative"
+                  className="w-full sm:flex-1 flex flex-col items-center justify-center py-8 px-4 bg-white border border-black/5 hover:border-black/10 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl transition-all duration-500 group relative outline-none focus:outline-none [-webkit-tap-highlight-color:transparent]"
                 >
-                  <i className="fa-solid fa-file-import text-neutral-200 group-hover:text-neutral-400 mb-2 block"></i>
-                  <span className="text-[8px] tracking-[0.4em] uppercase font-bold text-neutral-400 group-hover:text-black">Restore Vault</span>
-                  {!profile.isPremium && <i className="fa-solid fa-lock absolute top-4 right-4 text-[8px] text-amber-600/50 group-hover:text-amber-600 transition-colors"></i>}
+                  <div className="w-12 h-12 rounded-full bg-neutral-50 flex items-center justify-center mb-4 group-hover:bg-neutral-900 group-hover:scale-110 transition-all duration-500">
+                    <i className="fa-solid fa-file-import text-neutral-400 group-hover:text-white transition-colors"></i>
+                  </div>
+                  <span className="text-[9px] tracking-[0.3em] uppercase font-bold text-neutral-500 group-hover:text-black transition-colors">Restore Vault</span>
+                  {!profile.isPremium && <i className="fa-solid fa-lock absolute top-5 right-5 text-[10px] text-amber-600/40 group-hover:text-amber-600 transition-colors"></i>}
                 </button>
               </div>
             ) : (

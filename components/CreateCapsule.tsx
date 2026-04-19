@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { Capsule, UserProfile } from '../types';
 import { Button } from './Button';
+import { KeyIcon } from './KeyIcon';
 import { TIME_OPTIONS } from '../constants';
 import { analytics } from '../services/analytics';
 
@@ -270,7 +271,7 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, profile,
             className="group flex flex-col items-center gap-3 transition-all"
           >
             <div className="w-14 h-14 rounded-full border border-black/5 flex items-center justify-center group-hover:bg-black group-hover:scale-110 transition-all duration-700 shadow-lg shadow-black/5">
-              <i className="fa-solid fa-feather-pointed text-neutral-300 group-hover:text-white transition-colors text-xs"></i>
+              <KeyIcon className="h-5 w-auto text-neutral-300 group-hover:text-white transition-colors" />
             </div>
             <span className="text-[7px] tracking-[0.4em] uppercase text-neutral-400 group-hover:text-black transition-colors font-bold">Seal this moment</span>
           </button>

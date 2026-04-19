@@ -117,7 +117,7 @@ export const ShareCard: React.FC<ShareCardProps> = ({ capsule, onClose }) => {
               <i className="fa-solid fa-download"></i>
             )}
             <span className="uppercase tracking-widest text-xs font-medium">
-              {isDownloading ? 'Generating...' : 'Download Card'}
+              {isDownloading ? 'Forging...' : 'Extract Artifact'}
             </span>
           </button>
         </div>
