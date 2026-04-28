@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Build Zero-Knowledge on Vercel | CHRONOS</title>
+  <meta name="description" content="Zero-knowledge architecture: build apps where servers can't read user data, even under subpoena. Here's how to implement it on Vercel with code examples." />
+  <meta name="keywords" content="zero-knowledge architecture, zero-knowledge proof, client-side encryption Vercel, end-to-end encrypted app, serverless encryption, secure backend, privacy-first backend" />
+  <meta name="author" content="CHRONOS" />
+  <link rel="canonical" href="https://chronos-snowy.vercel.app/blog/zero-knowledge-web-app.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://chronos-snowy.vercel.app/blog/zero-knowledge-web-app.html" />
+  <meta property="og:title" content="How to Build Zero-Knowledge on Vercel" />
+  <meta property="og:description" content="Build apps where servers can't read user data. Here's the architecture + code." />
+  <meta property="og:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta property="og:site_name" content="CHRONOS" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to Build Zero-Knowledge on Vercel" />
+  <meta name="twitter:description" content="Zero-knowledge backend: build with Vercel + client-side encryption." />
+  <meta name="twitter:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta name="twitter:site" content="@Shivsha44422762" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Build Zero-Knowledge on Vercel","description":"Zero-knowledge architecture: build apps where servers can't read user data, even under subpoena. Here's how to implement it on Vercel with code examples.","author":{"@type":"Organization","name":"CHRONOS"},"publisher":{"@type":"Organization","name":"CHRONOS","url":"https://chronos-snowy.vercel.app"},"datePublished":"2026-04-15","dateModified":"2026-04-15","mainEntityOfPage":"https://chronos-snowy.vercel.app/blog/zero-knowledge-web-app.html"}</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:         #f8fafc;
+      --bg-2:       #f1f5f9;
+      --bg-3:       #e8f2f7;
+      --ink:        #0f172a;
+      --ink-mid:    #334155;
+      --ink-soft:   #64748b;
+      --ink-dim:    #94a3b8;
+      --emerald:    #059669;
+      --emerald-2:  #047857;
+      --emerald-pale: rgba(5,150,105,0.08);
+      --mint:       #14b8a6;
+      --mint-2:     #0d9488;
+      --border:     rgba(15,23,42,0.1);
+      --border-2:   rgba(15,23,42,0.05);
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--ink);font-family:'Raleway',sans-serif;font-weight:300;line-height:1.8;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.01'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1.25rem,5vw,4rem);background:rgba(248,250,252,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Inconsolata',monospace;font-size:.95rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);text-decoration:none;font-weight:600}
+    .nav-right{display:flex;align-items:center;gap:2rem}
+    .nav-link{font-size:.78rem;color:var(--ink-soft);text-decoration:none;letter-spacing:.05em;transition:color .2s}
+    .nav-link:hover{color:var(--emerald)}
+    .nav-cta{padding:.5rem 1.25rem;background:var(--emerald);color:#fff;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:background .2s;font-weight:500}
+    .nav-cta:hover{background:var(--emerald-2)}
+
+    /* Hero — minimal, technical */
+    .hero{min-height:64vh;display:flex;flex-direction:column;justify-content:flex-end;padding:9rem clamp(1.25rem,8vw,8rem) 4rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg, var(--bg-2) 0%, var(--emerald-pale) 100%);pointer-events:none;z-index:-1}
+    .hero::after{content:'';position:absolute;bottom:0;right:0;width:300px;height:300px;background:radial-gradient(circle, var(--mint-2) 0%, transparent 70%);opacity:.05;pointer-events:none}
+    .hero-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mint);margin-bottom:1.5rem;opacity:0;animation:fadeUp .6s .1s forwards;position:relative}
+    h1{font-family:'Inconsolata',monospace;font-size:clamp(2.4rem,6vw,5.8rem);font-weight:500;line-height:1.08;color:var(--ink);margin-bottom:1.5rem;max-width:800px;opacity:0;animation:fadeUp .8s .2s forwards;position:relative;letter-spacing:-1px}
+    h1 em{font-style:italic;color:var(--emerald);font-weight:600}
+    .hero-sub{font-size:clamp(.95rem,1.7vw,1.1rem);color:var(--ink-soft);max-width:540px;line-height:1.8;opacity:0;animation:fadeUp .8s .35s forwards;position:relative}
+    .hero-meta{display:flex;align-items:center;gap:1.5rem;margin-top:2rem;opacity:0;animation:fadeUp .6s .5s forwards;position:relative}
+    .hero-tag{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mint);border:1px solid rgba(20,184,166,0.3);padding:.25rem .7rem}
+    .hero-date,.hero-read{font-size:.72rem;color:var(--ink-dim)}
+
+    .article-wrap{display:grid;grid-template-columns:1fr min(680px,100%) 1fr;padding:0 clamp(1.25rem,5vw,2rem)}
+    .article-wrap>*{grid-column:2}
+    article{padding:4rem 0 6rem}
+
+    .prose h2{font-family:'Inconsolata',monospace;font-size:clamp(1.7rem,3vw,2.6rem);font-weight:500;color:var(--ink);margin:3.5rem 0 1.2rem;line-height:1.15;letter-spacing:-0.5px}
+    .prose h3{font-family:'Inconsolata',monospace;font-size:1.25rem;color:var(--emerald);margin:2.5rem 0 .8rem;font-weight:500;letter-spacing:-0.3px}
+    .prose h4{font-family:'Inconsolata',monospace;font-size:0.95rem;color:var(--mint);margin:1.5rem 0 .6rem;font-weight:500;letter-spacing:0.5px}
+    .prose p{font-size:1.05rem;color:var(--ink-mid);margin-bottom:1.6rem;line-height:1.9}
+    .prose p strong{color:var(--ink);font-weight:500}
+    .prose p em{font-style:italic}
+    .prose ul,.prose ol{margin:1rem 0 1.8rem 1.2rem}
+    .prose li{font-size:1rem;color:var(--ink-mid);margin-bottom:.7rem;line-height:1.8;padding-left:.4rem}
+    .prose li::marker{color:var(--mint)}
+    .prose code{font-family:'Inconsolata',monospace;background:var(--bg-2);padding:.2rem .5rem;border-radius:3px;font-size:0.9rem;color:var(--emerald);font-weight:500}
+
+    /* Code block */
+    .code-block{background:#0f172a;color:#e2e8f0;padding:1.75rem;border-radius:4px;overflow-x:auto;margin:2rem 0;font-family:'Inconsolata',monospace;font-size:.85rem;line-height:1.6;border-left:3px solid var(--mint);position:relative}
+    .code-label{position:absolute;top:.75rem;right:.75rem;font-size:.7rem;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.5px;opacity:.5}
+    .code-block code{background:transparent;color:inherit;padding:0;font-size:inherit}
+
+    /* Callout */
+    .info-callout{background:var(--emerald-pale);border:1px solid rgba(5,150,105,0.2);border-left:3px solid var(--emerald);padding:1.75rem 2rem;margin:2.5rem 0}
+    .info-label{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--emerald);margin-bottom:.7rem;font-weight:500}
+    .info-callout p{font-size:.95rem;color:var(--ink-mid);margin:0;line-height:1.8}
+
+    /* Architecture flow */
+    .arch-flow{margin:2.5rem 0;background:var(--bg-2);border:1px solid var(--border);padding:2.5rem;display:flex;flex-direction:column;gap:1.5rem}
+    .flow-title{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.5rem;font-weight:500}
+    .flow-steps{display:flex;flex-direction:column;gap:0}
+    .flow-step{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;gap:1.5rem;align-items:flex-start}
+    .flow-step:last-child{border-bottom:none}
+    .flow-num{font-family:'Inconsolata',monospace;font-size:1.2rem;color:var(--mint);font-weight:600;flex-shrink:0;width:28px}
+    .flow-content{flex:1}
+    .flow-label{font-family:'Inconsolata',monospace;font-size:.75rem;color:var(--emerald);text-transform:uppercase;letter-spacing:.8px;font-weight:600;margin-bottom:.3rem}
+    .flow-desc{font-size:.9rem;color:var(--ink-soft);line-height:1.5}
+
+    /* Pull quote */
+    .pull-quote{border-left:4px solid var(--mint);padding:1.5rem 2rem;margin:3rem 0;background:var(--emerald-pale)}
+    .pull-quote p{font-family:'Inconsolata',monospace;font-size:clamp(1.2rem,2.2vw,1.75rem);font-weight:500;color:var(--ink);margin:0;line-height:1.45;letter-spacing:-0.3px}
+
+    /* Implementation grid */
+    .impl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border);margin:2.5rem 0}
+    .impl-card{background:var(--bg);padding:1.5rem}
+    .impl-icon{font-size:1.6rem;margin-bottom:.5rem}
+    .impl-title{font-family:'Inconsolata',monospace;font-size:.9rem;color:var(--ink);margin-bottom:.5rem;font-weight:500}
+    .impl-desc{font-size:.82rem;color:var(--ink-soft);line-height:1.65}
+
+    /* Steps */
+    .steps{display:flex;flex-direction:column;gap:1px;margin:2.5rem 0;background:var(--border)}
+    .step{display:flex;gap:1.5rem;background:var(--bg);padding:1.75rem 2rem}
+    .step-num{font-family:'Inconsolata',monospace;font-size:1.8rem;color:rgba(5,150,105,0.15);line-height:1;flex-shrink:0;width:2.5rem;text-align:center;font-weight:600}
+    .step-content h4{font-family:'Inconsolata',monospace;font-size:1.05rem;color:var(--ink);margin:0 0 .3rem 0;font-weight:500}
+    .step-content p{font-size:.92rem;color:var(--ink-soft);margin:0;line-height:1.75}
+
+    .section-divider{display:flex;align-items:center;gap:1rem;margin:3rem 0;color:var(--ink-dim)}
+    .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .section-divider span{font-size:.7rem;letter-spacing:.15em}
+
+    .article-cta{margin-top:4rem;padding:3rem;background:linear-gradient(135deg, var(--emerald) 0%, var(--mint) 100%);text-align:center;position:relative;overflow:hidden}
+    .article-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 120%,rgba(248,250,252,0.1) 0%,transparent 70%);pointer-events:none}
+    .article-cta-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1rem;font-weight:500}
+    .article-cta h3{font-family:'Inconsolata',monospace;font-size:clamp(1.5rem,3vw,2.2rem);color:rgba(255,255,255,0.95);margin-bottom:.8rem;font-weight:500;letter-spacing:-0.5px}
+    .article-cta p{font-size:.92rem;color:rgba(255,255,255,0.55);max-width:400px;margin:0 auto 2rem;line-height:1.75}
+    .btn-cta{display:inline-flex;align-items:center;padding:.9rem 2.5rem;background:#fff;color:var(--emerald);font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;font-family:'Raleway',sans-serif;transition:opacity .2s,transform .2s}
+    .btn-cta:hover{opacity:.88;transform:translateY(-1px)}
+
+    footer{border-top:1px solid var(--border);padding:2rem clamp(1.25rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .footer-logo{font-family:'Inconsolata',monospace;font-size:.95rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);text-decoration:none;font-weight:600}
+    .footer-copy{font-size:.72rem;color:var(--ink-dim)}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @media(max-width:600px){.article-cta{padding:2rem 1.5rem}.step{flex-direction:column;gap:.5rem}.code-block{font-size:.75rem}}
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Main navigation">
+    <a href="https://chronos-snowy.vercel.app/" class="nav-logo">CHRONOS</a>
+    <div class="nav-right">
+      <a href="https://chronos-snowy.vercel.app/blog/blog-index.html" class="nav-link">All Articles</a>
+      <a href="https://chronos-snowy.vercel.app/" class="nav-cta">Open App</a>
+    </div>
+  </nav>
+
+  <header class="hero" aria-label="Article header">
+    <p class="hero-label">Pillar 3 · Implementation</p>
+    <h1>How to build <em>zero-knowledge</em><br/>on Vercel</h1>
+    <p class="hero-sub">Zero-knowledge means: the server stores your data, but cannot read it. Not because encryption is good, but because the server never sees plaintext. Here's the architecture and code to make it real on Vercel.</p>
+    <div class="hero-meta">
+      <span class="hero-tag">Backend Architecture</span>
+      <span class="hero-date">April 15, 2026</span>
+      <span class="hero-read">15 min read</span>
+    </div>
+  </header>
+
+  <div class="article-wrap">
+    <article class="prose">
+
+      <p>Most "zero-knowledge" apps claim it in marketing. Few actually implement it.</p>
+
+      <p>True zero-knowledge means: the server cannot decrypt your data, even if it wanted to. Even if law enforcement subpoenas it. Even if the server gets hacked. The server sees only encrypted bytes.</p>
+
+      <p>This isn't theoretical. CHRONOS implements it. Here's how.</p>
+
+      <div class="pull-quote reveal">
+        <p>Zero-knowledge isn't a feature. It's an architecture. Build it from the beginning or don't build it at all.</p>
+      </div>
+
+      <h2>The core principle: Encryption before transmission</h2>
+
+      <p>Zero-knowledge has one rule: <strong>plaintext never leaves the client.</strong></p>
+
+      <p>Here's what happens:</p>
+
+      <div class="arch-flow reveal">
+        <p class="flow-title">Zero-knowledge data flow</p>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="flow-num">1</div>
+            <div class="flow-content">
+              <div class="flow-label">Client: User writes</div>
+              <div class="flow-desc">User enters "My secret thought" in the CHRONOS app. This lives in plaintext in the browser.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">2</div>
+            <div class="flow-content">
+              <div class="flow-label">Client: Encrypt before leaving</div>
+              <div class="flow-desc">Before any network call, AES-256-GCM encrypts the thought. Only the encrypted bytes leave the browser.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">3</div>
+            <div class="flow-content">
+              <div class="flow-label">Network: Transmission</div>
+              <div class="flow-desc">Encrypted blob travels over HTTPS to Vercel. Even if HTTPS is intercepted, only ciphertext is visible.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">4</div>
+            <div class="flow-num">4</div>
+            <div class="flow-content">
+              <div class="flow-label">Server: Storage</div>
+              <div class="flow-desc">Vercel stores the encrypted blob in a database. Server has zero visibility into content. Subpoenas get ciphertext, not secrets.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">5</div>
+            <div class="flow-content">
+              <div class="flow-label">Client: Decrypt on retrieval</div>
+              <div class="flow-desc">When user retrieves, encrypted blob returns to browser. Client-side decryption happens only on the user's device. User reads plaintext.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p>The critical insight: <strong>Vercel never holds the decryption key.</strong> The key stays on the user's device. The server cannot decrypt even if it tries.</p>
+
+      <h2>The technical implementation: How CHRONOS does it</h2>
+
+      <p>Here's the actual code pattern:</p>
+
+      <div class="code-block reveal">
+        <div class="code-label">JavaScript / Node.js</div>
+        <code>// 1. Client-side encryption (happens BEFORE sending)
+import { webcrypto } from 'crypto';
+
+async function encryptVault(plaintext, userKey) {
+  // userKey = 256-bit key (only user has this)
+  // AES-256-GCM: authenticated encryption (prevents tampering)
+  const iv = webcrypto.getRandomValues(new Uint8Array(12));
+  
+  const encrypted = await webcrypto.subtle.encrypt(
+    { name: 'AES-GCM', iv },
+    userKey,
+    new TextEncoder().encode(plaintext)
+  );
+  
+  // Return encrypted blob + IV (IV is public, doesn't compromise security)
+  return {
+    iv: Array.from(iv),
+    ciphertext: Array.from(new Uint8Array(encrypted))
+  };
+}
+
+// 2. Send encrypted blob to Vercel (plaintext never transmitted)
+const encrypted = await encryptVault(userThought, userKey);
+const response = await fetch('/api/vault', {
+  method: 'POST',
+  body: JSON.stringify(encrypted) // Only ciphertext
+});
+
+// 3. Server stores encrypted blob (never sees plaintext)
+// Vercel API handler
+export default async function handler(req, res) {
+  const { iv, ciphertext } = req.body;
+  // Store as-is. Server cannot decrypt.
+  await db.vaults.create({
+    userId: req.user.id,
+    iv, ciphertext,
+    createdAt: new Date()
+  });
+  return res.json({ success: true });
+}
+
+// 4. Client-side decryption (only on user's device)
+async function decryptVault(encrypted, userKey) {
+  const decrypted = await webcrypto.subtle.decrypt(
+    { name: 'AES-GCM', iv: new Uint8Array(encrypted.iv) },
+    userKey,
+    new Uint8Array(encrypted.ciphertext)
+  );
+  
+  return new TextDecoder().decode(decrypted);
+}
+
+// User retrieves vault
+const vault = await db.vaults.findById(vaultId);
+const plaintext = await decryptVault(vault, userKey);
+// Only now is plaintext visible (in browser)
+</code>
+      </div>
+
+      <p>That's it. The pattern is:</p>
+
+      <ol>
+        <li>User enters plaintext</li>
+        <li>Encrypt client-side with user's key</li>
+        <li>Send only ciphertext to server</li>
+        <li>Server stores ciphertext</li>
+        <li>When retrieving, client decrypts</li>
+      </ol>
+
+      <p>The server never touches plaintext. Ever.</p>
+
+      <div class="pull-quote reveal">
+        <p>If the server never sees plaintext, it cannot leak it, sell it, or be compelled to hand it over.</p>
+      </div>
+
+      <h2>The key problem: Where does the encryption key live?</h2>
+
+      <p>This is the hardest part of zero-knowledge architecture.</p>
+
+      <p>You need a cryptographic key to encrypt/decrypt. Where should it live?</p>
+
+      <div class="impl-grid reveal">
+        <div class="impl-card">
+          <div class="impl-icon">🔑</div>
+          <div class="impl-title">Option 1: User password</div>
+          <div class="impl-desc">Derive encryption key from user password (PBKDF2, Argon2). User remembers password, key is derived on-the-fly. Trade-off: weak password = weak encryption.</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-icon">💾</div>
+          <div class="impl-title">Option 2: Browser storage</div>
+          <div class="impl-desc">Store random key in browser localStorage/IndexedDB. Fast, strong. Trade-off: if device is compromised, key is accessible.</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-icon">⚡</div>
+          <div class="impl-title">Option 3: Hardware security</div>
+          <div class="impl-desc">Store key in secure enclave (iOS, Android, Windows Hello). Most secure. Trade-off: only works on supported devices.</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-icon">🎲</div>
+          <div class="impl-title">Option 4: Hybrid</div>
+          <div class="impl-desc">Combine password + stored key. User password unlocks storage key. Best of both worlds, added complexity.</div>
+        </div>
+      </div>
+
+      <p>CHRONOS uses <strong>Option 1</strong> (password-derived key) for simplicity + Option 2 (browser storage) for convenience. The tradeoff: passwords are the weakest link.</p>
+
+      <p>This is why CHRONOS emphasizes: <strong>use a strong, unique password.</strong> Your encryption is only as strong as your password.</p>
+
+      <h2>Building zero-knowledge on Vercel: The architecture</h2>
+
+      <p>Here's how to structure the app:</p>
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Client (React / Frontend)</h4>
+            <p>Where encryption happens. User writes plaintext. Client-side JS encrypts before sending. Client decrypts on retrieval. Plaintext never leaves this layer except within the user's browser memory.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>API (Vercel Functions)</h4>
+            <p>Stateless endpoints. Receive encrypted blob. Store blob. Retrieve blob. Return blob. Never touches plaintext. Can be written in Node, Python, Go — doesn't matter. It doesn't see secrets.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Database (Postgres, MongoDB, etc.)</h4>
+            <p>Stores encrypted blobs and metadata. Never stores keys. Never sees plaintext. Could be compromised; attackers get random bytes, not secrets.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Authentication Layer</h4>
+            <p>Verifies user (JWT, sessions). But does NOT encrypt/decrypt. API layer just checks "is this user allowed to access this vault?" then returns encrypted blob to client.</p>
+          </div>
+        </div>
+      </div>
+
+      <p>The key principle: <strong>Encryption/decryption logic is client-only.</strong> The server is stateless about plaintext.</p>
+
+      <h2>The honest trade-offs: What zero-knowledge costs</h2>
+
+      <p>Zero-knowledge is powerful but expensive:</p>
+
+      <div class="info-callout reveal">
+        <p class="info-label">Trade-off #1: No Server-Side Search</p>
+        <p>With encrypted data, the server cannot search your vaults. It can't find "all entries from January" or "all entries containing 'anxiety'." You can only search on the client. This limits UX (search is slower, only works on downloaded data).</p>
+      </div>
+
+      <div class="info-callout reveal">
+        <p class="info-label">Trade-off #2: No Server-Side Sync Without Trust</p>
+        <p>When you sync across devices, encrypted data must match. But "match" is hard to verify when you can't decrypt. CHRONOS solves this with device isolation + timestamps, but it's complex.</p>
+      </div>
+
+      <div class="info-callout reveal">
+        <p class="info-label">Trade-off #3: Metadata Still Exists</p>
+        <p>Server sees: when you write, how often, file sizes, device info, IP address. This metadata alone reveals patterns (behavior, location, emotional state changes). Zero-knowledge encrypts content but not metadata.</p>
+      </div>
+
+      <div class="info-callout reveal">
+        <p class="info-label">Trade-off #4: Complexity for Developers</p>
+        <p>Encryption/decryption logic is tricky. Mistakes are catastrophic. Key management is hard. Most teams don't build this correctly. Zero-knowledge requires serious engineering discipline.</p>
+      </div>
+
+      <p>Despite these costs, the benefit is profound: <strong>your data is yours, not the platform's.</strong></p>
+
+      <h2>The cryptography: What makes it actually work</h2>
+
+      <p>Zero-knowledge relies on three cryptographic primitives:</p>
+
+      <ul>
+        <li><strong>AES-256:</strong> Symmetric encryption. Fast. Unbroken after 25 years. If key is secret, ciphertext is unbreakable.</li>
+        <li><strong>GCM (Galois/Counter Mode):</strong> Authenticates ciphertext. Detects tampering. Prevents attacker from modifying encrypted data without being caught.</li>
+        <li><strong>PBKDF2/Argon2:</strong> Derives encryption key from password. Slows down brute-force attacks. Argon2 is newer, stronger.</li>
+      </ul>
+
+      <p>Together: <strong>AES-256-GCM with PBKDF2 key derivation</strong> is the industry standard for zero-knowledge apps. It's what Signal, Telegram (optional), and CHRONOS use.</p>
+
+      <p>The security is proven. The weakness is always the human side: password strength, key management, device security.</p>
+
+      <h2>Implementation checklist: Building zero-knowledge correctly</h2>
+
+      <p>If you're building zero-knowledge:</p>
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <h4>Use a proven library</h4>
+            <p>Don't implement encryption yourself. Use libsodium (Sodium.js), TweetNaCl.js, or Web Crypto API. Let cryptographers handle the hard parts.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <h4>Never log plaintext</h4>
+            <p>Not in server logs, not in error messages, not in monitoring. If plaintext appears anywhere server-side, you've broken zero-knowledge.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <h4>Encrypt before sending</h4>
+            <p>Always. No exceptions. If you ever transmit plaintext, zero-knowledge is broken. Make encryption the default step before any HTTP call.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <h4>Use strong key derivation</h4>
+            <p>PBKDF2 with 600,000 iterations, or Argon2. Weak key derivation is the #1 way zero-knowledge fails.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <h4>Audit for metadata leaks</h4>
+            <p>Even with encryption, metadata can reveal patterns. Think about what the server learns: timestamps, file sizes, sync patterns, device info. Minimize what's logged.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <h4>Test the failure case</h4>
+            <p>What happens if the encryption key is forgotten? Make sure data isn't unrecoverable. Plan for key recovery (backup codes, device syncing).</p>
+          </div>
+        </div>
+      </div>
+
+      <p>This checklist is not exhaustive. Building privacy-respecting systems is hard. Hire security experts if you're handling sensitive data.</p>
+
+      <h2>Why Vercel? Why serverless?</h2>
+
+      <p>Zero-knowledge can be built on any backend, but serverless (Vercel Functions) has advantages:</p>
+
+      <ul>
+        <li><strong>Stateless by default:</strong> Serverless functions don't retain state between calls. Less risk of accidental plaintext retention.</li>
+        <li><strong>No persistent infrastructure:</strong> No servers sitting around with secrets. Each request is a fresh process.</li>
+        <li><strong>Simple scaling:</strong> If you need to scale, serverless scales automatically. No infrastructure to manage.</li>
+        <li><strong>Cost:</strong> You pay only for execution, not idle servers. Zero-knowledge apps that store encrypted data don't need much server compute.</li>
+      </ul>
+
+      <p>That said, zero-knowledge can run on traditional servers (AWS EC2, DigitalOcean, your own hardware). The architecture is backend-agnostic.</p>
+
+      <div class="pull-quote reveal">
+        <p>Zero-knowledge isn't about the platform. It's about the principle: plaintext never leaves the client.</p>
+      </div>
+
+      <h2>The shift in software design</h2>
+
+      <p>Zero-knowledge represents a fundamental shift in how we think about user data:</p>
+
+      <ul>
+        <li><strong>Old model:</strong> "Users trust us with their data. We'll be good stewards."</li>
+        <li><strong>New model:</strong> "Users' data is theirs. We literally cannot read it."</li>
+      </ul>
+
+      <p>The new model doesn't require trust. It requires architecture.</p>
+
+      <p>This is why CHRONOS was built zero-knowledge from day one. Not because we're unusually ethical, but because the architecture is becoming table-stakes for apps handling sensitive data (journals, health records, financial data).</p>
+
+      <p>If you're building an app that stores user secrets, build it zero-knowledge. If you can't, acknowledge it. Don't claim privacy you don't have.</p>
+
+      <div class="article-cta reveal">
+        <p class="article-cta-label">CHRONOS</p>
+        <h3>Built zero-knowledge<br/>from day one.</h3>
+        <p>Your vault is encrypted on your device. We literally cannot read it. That's not a promise. It's an architecture.</p>
+        <a href="https://chronos-snowy.vercel.app/" class="btn-cta">Open CHRONOS</a>
+      </div>
+
+    </article>
+  </div>
+
+  <link rel="stylesheet" href="/blog/blog-styles.css" />
+  <section id="chronos-related-section" style="color: var(--ink);">
+    <div id="chronos-related"></div>
+  </section>
+  <script src="/blog/blog-components.js"></script>
+
+  <footer>
+    <a href="https://chronos-snowy.vercel.app/" class="footer-logo">CHRONOS</a>
+    <p class="footer-copy">© 2026 CHRONOS · Curating Continuity</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)} });
+    },{threshold:0.1});
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
