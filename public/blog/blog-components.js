@@ -217,7 +217,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/zero-knowledge-web-app.html",
     title: "How to build a zero-knowledge web app on Vercel",
     tag:   "Pillar 3 · Tech",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/client-side-encryption-basics.html",
