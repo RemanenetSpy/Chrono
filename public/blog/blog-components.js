@@ -223,7 +223,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/client-side-encryption-basics.html",
     title: "Client-side encryption basics for indie hackers",
     tag:   "Pillar 3 · Tech",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/data-sovereignty-2026.html",
