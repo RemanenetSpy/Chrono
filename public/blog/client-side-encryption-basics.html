@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client-Side Encryption Basics for Indie Hackers | CHRONOS</title>
+  <meta name="description" content="Encryption doesn't need to be scary. Here's how client-side encryption actually works, in plain language, with optional code for indie hackers building privacy apps." />
+  <meta name="keywords" content="client-side encryption, encryption for beginners, how encryption works, indie hacker privacy, app encryption tutorial, end-to-end encryption explained, privacy app basics" />
+  <meta name="author" content="CHRONOS" />
+  <link rel="canonical" href="https://chronos-snowy.vercel.app/blog/client-side-encryption-basics.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://chronos-snowy.vercel.app/blog/client-side-encryption-basics.html" />
+  <meta property="og:title" content="Client-Side Encryption Basics for Indie Hackers" />
+  <meta property="og:description" content="Learn encryption without the math. Here's how to build privacy into your app." />
+  <meta property="og:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta property="og:site_name" content="CHRONOS" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Client-Side Encryption Basics for Indie Hackers" />
+  <meta name="twitter:description" content="Encryption demystified. Build privacy apps without a PhD." />
+  <meta name="twitter:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta name="twitter:site" content="@Shivsha44422762" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Client-Side Encryption Basics for Indie Hackers","description":"Encryption doesn't need to be scary. Here's how client-side encryption actually works, in plain language, with optional code for indie hackers.","author":{"@type":"Organization","name":"CHRONOS"},"publisher":{"@type":"Organization","name":"CHRONOS","url":"https://chronos-snowy.vercel.app"},"datePublished":"2026-04-17","dateModified":"2026-04-17","mainEntityOfPage":"https://chronos-snowy.vercel.app/blog/client-side-encryption-basics.html"}</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:         #faf6f1;
+      --bg-2:       #f3ede5;
+      --bg-3:       #ece3da;
+      --ink:        #3a2f2a;
+      --ink-mid:    #5a4f47;
+      --ink-soft:   #8a7f77;
+      --ink-dim:    #b5ada3;
+      --warmchar:   #6b4c3a;
+      --warmchar-2: #4a3225;
+      --burnt:      #c46830;
+      --burnt-2:    #a85020;
+      --burnt-pale: rgba(196,104,48,0.08);
+      --border:     rgba(58,47,42,0.12);
+      --border-2:   rgba(58,47,42,0.06);
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;line-height:1.8;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1.25rem,5vw,4rem);background:rgba(250,246,241,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Outfit',sans-serif;font-size:.95rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink);text-decoration:none;font-weight:600}
+    .nav-right{display:flex;align-items:center;gap:2rem}
+    .nav-link{font-size:.78rem;color:var(--ink-soft);text-decoration:none;letter-spacing:.05em;transition:color .2s}
+    .nav-link:hover{color:var(--burnt)}
+    .nav-cta{padding:.5rem 1.25rem;background:var(--burnt);color:#fff;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:background .2s;font-weight:500}
+    .nav-cta:hover{background:var(--burnt-2)}
+
+    /* Hero — warm, approachable */
+    .hero{min-height:64vh;display:flex;flex-direction:column;justify-content:flex-end;padding:9rem clamp(1.25rem,8vw,8rem) 4rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-10%;left:-5%;width:50%;height:120%;background:radial-gradient(ellipse at 30% 40%, var(--burnt-pale) 0%, transparent 65%);pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:0;right:0;width:200px;height:200px;background:radial-gradient(circle, var(--warmchar) 0%, transparent 70%);opacity:.05;pointer-events:none}
+    .hero-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--burnt);margin-bottom:1.5rem;opacity:0;animation:fadeUp .6s .1s forwards;position:relative}
+    h1{font-family:'Outfit',sans-serif;font-size:clamp(2.4rem,6vw,5.8rem);font-weight:400;line-height:1.08;color:var(--ink);margin-bottom:1.5rem;max-width:800px;opacity:0;animation:fadeUp .8s .2s forwards;position:relative}
+    h1 em{font-style:italic;font-weight:600;color:var(--burnt)}
+    .hero-sub{font-size:clamp(.95rem,1.7vw,1.1rem);color:var(--ink-soft);max-width:540px;line-height:1.8;opacity:0;animation:fadeUp .8s .35s forwards;position:relative}
+    .hero-meta{display:flex;align-items:center;gap:1.5rem;margin-top:2rem;opacity:0;animation:fadeUp .6s .5s forwards;position:relative}
+    .hero-tag{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--burnt);border:1px solid rgba(196,104,48,0.3);padding:.25rem .7rem}
+    .hero-date,.hero-read{font-size:.72rem;color:var(--ink-dim)}
+
+    .article-wrap{display:grid;grid-template-columns:1fr min(680px,100%) 1fr;padding:0 clamp(1.25rem,5vw,2rem)}
+    .article-wrap>*{grid-column:2}
+    article{padding:4rem 0 6rem}
+
+    .prose h2{font-family:'Outfit',sans-serif;font-size:clamp(1.7rem,3vw,2.6rem);font-weight:500;color:var(--ink);margin:3.5rem 0 1.2rem;line-height:1.15}
+    .prose h3{font-family:'Outfit',sans-serif;font-size:1.25rem;font-style:italic;color:var(--burnt);margin:2.5rem 0 .8rem;font-weight:500}
+    .prose p{font-size:1.05rem;color:var(--ink-mid);margin-bottom:1.6rem;line-height:1.9}
+    .prose p strong{color:var(--ink);font-weight:500}
+    .prose p em{font-style:italic}
+    .prose ul,.prose ol{margin:1rem 0 1.8rem 1.2rem}
+    .prose li{font-size:1rem;color:var(--ink-mid);margin-bottom:.7rem;line-height:1.8;padding-left:.4rem}
+    .prose li::marker{color:var(--burnt)}
+    .prose code{font-family:'JetBrains Mono',monospace;background:var(--bg-2);padding:.2rem .5rem;border-radius:3px;font-size:0.9rem;color:var(--burnt);font-weight:500}
+
+    /* Visual explanation */
+    .visual-explain{margin:2.5rem 0;background:var(--bg-2);border:1px solid var(--border);padding:2.5rem;display:flex;flex-direction:column;gap:1.5rem}
+    .explain-title{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.5rem;font-weight:500}
+    .explain-box{padding:1.5rem;background:var(--bg);border:1px solid var(--border);border-radius:4px}
+    .explain-label{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--burnt);font-weight:600;margin-bottom:.5rem}
+    .explain-content{font-size:.95rem;color:var(--ink-mid);line-height:1.7}
+
+    /* Metaphor cards */
+    .metaphor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--border);margin:2.5rem 0}
+    .metaphor-card{background:var(--bg);padding:1.75rem}
+    .metaphor-icon{font-size:2rem;margin-bottom:.5rem;opacity:.7}
+    .metaphor-title{font-family:'Outfit',sans-serif;font-size:1rem;color:var(--ink);margin-bottom:.5rem;font-weight:500}
+    .metaphor-explain{font-size:.9rem;color:var(--ink-soft);line-height:1.7;margin-bottom:1rem}
+    .metaphor-realworld{font-size:.82rem;color:var(--burnt);font-weight:500;border-top:1px solid var(--border);padding-top:.75rem;margin-top:.75rem}
+
+    /* Pull quote */
+    .pull-quote{border-left:4px solid var(--burnt);padding:1.5rem 2rem;margin:3rem 0;background:var(--burnt-pale)}
+    .pull-quote p{font-family:'Outfit',sans-serif;font-size:clamp(1.2rem,2.2vw,1.75rem);font-weight:500;color:var(--ink);margin:0;line-height:1.45}
+
+    /* Myth vs reality */
+    .myth-reality{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:2.5rem 0}
+    @media(max-width:640px){.myth-reality{grid-template-columns:1fr}}
+    .myth-box{background:var(--bg-2);border:1px solid var(--border);padding:1.5rem;border-radius:4px}
+    .myth-header{font-family:'Outfit',sans-serif;font-size:1rem;color:var(--ink);margin-bottom:1rem;font-weight:500}
+    .myth-box:nth-child(2) .myth-header{color:var(--burnt)}
+    .myth-point{font-size:.9rem;color:var(--ink-soft);margin-bottom:.75rem;line-height:1.6;display:flex;gap:.5rem}
+    .myth-point::before{content:'✗';color:#a85020;font-weight:600;flex-shrink:0;width:20px}
+    .myth-box:nth-child(2) .myth-point::before{content:'✓';color:var(--burnt)}
+
+    /* Steps */
+    .steps{display:flex;flex-direction:column;gap:1px;margin:2.5rem 0;background:var(--border)}
+    .step{display:flex;gap:1.5rem;background:var(--bg);padding:1.75rem 2rem}
+    .step-num{font-family:'JetBrains Mono',monospace;font-size:1.8rem;color:rgba(196,104,48,0.15);line-height:1;flex-shrink:0;width:2.5rem;text-align:center;font-weight:600}
+    .step-content h4{font-family:'Outfit',sans-serif;font-size:1.05rem;color:var(--ink);margin:0 0 .3rem 0;font-weight:500}
+    .step-content p{font-size:.92rem;color:var(--ink-soft);margin:0;line-height:1.75}
+
+    .section-divider{display:flex;align-items:center;gap:1rem;margin:3rem 0;color:var(--ink-dim)}
+    .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .section-divider span{font-size:.7rem;letter-spacing:.15em}
+
+    .article-cta{margin-top:4rem;padding:3rem;background:linear-gradient(135deg, var(--burnt) 0%, var(--burnt-2) 100%);text-align:center;position:relative;overflow:hidden}
+    .article-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 120%,rgba(250,246,241,0.1) 0%,transparent 70%);pointer-events:none}
+    .article-cta-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1rem;font-weight:500}
+    .article-cta h3{font-family:'Outfit',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);color:rgba(255,255,255,0.95);margin-bottom:.8rem;font-weight:500}
+    .article-cta p{font-size:.92rem;color:rgba(255,255,255,0.55);max-width:400px;margin:0 auto 2rem;line-height:1.75}
+    .btn-cta{display:inline-flex;align-items:center;padding:.9rem 2.5rem;background:#fff;color:var(--burnt);font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;font-family:'Outfit',sans-serif;transition:opacity .2s,transform .2s}
+    .btn-cta:hover{opacity:.88;transform:translateY(-1px)}
+
+    footer{border-top:1px solid var(--border);padding:2rem clamp(1.25rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .footer-logo{font-family:'Outfit',sans-serif;font-size:.95rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink);text-decoration:none;font-weight:600}
+    .footer-copy{font-size:.72rem;color:var(--ink-dim)}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @media(max-width:600px){.article-cta{padding:2rem 1.5rem}.step{flex-direction:column;gap:.5rem}.metaphor-grid{gap:1rem}}
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Main navigation">
+    <a href="https://chronos-snowy.vercel.app/" class="nav-logo">CHRONOS</a>
+    <div class="nav-right">
+      <a href="https://chronos-snowy.vercel.app/blog/blog-index.html" class="nav-link">All Articles</a>
+      <a href="https://chronos-snowy.vercel.app/" class="nav-cta">Open App</a>
+    </div>
+  </nav>
+
+  <header class="hero" aria-label="Article header">
+    <p class="hero-label">Pillar 3 · Accessible</p>
+    <h1>Client-side encryption <em>basics</em><br/>for indie hackers</h1>
+    <p class="hero-sub">Encryption doesn't require a PhD. It's not magic. It's just math that works. Here's how to think about it, understand it, and actually build it into your app—without getting lost in cryptography.</p>
+    <div class="hero-meta">
+      <span class="hero-tag">Educational</span>
+      <span class="hero-date">April 17, 2026</span>
+      <span class="hero-read">14 min read</span>
+    </div>
+  </header>
+
+  <div class="article-wrap">
+    <article class="prose">
+
+      <p>Most tutorials on encryption start with heavy math. Asymmetric vs symmetric. Key derivation functions. Cipher modes. Attack vectors.</p>
+
+      <p>You lose your audience at "elliptic curve."</p>
+
+      <p>Here's the truth: you don't need the math. You need the intuition. Once you understand *why* encryption works, the implementation is simple (because smart people already built the libraries for you).</p>
+
+      <div class="pull-quote reveal">
+        <p>Encryption is not complicated. Explaining encryption without math is hard. This is the easy version.</p>
+      </div>
+
+      <h2>What encryption actually is (the simple version)</h2>
+
+      <p>Encryption is a scrambler. You have plaintext (readable message). You scramble it with a key. Out comes ciphertext (unreadable gibberish). Only someone with the right key can unscramble it back to plaintext.</p>
+
+      <p>That's it. Everything else is details.</p>
+
+      <div class="visual-explain reveal">
+        <p class="explain-title">The encryption process in three steps</p>
+        <div class="explain-box">
+          <div class="explain-label">Step 1: Start with a secret</div>
+          <div class="explain-content">You have plaintext: "My vault contains my fears and dreams." Your app has a key: "supersecurepassword123". Both stay on your device.</div>
+        </div>
+        <div class="explain-box">
+          <div class="explain-label">Step 2: Scramble with the key</div>
+          <div class="explain-content">Your app uses a cryptographic algorithm (we'll get to this) to scramble the plaintext with the key. Out comes: "aB7$@!dK#qL9%mN8pO2&xZ3*vY4+wU6-jI5~hG1"</div>
+        </div>
+        <div class="explain-box">
+          <div class="explain-label">Step 3: Send the scrambled version</div>
+          <div class="explain-content">The server receives the scrambled gibberish. Even if hacked, it's useless. Only your app (which has the key) can unscramble. When you want to read it, your app unscrambles using the same key.</div>
+        </div>
+      </div>
+
+      <p>The beauty: the server never sees the plaintext. Even if subpoenaed, it can't decrypt because it doesn't have the key.</p>
+
+      <h2>The key (ha): Why the key matters more than the algorithm</h2>
+
+      <p>Beginners think the algorithm is everything. "Should I use AES? RSA? Elliptic curve cryptography?"</p>
+
+      <p>Wrong question. The algorithm is just the scrambler. What matters is the *key*.</p>
+
+      <p>Think of it like a combination lock:</p>
+
+      <ul>
+        <li><strong>The algorithm</strong> is the lock mechanism (how it scrambles).</li>
+        <li><strong>The key</strong> is the combination (what unscrambles it).</li>
+      </ul>
+
+      <p>You can have the world's best lock mechanism, but if your combination is "1234", a child will open it.</p>
+
+      <p>Encryption security is 90% about the key strength, 10% about the algorithm. Use industry-standard algorithms (AES, ChaCha20). Spend your worry on key generation and storage.</p>
+
+      <div class="pull-quote reveal">
+        <p>A strong key with a weak algorithm is safer than a weak key with a strong algorithm.</p>
+      </div>
+
+      <h2>Keys: How they're generated, stored, and used</h2>
+
+      <p>There are three main ways indie hackers should think about keys:</p>
+
+      <div class="metaphor-grid reveal">
+        <div class="metaphor-card">
+          <div class="metaphor-icon">🔑</div>
+          <div class="metaphor-title">Random key from the server</div>
+          <div class="metaphor-explain">The server generates a random key and gives it to you. You use it to encrypt. Problem: you don't control the key. The server might have a copy.</div>
+          <div class="metaphor-realworld">Not recommended for privacy apps</div>
+        </div>
+        <div class="metaphor-card">
+          <div class="metaphor-icon">🧠</div>
+          <div class="metaphor-title">Key derived from your password</div>
+          <div class="metaphor-explain">Your password is transformed into a key using math. Every time you use the password, you get the same key. You control it (no one else has it). Password strength = key strength.</div>
+          <div class="metaphor-realworld">Best for privacy apps (CHRONOS uses this)</div>
+        </div>
+        <div class="metaphor-card">
+          <div class="metaphor-icon">🎲</div>
+          <div class="metaphor-title">Random key generated locally, stored encrypted</div>
+          <div class="metaphor-explain">Your device generates a random key. You can store it encrypted (protected by password). Decrypt when needed. Most secure but more complex.</div>
+          <div class="metaphor-realworld">Used by Signal, WhatsApp, Apple</div>
+        </div>
+      </div>
+
+      <h2>Symmetric vs. asymmetric (the metaphor you'll actually understand)</h2>
+
+      <p>There are two main types of encryption. Indie hackers usually only need to understand one, but here's both:</p>
+
+      <div class="myth-reality reveal">
+        <div class="myth-box">
+          <div class="myth-header">🔓 Symmetric Encryption (one key)</div>
+          <div class="myth-point">One key scrambles AND unscrambles</div>
+          <div class="myth-point">Same key on both sides = same secret to share</div>
+          <div class="myth-point">Metaphor: One key opens a box, one key closes it</div>
+          <div class="myth-point">Use case: Encrypting your own data (CHRONOS, note apps)</div>
+          <div class="myth-point">Examples: AES, ChaCha20</div>
+        </div>
+        <div class="myth-box">
+          <div class="myth-header">🔐 Asymmetric Encryption (two keys)</div>
+          <div class="myth-point">One key (public) scrambles, other key (private) unscrambles</div>
+          <div class="myth-point">You share public key, keep private key secret</div>
+          <div class="myth-point">Metaphor: Public mailbox (anyone can mail), private key to open it (only you have it)</div>
+          <div class="myth-point">Use case: Encrypting to someone else (email, messaging)</div>
+          <div class="myth-point">Examples: RSA, Elliptic Curve</div>
+        </div>
+      </div>
+
+      <p>For building privacy apps that protect *your own* data (like CHRONOS), use symmetric encryption. It's simpler and faster.</p>
+
+      <h2>The three myths about encryption that trap indie hackers</h2>
+
+      <p>Here are the misconceptions that stop you from building:</p>
+
+      <div class="visual-explain reveal">
+        <p class="explain-title">Myth vs Reality</p>
+        <div class="explain-box">
+          <div class="explain-label">❌ Myth: "I need to understand cryptography to use it"</div>
+          <div class="explain-content">You don't understand how TCP/IP works, but you use it. You don't understand how JPEG compression works, but you use it. Same with encryption. Use proven libraries (libsodium, Web Crypto API). Let cryptographers handle the hard parts.</div>
+        </div>
+        <div class="explain-box">
+          <div class="explain-label">❌ Myth: "Encryption makes my app slow"</div>
+          <div class="explain-content">Modern encryption (AES-256) is *fast*. Your browser can encrypt/decrypt hundreds of messages per second. The performance cost is negligible for 99% of apps.</div>
+        </div>
+        <div class="explain-box">
+          <div class="explain-label">❌ Myth: "If I encrypt, I'm done with security"</div>
+          <div class="explain-content">Encryption is one layer. You still need secure password storage, protection against malware, secure key generation. But encryption + strong password = pretty damn secure.</div>
+        </div>
+      </div>
+
+      <h2>AES-256: The industry standard (and why you should use it)</h2>
+
+      <p>If you Google "what encryption should I use?", you'll see AES-256 recommended everywhere. Here's why it's the default for indie hackers:</p>
+
+      <ul>
+        <li><strong>Proven:</strong> It's been analyzed by cryptographers for 25 years. No weaknesses found.</li>
+        <li><strong>Fast:</strong> It's optimized in hardware on modern CPUs. Nearly free performance-wise.</li>
+        <li><strong>Available:</strong> Every language, every platform has AES libraries. Web Crypto API in browsers. libsodium in Node.</li>
+        <li><strong>Strong:</strong> AES-256 means 256-bit key. That's 2^256 possible keys. There's no computer in the universe that could brute-force this.</li>
+      </ul>
+
+      <p>Use AES-256. Don't overthink it. Literally every privacy app uses it (Signal, WhatsApp, CHRONOS).</p>
+
+      <h2>How to actually implement it (the indie hacker way)</h2>
+
+      <p>Here's the pattern. No crypto degree required:</p>
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Choose a library (don't build crypto yourself)</h4>
+            <p>Use libsodium (via Sodium.js) or Web Crypto API. These are battle-tested. You use them, not write them.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Derive a key from the user's password</h4>
+            <p>Take the password "mypassword123", run it through a key derivation function (PBKDF2, Argon2). Out comes a strong 256-bit key. Always the same key for the same password.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Encrypt user data before sending to server</h4>
+            <p>When user writes "My secret thought", use the key to encrypt it. Send the encrypted blob to the server. Keep plaintext local.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Decrypt on the client when retrieving</h4>
+            <p>When user wants to read, fetch encrypted blob from server. Decrypt on the client (in the browser, on the device). Show plaintext only after decryption.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <h4>Never log plaintext server-side</h4>
+            <p>The server sees only ciphertext. It never sees the plaintext. Make this the default: encrypt before sending, period.</p>
+          </div>
+        </div>
+      </div>
+
+      <p>That's the pattern. Every privacy app follows this. So can you.</p>
+
+      <h2>The honest trade-offs of client-side encryption</h2>
+
+      <p>Encryption isn't free. Here are the costs:</p>
+
+      <ul>
+        <li><strong>Forgotten password = lost data:</strong> If the user forgets their password, their data is gone. No "forgot password" recovery. Plan for this (recovery codes, backup devices).</li>
+        <li><strong>No server-side search:</strong> The server can't search encrypted data. Search has to happen on the client. This limits UX.</li>
+        <li><strong>Complexity:</strong> You have to think about encryption early. Retrofitting later is hard.</li>
+        <li><strong>Key management is hard:</strong> Even with a library, keys can leak if you're careless. Review your code.</li>
+      </ul>
+
+      <p>These are real constraints, not negatives. They're why encryption is valuable—it forces the server to be dumb about your data.</p>
+
+      <div class="pull-quote reveal">
+        <p>The complexity of encryption is worth it because the benefit is genuine privacy. The server cannot leak what it never had.</p>
+      </div>
+
+      <h2>Building your first encrypted app: The checklist</h2>
+
+      <p>Ready to add encryption to your indie app? Here's your minimum checklist:</p>
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <h4>Pick a proven library</h4>
+            <p>Web Crypto API (browser), Sodium.js, or libsodium. Don't invent your own encryption.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <h4>Use AES-256</h4>
+            <p>It's the default for a reason. Don't overthink algorithm selection.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <h4>Derive keys from passwords (PBKDF2, Argon2)</h4>
+            <p>Not random keys from the server. Use a key derivation function with high iteration count.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <h4>Encrypt before sending</h4>
+            <p>Make it the default. Plaintext never leaves the client except in the user's browser memory.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <h4>Handle forgotten passwords gracefully</h4>
+            <p>Maybe recovery codes, maybe multi-device backup. Don't just say "too bad."</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <h4>Test thoroughly</h4>
+            <p>Encryption mistakes are catastrophic. Unit test your encryption, integration test your key derivation, manually verify encryption/decryption.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2>The shift in indie hacking: Privacy as a feature</h2>
+
+      <p>Five years ago, encryption was a niche feature. Now it's table-stakes.</p>
+
+      <p>Users are waking up to the fact that cloud companies sell or leak data. Apps that offer genuine privacy—not marketing privacy, but architectural privacy—have an advantage.</p>
+
+      <p>This is the opportunity for indie hackers. You don't have a surveillance business to defend. You can actually build privacy.</p>
+
+      <p>Use encryption. Build privacy into your apps from day one. It's not as hard as you think, and it's more valuable than you imagine.</p>
+
+      <div class="article-cta reveal">
+        <p class="article-cta-label">CHRONOS</p>
+        <h3>Built with encryption<br/>from the start.</h3>
+        <p>Encryption is not a nice-to-have. It's the foundation. Here's how we did it.</p>
+        <a href="https://chronos-snowy.vercel.app/" class="btn-cta">Open CHRONOS</a>
+      </div>
+
+    </article>
+  </div>
+
+  <link rel="stylesheet" href="/blog/blog-styles.css" />
+  <section id="chronos-related-section" style="color: var(--ink);">
+    <div id="chronos-related"></div>
+  </section>
+  <script src="/blog/blog-components.js"></script>
+
+  <footer>
+    <a href="https://chronos-snowy.vercel.app/" class="footer-logo">CHRONOS</a>
+    <p class="footer-copy">© 2026 CHRONOS · Curating Continuity</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)} });
+    },{threshold:0.1});
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
