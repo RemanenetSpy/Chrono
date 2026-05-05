@@ -229,7 +229,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/data-sovereignty-2026.html",
     title: "Data sovereignty in 2026: Owning your own thoughts",
     tag:   "Pillar 3 · Privacy",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/no-login-web-apps-privacy.html",
