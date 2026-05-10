@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>No-Login Web Apps: Authentication Without Accounts | CHRONOS</title>
+  <meta name="description" content="No-login apps don't require usernames or passwords. You authenticate through cryptography, not credentials. Here's how to build apps that don't need to know who you are." />
+  <meta name="keywords" content="no-login app, passwordless authentication, cryptographic authentication, web3 auth, stateless authentication, privacy-first authentication, self-sovereign identity" />
+  <meta name="author" content="CHRONOS" />
+  <link rel="canonical" href="https://chronos-snowy.vercel.app/blog/no-login-web-apps-privacy.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://chronos-snowy.vercel.app/blog/no-login-web-apps-privacy.html" />
+  <meta property="og:title" content="No-Login Web Apps: Authentication Without Accounts" />
+  <meta property="og:description" content="Build apps without usernames, passwords, or user databases. Here's how." />
+  <meta property="og:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta property="og:site_name" content="CHRONOS" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="No-Login Web Apps: Authentication Without Accounts" />
+  <meta name="twitter:description" content="Passwordless, accountless authentication using cryptography." />
+  <meta name="twitter:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta name="twitter:site" content="@Shivsha44422762" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"No-Login Web Apps: Authentication Without Accounts","description":"No-login apps don't require usernames or passwords. You authenticate through cryptography, not credentials. Here's how to build it.","author":{"@type":"Organization","name":"CHRONOS"},"publisher":{"@type":"Organization","name":"CHRONOS","url":"https://chronos-snowy.vercel.app"},"datePublished":"2026-04-21","dateModified":"2026-04-21","mainEntityOfPage":"https://chronos-snowy.vercel.app/blog/no-login-web-apps-privacy.html"}</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:         #f0fdf7;
+      --bg-2:       #e8fbf4;
+      --bg-3:       #dff8f0;
+      --ink:        #0f3d38;
+      --ink-mid:    #2a5f5a;
+      --ink-soft:   #5a8a87;
+      --ink-dim:    #8ab5b2;
+      --teal:       #0d9488;
+      --teal-2:     #0b7c6f;
+      --teal-pale:  rgba(13,148,136,0.08);
+      --rose:       #e63f72;
+      --rose-2:     #c91f58;
+      --border:     rgba(15,61,56,0.12);
+      --border-2:   rgba(15,61,56,0.06);
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--ink);font-family:'Poppins',sans-serif;font-weight:300;line-height:1.8;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.01'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1.25rem,5vw,4rem);background:rgba(240,253,247,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Poppins',sans-serif;font-size:.95rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink);text-decoration:none;font-weight:600}
+    .nav-right{display:flex;align-items:center;gap:2rem}
+    .nav-link{font-size:.78rem;color:var(--ink-soft);text-decoration:none;letter-spacing:.05em;transition:color .2s}
+    .nav-link:hover{color:var(--teal)}
+    .nav-cta{padding:.5rem 1.25rem;background:var(--teal);color:#fff;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:background .2s;font-weight:500}
+    .nav-cta:hover{background:var(--teal-2)}
+
+    /* Hero — minimalist, clean */
+    .hero{min-height:64vh;display:flex;flex-direction:column;justify-content:flex-end;padding:9rem clamp(1.25rem,8vw,8rem) 4rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:0;right:0;width:50%;height:100%;background:linear-gradient(225deg, var(--teal-pale) 0%, transparent 70%);pointer-events:none}
+    .hero-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);margin-bottom:1.5rem;opacity:0;animation:fadeUp .6s .1s forwards;position:relative}
+    h1{font-family:'Poppins',sans-serif;font-size:clamp(2.4rem,6vw,5.8rem);font-weight:400;line-height:1.08;color:var(--ink);margin-bottom:1.5rem;max-width:800px;opacity:0;animation:fadeUp .8s .2s forwards;position:relative}
+    h1 em{font-style:italic;font-weight:600;color:var(--teal)}
+    .hero-sub{font-size:clamp(.95rem,1.7vw,1.1rem);color:var(--ink-soft);max-width:540px;line-height:1.8;opacity:0;animation:fadeUp .8s .35s forwards;position:relative}
+    .hero-meta{display:flex;align-items:center;gap:1.5rem;margin-top:2rem;opacity:0;animation:fadeUp .6s .5s forwards;position:relative}
+    .hero-tag{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);border:1px solid rgba(230,63,114,0.3);padding:.25rem .7rem}
+    .hero-date,.hero-read{font-size:.72rem;color:var(--ink-dim)}
+
+    .article-wrap{display:grid;grid-template-columns:1fr min(680px,100%) 1fr;padding:0 clamp(1.25rem,5vw,2rem)}
+    .article-wrap>*{grid-column:2}
+    article{padding:4rem 0 6rem}
+
+    .prose h2{font-family:'Poppins',sans-serif;font-size:clamp(1.7rem,3vw,2.6rem);font-weight:500;color:var(--ink);margin:3.5rem 0 1.2rem;line-height:1.15}
+    .prose h3{font-family:'Poppins',sans-serif;font-size:1.25rem;font-style:italic;color:var(--teal);margin:2.5rem 0 .8rem;font-weight:500}
+    .prose p{font-size:1.05rem;color:var(--ink-mid);margin-bottom:1.6rem;line-height:1.9}
+    .prose p strong{color:var(--ink);font-weight:500}
+    .prose p em{font-style:italic}
+    .prose ul,.prose ol{margin:1rem 0 1.8rem 1.2rem}
+    .prose li{font-size:1rem;color:var(--ink-mid);margin-bottom:.7rem;line-height:1.8;padding-left:.4rem}
+    .prose li::marker{color:var(--rose)}
+    .prose code{font-family:'IBM Plex Mono',monospace;background:var(--bg-2);padding:.2rem .5rem;border-radius:3px;font-size:0.9rem;color:var(--teal);font-weight:500}
+
+    /* Auth comparison */
+    .auth-comparison{margin:2.5rem 0;background:var(--bg-2);border:1px solid var(--border);padding:2.5rem;display:flex;flex-direction:column;gap:0}
+    .comparison-title{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:1.5rem;font-weight:500}
+    .comparison-items{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+    .comparison-item{background:var(--bg);padding:1.5rem;display:flex;gap:1rem}
+    .comp-label{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;font-weight:600;flex-shrink:0;min-width:90px}
+    .comp-content{flex:1}
+    .comp-title{font-size:.95rem;color:var(--ink);margin-bottom:.4rem;font-weight:500}
+    .comp-desc{font-size:.85rem;color:var(--ink-soft);line-height:1.6}
+
+    /* Flow diagram */
+    .flow-diagram{margin:2.5rem 0;background:var(--bg-2);border:1px solid var(--border);padding:2.5rem;display:flex;flex-direction:column;gap:1.5rem}
+    .flow-title{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.5rem;font-weight:500}
+    .flow-steps{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+    .flow-step{background:var(--bg);padding:1.5rem;display:flex;gap:1rem}
+    .flow-num{font-family:'IBM Plex Mono',monospace;font-size:1.2rem;color:var(--rose);font-weight:600;flex-shrink:0;width:28px}
+    .flow-content{flex:1}
+    .flow-step-label{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;font-weight:600;margin-bottom:.3rem}
+    .flow-step-desc{font-size:.9rem;color:var(--ink-soft);line-height:1.5}
+
+    /* Pull quote */
+    .pull-quote{border-left:4px solid var(--rose);padding:1.5rem 2rem;margin:3rem 0;background:var(--teal-pale)}
+    .pull-quote p{font-family:'Poppins',sans-serif;font-size:clamp(1.2rem,2.2vw,1.75rem);font-weight:500;color:var(--ink);margin:0;line-height:1.45}
+
+    /* Approaches grid */
+    .approaches-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--border);margin:2.5rem 0}
+    .approach-card{background:var(--bg);padding:1.75rem}
+    .approach-icon{font-size:1.8rem;margin-bottom:.5rem;opacity:.7}
+    .approach-title{font-family:'Poppins',sans-serif;font-size:1rem;color:var(--ink);margin-bottom:.5rem;font-weight:500}
+    .approach-how{font-size:.9rem;color:var(--ink-soft);line-height:1.7;margin-bottom:1rem}
+    .approach-note{font-size:.82rem;color:var(--rose);font-weight:500;border-top:1px solid var(--border);padding-top:.75rem;margin-top:.75rem}
+
+    /* Steps */
+    .steps{display:flex;flex-direction:column;gap:1px;margin:2.5rem 0;background:var(--border)}
+    .step{display:flex;gap:1.5rem;background:var(--bg);padding:1.75rem 2rem}
+    .step-num{font-family:'IBM Plex Mono',monospace;font-size:1.8rem;color:rgba(13,148,136,0.15);line-height:1;flex-shrink:0;width:2.5rem;text-align:center;font-weight:600}
+    .step-content h4{font-family:'Poppins',sans-serif;font-size:1.05rem;color:var(--ink);margin:0 0 .3rem 0;font-weight:500}
+    .step-content p{font-size:.92rem;color:var(--ink-soft);margin:0;line-height:1.75}
+
+    .section-divider{display:flex;align-items:center;gap:1rem;margin:3rem 0;color:var(--ink-dim)}
+    .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .section-divider span{font-size:.7rem;letter-spacing:.15em}
+
+    .article-cta{margin-top:4rem;padding:3rem;background:linear-gradient(135deg, var(--teal) 0%, var(--teal-2) 100%);text-align:center;position:relative;overflow:hidden}
+    .article-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 120%,rgba(240,253,247,0.1) 0%,transparent 70%);pointer-events:none}
+    .article-cta-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1rem;font-weight:500}
+    .article-cta h3{font-family:'Poppins',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);color:rgba(255,255,255,0.95);margin-bottom:.8rem;font-weight:500}
+    .article-cta p{font-size:.92rem;color:rgba(255,255,255,0.55);max-width:400px;margin:0 auto 2rem;line-height:1.75}
+    .btn-cta{display:inline-flex;align-items:center;padding:.9rem 2.5rem;background:#fff;color:var(--teal);font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;font-family:'Poppins',sans-serif;transition:opacity .2s,transform .2s}
+    .btn-cta:hover{opacity:.88;transform:translateY(-1px)}
+
+    footer{border-top:1px solid var(--border);padding:2rem clamp(1.25rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .footer-logo{font-family:'Poppins',sans-serif;font-size:.95rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink);text-decoration:none;font-weight:600}
+    .footer-copy{font-size:.72rem;color:var(--ink-dim)}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @media(max-width:600px){.article-cta{padding:2rem 1.5rem}.step{flex-direction:column;gap:.5rem}.comparison-item{flex-direction:column}}
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Main navigation">
+    <a href="https://chronos-snowy.vercel.app/" class="nav-logo">CHRONOS</a>
+    <div class="nav-right">
+      <a href="https://chronos-snowy.vercel.app/blog/blog-index.html" class="nav-link">All Articles</a>
+      <a href="https://chronos-snowy.vercel.app/" class="nav-cta">Open App</a>
+    </div>
+  </nav>
+
+  <header class="hero" aria-label="Article header">
+    <p class="hero-label">Pillar 3 · Authentication</p>
+    <h1>No-login web apps:<br/><em>Authentication without accounts</em></h1>
+    <p class="hero-sub">Traditional apps require usernames, passwords, and databases of user profiles. No-login apps use cryptography instead. You authenticate with a key, not a credential. The server never stores anything about you.</p>
+    <div class="hero-meta">
+      <span class="hero-tag">Stateless Auth</span>
+      <span class="hero-date">April 21, 2026</span>
+      <span class="hero-read">13 min read</span>
+    </div>
+  </header>
+
+  <div class="article-wrap">
+    <article class="prose">
+
+      <p>Every app you use requires an account. Username. Password. Email verification. Account recovery questions. Password resets.</p>
+
+      <p>These are a liability. User databases get hacked. Passwords get cracked. Email verification creates tracking.</p>
+
+      <p>What if apps didn't require accounts at all?</p>
+
+      <p>No-login apps are the future. You don't authenticate *to* the app. You authenticate *with* the app. The distinction is subtle but revolutionary.</p>
+
+      <div class="pull-quote reveal">
+        <p>No-login means the server doesn't know who you are. It only knows you can prove a cryptographic claim.</p>
+      </div>
+
+      <h2>The difference: Credential-based vs. cryptographic auth</h2>
+
+      <p>Traditional login:</p>
+
+      <ol>
+        <li>You create an account (username, password, email)</li>
+        <li>Server stores credentials in a database</li>
+        <li>You log in by sending credentials</li>
+        <li>Server verifies credentials, creates a session</li>
+        <li>Session token proves you're logged in</li>
+      </ol>
+
+      <p>Problem: Server is a target. Hack the database, get all credentials.</p>
+
+      <p>No-login authentication:</p>
+
+      <ol>
+        <li>You generate a cryptographic key pair (public + private key)</li>
+        <li>Server stores nothing (no database of credentials)</li>
+        <li>You sign a challenge with your private key</li>
+        <li>Server verifies signature with your public key</li>
+        <li>Signature proves you control the private key (proves it's you)</li>
+      </ol>
+
+      <p>Problem doesn't exist. Server has no credentials to hack.</p>
+
+      <div class="auth-comparison reveal">
+        <p class="comparison-title">Authentication approaches</p>
+        <div class="comparison-items">
+          <div class="comparison-item">
+            <div class="comp-label">Traditional</div>
+            <div class="comp-content">
+              <div class="comp-title">Credential-based (Username + Password)</div>
+              <div class="comp-desc">User remembers password. Server stores hashed password. Login = password comparison. Breach = passwords compromised. Account recovery = complex (forgot password flows).</div>
+            </div>
+          </div>
+          <div class="comparison-item">
+            <div class="comp-label">Modern</div>
+            <div class="comp-content">
+              <div class="comp-title">Cryptographic (Key-based signing)</div>
+              <div class="comp-desc">User generates key pair. Server stores only public key. Login = sign challenge. Breach = only public keys leaked (useless). Account recovery = key backup/device sync.</div>
+            </div>
+          </div>
+          <div class="comparison-item">
+            <div class="comp-label">Hybrid</div>
+            <div class="comp-content">
+              <div class="comp-title">Multi-factor (Password + TOTP/WebAuthn)</div>
+              <div class="comp-desc">Username + password + second factor. Better than password alone. Still requires password. Still has account database. Improvement, not revolution.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>How no-login actually works: The challenge-response pattern</h2>
+
+      <p>Here's the real implementation:</p>
+
+      <div class="flow-diagram reveal">
+        <p class="flow-title">Cryptographic authentication flow</p>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="flow-num">1</div>
+            <div class="flow-content">
+              <div class="flow-step-label">Setup: Generate key pair</div>
+              <div class="flow-step-desc">User generates a key pair (Ed25519 or similar). Private key stays on device. Public key is shared with server (or derived from it).</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">2</div>
+            <div class="flow-content">
+              <div class="flow-step-label">Login: Request challenge</div>
+              <div class="flow-step-desc">User visits app. App requests a challenge from server. Challenge is a random nonce (one-time number). Server sends challenge to client.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">3</div>
+            <div class="flow-content">
+              <div class="flow-step-label">Sign: User signs with private key</div>
+              <div class="flow-step-desc">Client uses private key to sign the challenge. Signature is cryptographic proof that the user controls the private key. Only the holder of the private key could produce this signature.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">4</div>
+            <div class="flow-content">
+              <div class="flow-step-label">Verify: Server checks signature</div>
+              <div class="flow-step-desc">User sends signature + public key. Server verifies: "Does this signature match this public key for this challenge?" If yes = authenticated.</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">5</div>
+            <div class="flow-content">
+              <div class="flow-step-label">Session: Create session token</div>
+              <div class="flow-step-desc">Server creates a session token (JWT, session cookie) proving user is authenticated. Token expires or requires re-signing.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p>The magic: Server *never* sees the private key. Only the public key and the signature. This proves ownership of the private key without revealing it.</p>
+
+      <h2>Three approaches to no-login: Spectrum from simple to complex</h2>
+
+      <div class="approaches-grid reveal">
+        <div class="approach-card">
+          <div class="approach-icon">📱</div>
+          <div class="approach-title">Browser key storage</div>
+          <div class="approach-how">Private key stored in browser (localStorage, IndexedDB). Key is encrypted with device password. When you log in, device decrypts key, signs challenge.</div>
+          <div class="approach-note">Pro: Simple. Con: Device theft = key stolen.</div>
+        </div>
+        <div class="approach-card">
+          <div class="approach-icon">🔐</div>
+          <div class="approach-title">Hardware security key</div>
+          <div class="approach-how">Private key lives on hardware (YubiKey, Ledger, Windows Hello). Device can't see private key. Hardware signs challenges directly.</div>
+          <div class="approach-note">Pro: Most secure. Con: Requires hardware device.</div>
+        </div>
+        <div class="approach-card">
+          <div class="approach-icon">🌐</div>
+          <div class="approach-title">Blockchain/Web3 wallet</div>
+          <div class="approach-how">User authenticates with wallet (MetaMask, Phantom). Wallet stores private key. Signs login challenges using wallet SDK.</div>
+          <div class="approach-note">Pro: Cross-app authentication. Con: Requires crypto literacy.</div>
+        </div>
+      </div>
+
+      <h2>The real advantages of no-login</h2>
+
+      <p>Beyond "no passwords," no-login apps have concrete benefits:</p>
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>No user database = no target</h4>
+            <p>Traditional apps store usernames, emails, password hashes, profile data. Hackers steal this. No-login apps don't store user data—only public keys and content. Even if hacked, attacker gets nothing about you.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>No account recovery = user responsibility</h4>
+            <p>Lost your password? Traditional app has "forgot password" (exploitable). Lost your private key? Tough. You own it. This is good: no weak password resets, no account takeovers.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Cross-app authentication</h4>
+            <p>With one key pair, you can authenticate to multiple apps. With traditional login, each app has separate username/password. With no-login, one key works everywhere (if apps support it).</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Minimal server complexity</h4>
+            <p>Server doesn't manage passwords, resets, email verification, or account state. Server is stateless: it only verifies signatures. Less code, fewer bugs, easier to scale.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <h4>Privacy by default</h4>
+            <p>Traditional app requires email for account creation (tracking). No-login app requires nothing. No email, no phone, no identity. You're just a public key.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pull-quote reveal">
+        <p>No-login doesn't mean anonymous. It means the app doesn't need to know who you are to prove you're authentic.</p>
+      </div>
+
+      <h2>The honest trade-offs</h2>
+
+      <p>No-login has costs:</p>
+
+      <ul>
+        <li><strong>Lost key = lost account:</strong> Traditional app has "forgot password." No-login app has nothing. You must back up your key or you lose access to everything.</li>
+        <li><strong>User UX responsibility:</strong> Users must understand keys, backups, device security. No account recovery means users must be their own IT department.</li>
+        <li><strong>No account-level features:</strong> Traditional apps have "linked accounts," "account settings," "activity history." No-login apps don't have this unless they track you (defeating the purpose).</li>
+        <li><strong>Complex key management:</strong> Multiple devices need access to same key (or different keys). Requires key backup/sync infrastructure.</li>
+        <li><strong>Adoption barrier:</strong> Most users understand passwords. Most don't understand key pairs. WebAuthn is improving this, but we're not there yet.</li>
+      </ul>
+
+      <p>These are real constraints. But they're acceptable for privacy-respecting apps where you own your data.</p>
+
+      <h2>Who's already using no-login</h2>
+
+      <p>It's not theoretical:</p>
+
+      <ul>
+        <li><strong>Bitcoin/Blockchain:</strong> You don't have a "Bitcoin account." You have a key pair. You log in to wallets using your key.</li>
+        <li><strong>Signal:</strong> Uses phone number + cryptographic keys. No password.</li>
+        <li><strong>WebAuthn (passkeys):</strong> Apple, Google, Microsoft deploying hardware-backed no-password authentication on phones and laptops.</li>
+        <li><strong>CHRONOS:</strong> Uses cryptographic authentication (encrypted vault is unlocked by password-derived key). No traditional account database.</li>
+      </ul>
+
+      <p>Adoption is growing. The 2020s will see the shift from password-based to cryptographic authentication.</p>
+
+      <h2>Building no-login: The indie hacker path</h2>
+
+      <p>If you're building a privacy app, use no-login. Here's the pattern:</p>
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>User generates key pair (Ed25519 or EC)</h4>
+            <p>On their device. Private key never leaves the device. Public key is shared.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Server stores public key (and nothing else about the user)</h4>
+            <p>No username, email, password, profile. Just the public key and the user's content.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Login is challenge-response (sign + verify)</h4>
+            <p>Server sends a random challenge. Client signs with private key. Server verifies signature with public key.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>No account management needed</h4>
+            <p>No password resets, no email verification, no account recovery. User is responsible for key backup.</p>
+          </div>
+        </div>
+      </div>
+
+      <p>Libraries: libsodium, TweetNaCl.js, Web Crypto API all have Ed25519. Use them.</p>
+
+      <h2>The shift: From account-centric to key-centric</h2>
+
+      <p>Traditional app architecture: Users → Accounts → Sessions → Resources</p>
+
+      <p>No-login architecture: Public Keys → Sessions → Resources</p>
+
+      <p>This is a fundamental shift. It removes the "account" layer entirely. The server goes from "managing users" to "verifying keys."</p>
+
+      <p>This is good. It's simpler, more private, and more secure.</p>
+
+      <p>In 2026 and beyond, expect more apps to drop accounts entirely. Some will use WebAuthn. Some will use blockchain wallets. Some will use custom cryptography.</p>
+
+      <p>The common theme: authentication happens through cryptography, not credentials. The server doesn't know who you are. It only knows you can prove you control a key.</p>
+
+      <div class="article-cta reveal">
+        <p class="article-cta-label">CHRONOS</p>
+        <h3>No accounts.<br/>No passwords.</h3>
+        <p>Your vault is unlocked by your key, not your account. You authenticate to your device, not to us.</p>
+        <a href="https://chronos-snowy.vercel.app/" class="btn-cta">Open CHRONOS</a>
+      </div>
+
+    </article>
+  </div>
+
+  <link rel="stylesheet" href="/blog/blog-styles.css" />
+  <section id="chronos-related-section" style="color: var(--ink);">
+    <div id="chronos-related"></div>
+  </section>
+  <script src="/blog/blog-components.js"></script>
+
+  <footer>
+    <a href="https://chronos-snowy.vercel.app/" class="footer-logo">CHRONOS</a>
+    <p class="footer-copy">© 2026 CHRONOS · Curating Continuity</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)} });
+    },{threshold:0.1});
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
