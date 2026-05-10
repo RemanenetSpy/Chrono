@@ -235,7 +235,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/no-login-web-apps-privacy.html",
     title: "Why no-login web apps are the future of user privacy",
     tag:   "Pillar 3 · Privacy",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/ai-scraping-digital-diaries.html",
