@@ -505,264 +505,110 @@
     <p class="page-sub">Essays on cognitive offloading, digital minimalism, anxiety, focus, and the philosophy of time. One piece per day.</p>
   </header>
 
-  <div class="filter-bar" role="navigation" aria-label="Article filters">
-    <button class="filter-btn active" onclick="filterArticles('all', event)">All</button>
-    <button class="filter-btn" onclick="filterArticles('pain', event)">Pain Points</button>
-    <button class="filter-btn" onclick="filterArticles('philosophy', event)">Philosophy</button>
-    <button class="filter-btn" onclick="filterArticles('privacy', event)">Privacy & Tech</button>
-    <button class="filter-btn" onclick="filterArticles('alternatives', event)">Alternatives</button>
-    <button class="filter-btn" onclick="filterArticles('usecases', event)">Use Cases</button>
+<div class="filter-bar" role="navigation" aria-label="Article filters">
+    <button class="filter-btn active" onclick="filterArticles('all')">All Articles</button>
+    <button class="filter-btn" onclick="filterArticles('pain')">Pain Points (Pillar 1)</button>
+    <button class="filter-btn" onclick="filterArticles('philosophy')">Philosophy (Pillar 2)</button>
+    <button class="filter-btn" onclick="filterArticles('privacy')">Privacy & Tech (Pillar 3)</button>
+    <button class="filter-btn" onclick="filterArticles('alternatives')">Alternatives (Pillar 4)</button>
+    <button class="filter-btn" onclick="filterArticles('usecases')">Use Cases (Pillar 5)</button>
   </div>
 
-  <!-- ARTICLES -->
   <main class="articles-section">
     <div class="articles-grid" id="articlesGrid">
-
-      <!-- FEATURED — Article 1 -->
-      <a href="/blog/stop-obsessing-2am.html" class="article-card-featured" data-pillar="pain">
-        <div class="featured-content">
-          <div>
-            <span class="featured-badge">Pillar 1 · Anxiety</span>
-            <h2 class="featured-title">How to stop obsessing over tomorrow's problems at 2 AM</h2>
-            <p class="featured-excerpt">Your brain isn't broken — it's doing exactly what evolution designed it to do at the worst possible time. Here's how to interrupt the loop and finally sleep.</p>
-          </div>
-          <div class="featured-meta">
-            <span class="featured-meta-tag">Pain Points</span>
-            <span>March 21, 2026</span>
-            <span>9 min read</span>
-          </div>
-        </div>
-        <div class="featured-visual" aria-hidden="true">
-          <div class="featured-visual-text">2<br/>AM</div>
-        </div>
-      </a>
-
-      <!-- Article 2 -->
-      <a href="/blog/digital-lockbox-doomscrolling.html" class="article-card" data-pillar="pain">
-        <div>
-          <p class="card-tag">Pillar 1 · Habits</p>
-          <h2 class="card-title">The digital lockbox method for severe doomscrolling</h2>
-        </div>
-        <p class="card-excerpt">Doomscrolling isn't a willpower problem. It's a dopamine loop your brain cannot exit without a structural intervention.</p>
-        <div class="card-meta">
-          <span>March 22, 2026 · 10 min</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- Article 3 -->
-      <a href="/blog/revenge-bedtime-procrastination.html" class="article-card" data-pillar="pain">
-        <div>
-          <p class="card-tag">Pillar 1 · Sleep</p>
-          <h2 class="card-title">How to fix revenge bedtime procrastination using intentional friction</h2>
-        </div>
-        <p class="card-excerpt">You stay up until 2 AM not because you want to, but because it's the only time that belongs entirely to you.</p>
-        <div class="card-meta">
-          <span>March 23, 2026 · 9 min</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- Article 4 -->
-      <a href="/blog/decision-fatigue.html" class="article-card" data-pillar="pain">
-        <div>
-          <p class="card-tag">Pillar 1 · Focus</p>
-          <h2 class="card-title">Why decision fatigue is ruining your focus — and how to offload it</h2>
-        </div>
-        <p class="card-excerpt">Every decision you make depletes the same mental resource. By afternoon, your brain is running on empty.</p>
-        <div class="card-meta">
-          <span>March 24, 2026 · 10 min</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- Article 5 -->
-      <a href="/blog/social-media-comparison-trap.html" class="article-card" data-pillar="pain">
-        <div>
-          <p class="card-tag">Pillar 1 · Mental Health</p>
-          <h2 class="card-title">How to stop the social media comparison trap offline</h2>
-        </div>
-        <p class="card-excerpt">Deleting the apps doesn't delete the impulse. The comparison trap is a human problem that technology has made frictionless.</p>
-        <div class="card-meta">
-          <span>March 25, 2026 · 10 min</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- Article 6 -->
-      <a href="/blog/information-fatigue-syndrome.html" class="article-card" data-pillar="pain">
-        <div>
-          <p class="card-tag">Pillar 1 · Digital Wellness</p>
-          <h2 class="card-title">Tools to cure information fatigue syndrome</h2>
-        </div>
-        <p class="card-excerpt">74 gigabytes of information per day. Your brain was not built for this — and most digital detox advice makes it worse.</p>
-        <div class="card-meta">
-          <span>March 26, 2026 · 11 min</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- Article 7 -->
-      <a href="/blog/context-switching-deep-work.html" class="article-card" data-pillar="pain">
-        <div>
-          <p class="card-tag">Pillar 1 · Focus</p>
-          <h2 class="card-title">How to stop constant context switching during deep work</h2>
-        </div>
-        <p class="card-excerpt">Every task switch costs more than the interruption itself. Attention residue follows you into every new context.</p>
-        <div class="card-meta">
-          <span>March 27, 2026 · 10 min</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- Article 8 -->
-      <a href="/blog/intrusive-thoughts-at-work.html" class="article-card" data-pillar="pain">
-        <div>
-          <p class="card-tag">Pillar 1 · Mental Health</p>
-          <h2 class="card-title">A system to manage intrusive thoughts at work</h2>
-        </div>
-        <p class="card-excerpt">Intrusive thoughts at work are not weakness — they are unprocessed emotional material trying to surface at the wrong time.</p>
-        <div class="card-meta">
-          <span>March 27, 2026 · 10 min</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- Article 9 -->
-      <a href="/blog/wait-24-hours-rule.html" class="article-card" data-pillar="pain">
-        <div>
-          <p class="card-tag">Pillar 1 · Habits</p>
-          <h2 class="card-title">The wait 24 hours rule for impulsive texts and emails</h2>
-        </div>
-        <p class="card-excerpt">The message you want to send right now is almost never the one you should send. Here's the neuroscience behind why.</p>
-        <div class="card-meta">
-          <span>March 28, 2026 · 9 min</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- Coming soon — Pillar 1 remaining -->
-      <div class="article-card-soon" data-pillar="pain">
-        <p class="soon-tag">Pillar 1 · Anxiety</p>
-        <h2 class="soon-title">How to leave work stress at the office using a time-vault</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <div class="article-card-soon" data-pillar="pain">
-        <p class="soon-tag">Pillar 1 · Mental Health</p>
-        <h2 class="soon-title">Breaking the imposter syndrome rumination loop</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <div class="article-card-soon" data-pillar="pain">
-        <p class="soon-tag">Pillar 1 · Focus</p>
-        <h2 class="soon-title">How to stop checking your startup analytics every 5 minutes</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <div class="article-card-soon" data-pillar="pain">
-        <p class="soon-tag">Pillar 1 · Habits</p>
-        <h2 class="soon-title">The weekend tech-freeze protocol for digital burnout</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <div class="article-card-soon" data-pillar="pain">
-        <p class="soon-tag">Pillar 1 · Habits</p>
-        <h2 class="soon-title">Using friction to break your worst digital habits</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <!-- Coming soon — Pillar 2 -->
-      <div class="article-card-soon" data-pillar="philosophy">
-        <p class="soon-tag">Pillar 2 · Minimalism</p>
-        <h2 class="soon-title">Core principles of digital minimalism in a noisy world</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <div class="article-card-soon" data-pillar="philosophy">
-        <p class="soon-tag">Pillar 2 · Neuroscience</p>
-        <h2 class="soon-title">What is cognitive offloading? The neuroscience of writing things down</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <div class="article-card-soon" data-pillar="philosophy">
-        <p class="soon-tag">Pillar 2 · Philosophy</p>
-        <h2 class="soon-title">Intentional friction: Why good UX is sometimes making things harder</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <div class="article-card-soon" data-pillar="philosophy">
-        <p class="soon-tag">Pillar 2 · Lifestyle</p>
-        <h2 class="soon-title">JOMO — Joy of Missing Out — and how to actually achieve it</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <!-- Coming soon — Pillar 3 -->
-      <div class="article-card-soon" data-pillar="privacy">
-        <p class="soon-tag">Pillar 3 · Privacy</p>
-        <h2 class="soon-title">Why the cloud is the worst place for your personal journal</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <div class="article-card-soon" data-pillar="privacy">
-        <p class="soon-tag">Pillar 3 · Privacy</p>
-        <h2 class="soon-title">What is offline-first architecture in web development?</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <!-- Coming soon — Pillar 4 -->
-      <div class="article-card-soon" data-pillar="alternatives">
-        <p class="soon-tag">Pillar 4 · Alternatives</p>
-        <h2 class="soon-title">The best Day One app alternatives for absolute privacy</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <div class="article-card-soon" data-pillar="alternatives">
-        <p class="soon-tag">Pillar 4 · Alternatives</p>
-        <h2 class="soon-title">The 5 best offline-first journaling apps</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <!-- Coming soon — Pillar 5 -->
-      <div class="article-card-soon" data-pillar="usecases">
-        <p class="soon-tag">Pillar 5 · Use Cases</p>
-        <h2 class="soon-title">Writing letters to your future self — the 1-year time capsule</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
-      <div class="article-card-soon" data-pillar="usecases">
-        <p class="soon-tag">Pillar 5 · Use Cases</p>
-        <h2 class="soon-title">The anger management lockbox: where to put unsent messages</h2>
-        <p class="soon-label">Coming soon</p>
-      </div>
-
+      <div class="empty-state">Loading articles...</div>
     </div>
   </main>
 
-  <!-- WAITLIST BAND -->
-  <div class="newsletter-band">
-    <div class="newsletter-text">
-      <h3>Time is the only key.</h3>
-      <p>The full app is coming. Be first inside when the locks engage.</p>
-    </div>
-    <a href="https://chronos-snowy.vercel.app/waitlist.html" class="newsletter-link">Request the Key</a>
-  </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <a href="https://chronos-snowy.vercel.app/" class="footer-logo">CHRONOS</a>
-    <p class="footer-copy">© 2026 CHRONOS · Curating Continuity</p>
-  </footer>
-
   <script>
-    function filterArticles(pillar, e) {
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      e.target.classList.add('active');
-      document.querySelectorAll('[data-pillar]').forEach(card => {
-        card.style.display = (pillar === 'all' || card.dataset.pillar === pillar) ? '' : 'none';
-      });
-    }
-  </script>
+    let allArticles = [];
+    let currentFilter = 'all';
 
-</body>
-</html>
+    async function loadArticles() {
+      try {
+        // Fetch blog-components.js
+        const response = await fetch('/blog/blog-components.js');
+        const text = await response.text();
+        
+        // Extract CHRONOS_ARTICLES array
+        const match = text.match(/const CHRONOS_ARTICLES = \[([\s\S]*?)\];/);
+        if (!match) {
+          console.error('Could not parse blog-components.js');
+          return;
+        }
+
+        // Parse articles from the registry
+        const articlesText = match[1];
+        const articleBlocks = articlesText.split(/{/).slice(1); // Skip first split
+        
+        allArticles = articleBlocks.map(block => {
+          const urlMatch = block.match(/url:\s*"([^"]+)"/);
+          const titleMatch = block.match(/title:\s*"([^"]+)"/);
+          const tagMatch = block.match(/tag:\s*"([^"]+)"/);
+          
+          if (!urlMatch || !titleMatch) return null;
+          
+          const url = urlMatch[1];
+          const title = titleMatch[1];
+          const tag = tagMatch ? tagMatch[1] : 'Article';
+          
+          // Determine pillar from tag
+          let pillar = 'all';
+          if (tag.includes('Pillar 1')) pillar = 'pain';
+          else if (tag.includes('Pillar 2')) pillar = 'philosophy';
+          else if (tag.includes('Pillar 3')) pillar = 'privacy';
+          else if (tag.includes('Pillar 4')) pillar = 'alternatives';
+          else if (tag.includes('Pillar 5')) pillar = 'usecases';
+          
+          return { url, title, tag, pillar };
+        }).filter(Boolean);
+
+        renderArticles(allArticles);
+      } catch (error) {
+        console.error('Error loading articles:', error);
+      }
+    }
+
+    function renderArticles(articles) {
+      const grid = document.getElementById('articlesGrid');
+      
+      // Filter by current selection
+      const filtered = currentFilter === 'all' 
+        ? articles 
+        : articles.filter(a => a.pillar === currentFilter);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="empty-state" style="grid-column: 1/-1; padding: 3rem; text-align: center;">No articles in this category yet.</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered
+        .map((article, index) => `
+          <a href="${article.url}" class="article-card" style="animation: fadeUp 0.6s ${0.1 + index * 0.05}s forwards; opacity: 0;">
+            <p class="card-tag">${article.tag}</p>
+            <h2 class="card-title">${article.title}</h2>
+            <p class="card-excerpt">Click to read article</p>
+            <div class="card-meta">
+              <span>Read</span>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+        `)
+        .join('');
+    }
+
+    function filterArticles(filter) {
+      currentFilter = filter;
+      
+      // Update button styles
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      renderArticles(allArticles);
+    }
+
+    // Load on page load
+    loadArticles();
+  </script>
