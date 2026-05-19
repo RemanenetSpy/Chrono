@@ -241,7 +241,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/ai-scraping-digital-diaries.html",
     title: "The danger of AI companies scraping your digital diaries",
     tag:   "Pillar 3 · Privacy",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/private-note-taking-web.html",
