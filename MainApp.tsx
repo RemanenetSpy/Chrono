@@ -9,6 +9,7 @@ import { Button } from './components/Button';
 import { Logo } from './components/Logo';
 import { KeyIcon } from './components/KeyIcon';
 import { SplashScreen } from './components/SplashScreen';
+import { GuideEnvelope } from './components/GuideEnvelope';
 import { analytics } from './services/analytics';
 import { encryptCapsuleData, decryptCapsuleData } from './utils/encryption';
 
@@ -25,6 +26,7 @@ const MainApp: React.FC = () => {
   const [selectedCapsuleId, setSelectedCapsuleId] = useState<string | null>(null);
   const [premiumModalFeature, setPremiumModalFeature] = useState<string | null>(null);
   const [showSplash, setShowSplash] = useState(true);
+  const [showGuide, setShowGuide] = useState(false);
 
   useEffect(() => {
     const savedCapsules = localStorage.getItem('chronos_capsules');
@@ -221,14 +223,25 @@ const MainApp: React.FC = () => {
         )}
       </main>
 
-      <footer className="w-full py-8 md:py-10 flex flex-col items-center gap-2 border-t border-black/[0.01] opacity-30 hover:opacity-100 transition-opacity duration-1000 mt-6">
-        <p className="text-[7px] tracking-[0.6em] uppercase text-neutral-400 font-black">
-          Curating Continuity
-        </p>
-        <p className="text-[6px] tracking-[0.3em] uppercase text-neutral-300 font-bold">
-          Released under MIT License
-        </p>
+      <footer className="w-full py-8 md:py-10 flex flex-col items-center gap-6 border-t border-black/[0.01] opacity-60 hover:opacity-100 transition-opacity duration-1000 mt-6 pb-12">
+        <button 
+           onClick={() => setShowGuide(true)}
+           className="text-[9px] tracking-[0.3em] uppercase text-neutral-500 hover:text-black font-bold flex items-center gap-2 transition-colors pb-1 border-b border-black/5 hover:border-black/30 outline-none focus:outline-none [-webkit-tap-highlight-color:transparent]"
+        >
+          <i className="fa-regular fa-envelope"></i>
+          Manifesto & Correspondence
+        </button>
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-[7px] tracking-[0.6em] uppercase text-neutral-400 font-black">
+            Curating Continuity
+          </p>
+          <p className="text-[6px] tracking-[0.3em] uppercase text-neutral-300 font-bold">
+            Released under MIT License
+          </p>
+        </div>
       </footer>
+
+      {showGuide && <GuideEnvelope onClose={() => setShowGuide(false)} />}
 
       {premiumModalFeature && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#fdfbf7]/80 backdrop-blur-sm p-6">
