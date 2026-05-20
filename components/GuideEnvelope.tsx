@@ -20,12 +20,11 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
     const encodedSubject = encodeURIComponent(`[Chronos Protocol] ${subject || 'A Message from the Vault'}`);
     const encodedBody = encodeURIComponent(structuredBody);
     
-    // Create an anchor element to bypass iframe sandbox restrictions
+    // Create an anchor element and use '_top' to avoid leaving a blank tab open (which happens with _blank)
     const mailtoLink = `mailto:chronosvaults@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
     const anchor = document.createElement('a');
     anchor.href = mailtoLink;
-    anchor.target = '_blank';
-    anchor.rel = 'noopener noreferrer';
+    anchor.target = '_top';
     document.body.appendChild(anchor);
     anchor.click();
     document.body.removeChild(anchor);
