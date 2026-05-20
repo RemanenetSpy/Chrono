@@ -74,7 +74,7 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({ onClose, onUpgrade, 
             </div>
             <div className="flex items-center gap-3">
               <i className="fa-solid fa-check text-amber-600 text-xs"></i>
-              <span className="text-sm text-neutral-700">ChronosVault Import & Export</span>
+              <span className="text-sm text-neutral-700">Chronos Archive Import & Export</span>
             </div>
           </div>
 

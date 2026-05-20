@@ -11,23 +11,28 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
   const [message, setMessage] = useState('');
 
   const dateStr = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-  const structuredBody = `From the Desk of: ${senderName || 'A Time Traveler'}\nDate: ${dateStr}\n\nDear Archivist,\n\n${message}\n\n---\nDispatched via Chronos Vault App`;
+  const structuredBody = `From the Desk of: ${senderName || 'A Time Traveler'}\nDate: ${dateStr}\n\nDear Archivist,\n\n${message}\n\n---\nDispatched via Chronos`;
 
-  const encodedSubject = encodeURIComponent(`[Chronos Protocol] ${subject || 'A Message from the Vault'}`);
+  const encodedSubject = encodeURIComponent(`[Chronos Protocol] ${subject || 'A Message from Chronos'}`);
   const encodedBody = encodeURIComponent(structuredBody);
   const mailtoLink = `mailto:chronosvaults@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
 
   const isFormValid = message.trim().length > 0 && subject.trim().length > 0;
 
-  const handleDispatch = () => {
+  const handleDispatch = (e: React.FormEvent) => {
+    e.preventDefault();
     if (!isFormValid) return;
+
+    // We use Gmail web compose as the primary since default mail clients are often unconfigured
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=chronosvaults@gmail.com&su=${encodedSubject}&body=${encodedBody}`;
+    window.open(gmailLink, '_blank');
     
-    // Smooth transition back after dispatching
+    // Smooth transition back to manifesto after a brief delay
     setTimeout(() => {
       setView('manifesto');
       setMessage('');
       setSubject('');
-    }, 1000);
+    }, 1500);
   };
 
   return (
@@ -94,7 +99,7 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
             </div>
           </div>
         ) : (
-          <div className="animate-[fadeIn_0.5s_ease-out_forwards] flex flex-col h-full">
+          <form onSubmit={handleDispatch} className="animate-[fadeIn_0.5s_ease-out_forwards] flex flex-col h-full">
             <div className="flex items-center justify-between mb-8 border-b border-black/[0.03] pb-4">
               <button 
                 type="button" 
@@ -149,28 +154,30 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
             </div>
 
             <div className="flex justify-center pt-8 mt-4 border-t border-black/5">
-              <a 
-                href={isFormValid ? mailtoLink : '#'}
-                onClick={(e) => {
-                  if (!isFormValid) {
-                    e.preventDefault();
-                    return;
-                  }
-                  handleDispatch();
-                }}
-                className={`group flex flex-col items-center gap-3 transition-all relative z-10 outline-none focus:outline-none [-webkit-tap-highlight-color:transparent] no-underline ${!isFormValid ? 'opacity-50 cursor-not-allowed' : ''}`}
+              <button 
+                type="submit" 
+                disabled={!isFormValid}
+                className={`group flex flex-col items-center gap-3 transition-all relative z-10 outline-none focus:outline-none [-webkit-tap-highlight-color:transparent] ${!isFormValid ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <div className="w-14 h-14 bg-neutral-900 rounded-full flex items-center justify-center group-hover:bg-black group-[&:not(.opacity-50)]:hover:scale-105 transition-all duration-700 shadow-lg shadow-black/10">
-                  <i className="fa-regular fa-paper-plane text-white text-base group-[&:not(.opacity-50)]:hover:-translate-y-0.5 group-[&:not(.opacity-50)]:hover:translate-x-0.5 transition-transform duration-500"></i>
+                  <i className="fa-brands fa-google text-white text-base group-[&:not(.opacity-50)]:hover:-translate-y-0.5 group-[&:not(.opacity-50)]:hover:translate-x-0.5 transition-transform duration-500"></i>
                 </div>
-                <span className="text-[8px] tracking-[0.3em] uppercase text-neutral-500 group-[&:not(.opacity-50)]:hover:text-black transition-colors font-bold font-sans">Seal & Dispatch Letter</span>
-              </a>
+                <span className="text-[8px] tracking-[0.3em] uppercase text-neutral-500 group-[&:not(.opacity-50)]:hover:text-black transition-colors font-bold font-sans">Dispatch via Gmail</span>
+              </button>
             </div>
             
-            <p className="text-center mt-6 text-[7px] tracking-widest uppercase text-neutral-300 font-sans">
-              This action opens your secure mail client
-            </p>
-          </div>
+            <div className="flex flex-col items-center gap-2 mt-6">
+              <p className="text-center text-[7px] tracking-[0.3em] uppercase text-neutral-300 font-sans">
+                Requires a Google Account
+              </p>
+              <a 
+                href={mailtoLink} 
+                className="text-center text-[7px] tracking-[0.3em] uppercase text-neutral-400 hover:text-black font-sans border-b border-black/5 pb-0.5 transition-colors no-underline"
+              >
+                Or open native mail app
+              </a>
+            </div>
+          </form>
         )}
         
       </div>

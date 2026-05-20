@@ -42,7 +42,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `chronos_vault_${new Date().toISOString().split('T')[0]}.chronosvault`;
+      link.download = `chronos_archive_${new Date().toISOString().split('T')[0]}.chronosarchive`;
       link.click();
       URL.revokeObjectURL(url);
       
@@ -225,7 +225,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                 <button 
                   onClick={() => { 
                     if (!profile.isPremium) {
-                      onRequestPremium('ChronosVault Export');
+                      onRequestPremium('Chronos Archive Export');
                       return;
                     }
                     setBackupMode('EXPORT'); 
@@ -236,13 +236,13 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                   <div className="w-12 h-12 rounded-full bg-neutral-50 flex items-center justify-center mb-4 group-hover:bg-neutral-900 group-hover:scale-110 transition-all duration-500">
                     <i className="fa-solid fa-file-export text-neutral-400 group-hover:text-white transition-colors"></i>
                   </div>
-                  <span className="text-[9px] tracking-[0.3em] uppercase font-bold text-neutral-500 group-hover:text-black transition-colors">Seal ChronosVault</span>
+                  <span className="text-[9px] tracking-[0.3em] uppercase font-bold text-neutral-500 group-hover:text-black transition-colors">Seal Archive</span>
                   {!profile.isPremium && <i className="fa-solid fa-lock absolute top-5 right-5 text-[10px] text-amber-600/40 group-hover:text-amber-600 transition-colors"></i>}
                 </button>
                 <button 
                   onClick={() => { 
                     if (!profile.isPremium) {
-                      onRequestPremium('ChronosVault Import');
+                      onRequestPremium('Chronos Archive Import');
                       return;
                     }
                     setBackupMode('IMPORT'); 
@@ -284,11 +284,11 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                     </button>
                   ) : (
                     <label className="cursor-pointer text-[8px] tracking-[0.3em] uppercase font-black text-black border-b border-black pb-0.5">
-                      Select .chronosvault File
+                      Select .chronosarchive File
                       <input 
                         ref={fileInputRef}
                         type="file" 
-                        accept=".chronosvault" 
+                        accept=".chronosarchive" 
                         className="hidden" 
                         onChange={handleImport} 
                       />
