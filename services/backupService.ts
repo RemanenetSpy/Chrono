@@ -1,6 +1,6 @@
 
 /**
- * Proprietary Chronos Vault Service
+ * Proprietary Chronos Archive Service
  * Implements app-bound encryption and integrity checks.
  */
 
