@@ -10,24 +10,17 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleDispatch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!message) return;
+  const dateStr = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+  const structuredBody = `From the Desk of: ${senderName || 'A Time Traveler'}\nDate: ${dateStr}\n\nDear Archivist,\n\n${message}\n\n---\nDispatched via Chronos Vault App`;
 
-    const dateStr = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-    const structuredBody = `From the Desk of: ${senderName || 'A Time Traveler'}\nDate: ${dateStr}\n\nDear Archivist,\n\n${message}\n\n---\nDispatched via Chronos Vault App`;
+  const encodedSubject = encodeURIComponent(`[Chronos Protocol] ${subject || 'A Message from the Vault'}`);
+  const encodedBody = encodeURIComponent(structuredBody);
+  const mailtoLink = `mailto:chronosvaults@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
 
-    const encodedSubject = encodeURIComponent(`[Chronos Protocol] ${subject || 'A Message from the Vault'}`);
-    const encodedBody = encodeURIComponent(structuredBody);
-    
-    // Create an anchor element and use '_top' to avoid leaving a blank tab open (which happens with _blank)
-    const mailtoLink = `mailto:chronosvaults@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
-    const anchor = document.createElement('a');
-    anchor.href = mailtoLink;
-    anchor.target = '_top';
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
+  const isFormValid = message.trim().length > 0 && subject.trim().length > 0;
+
+  const handleDispatch = () => {
+    if (!isFormValid) return;
     
     // Smooth transition back after dispatching
     setTimeout(() => {
@@ -101,7 +94,7 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleDispatch} className="animate-[fadeIn_0.5s_ease-out_forwards] flex flex-col h-full">
+          <div className="animate-[fadeIn_0.5s_ease-out_forwards] flex flex-col h-full">
             <div className="flex items-center justify-between mb-8 border-b border-black/[0.03] pb-4">
               <button 
                 type="button" 
@@ -156,21 +149,28 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
             </div>
 
             <div className="flex justify-center pt-8 mt-4 border-t border-black/5">
-              <button 
-                type="submit" 
-                className="group flex flex-col items-center gap-3 transition-all relative z-10 outline-none focus:outline-none [-webkit-tap-highlight-color:transparent]"
+              <a 
+                href={isFormValid ? mailtoLink : '#'}
+                onClick={(e) => {
+                  if (!isFormValid) {
+                    e.preventDefault();
+                    return;
+                  }
+                  handleDispatch();
+                }}
+                className={`group flex flex-col items-center gap-3 transition-all relative z-10 outline-none focus:outline-none [-webkit-tap-highlight-color:transparent] no-underline ${!isFormValid ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                <div className="w-14 h-14 bg-neutral-900 rounded-full flex items-center justify-center group-hover:bg-black group-hover:scale-105 transition-all duration-700 shadow-lg shadow-black/10">
-                  <i className="fa-regular fa-paper-plane text-white text-base group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-500"></i>
+                <div className="w-14 h-14 bg-neutral-900 rounded-full flex items-center justify-center group-hover:bg-black group-[&:not(.opacity-50)]:hover:scale-105 transition-all duration-700 shadow-lg shadow-black/10">
+                  <i className="fa-regular fa-paper-plane text-white text-base group-[&:not(.opacity-50)]:hover:-translate-y-0.5 group-[&:not(.opacity-50)]:hover:translate-x-0.5 transition-transform duration-500"></i>
                 </div>
-                <span className="text-[8px] tracking-[0.3em] uppercase text-neutral-500 group-hover:text-black transition-colors font-bold font-sans">Seal & Dispatch Letter</span>
-              </button>
+                <span className="text-[8px] tracking-[0.3em] uppercase text-neutral-500 group-[&:not(.opacity-50)]:hover:text-black transition-colors font-bold font-sans">Seal & Dispatch Letter</span>
+              </a>
             </div>
             
             <p className="text-center mt-6 text-[7px] tracking-widest uppercase text-neutral-300 font-sans">
               This action opens your secure mail client
             </p>
-          </form>
+          </div>
         )}
         
       </div>
