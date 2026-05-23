@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Truly Private Note-Taking on the Web | CHRONOS</title>
+  <meta name="description" content="Not all 'private' note apps are equal. Here's how to evaluate real privacy: what architecture actually keeps your notes safe, and which popular apps fall short." />
+  <meta name="keywords" content="private note app, end-to-end encrypted notes, secure note-taking, encrypted note app comparison, local-first notes, privacy-first note-taking, encrypted cloud notes" />
+  <meta name="author" content="CHRONOS" />
+  <link rel="canonical" href="https://chronos-snowy.vercel.app/blog/private-note-taking-web.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://chronos-snowy.vercel.app/blog/private-note-taking-web.html" />
+  <meta property="og:title" content="Truly Private Note-Taking on the Web" />
+  <meta property="og:description" content="Evaluate real privacy in note apps. Architecture determines security, not marketing claims." />
+  <meta property="og:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta property="og:site_name" content="CHRONOS" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Truly Private Note-Taking on the Web" />
+  <meta name="twitter:description" content="How to evaluate real privacy in note apps." />
+  <meta name="twitter:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta name="twitter:site" content="@Shivsha44422762" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Truly Private Note-Taking on the Web","description":"Not all private note apps are equal. Here's how to evaluate real privacy and which apps fall short.","author":{"@type":"Organization","name":"CHRONOS"},"publisher":{"@type":"Organization","name":"CHRONOS","url":"https://chronos-snowy.vercel.app"},"datePublished":"2026-04-25","dateModified":"2026-04-25","mainEntityOfPage":"https://chronos-snowy.vercel.app/blog/private-note-taking-web.html"}</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:         #f9f7f5;
+      --bg-2:       #f1ede9;
+      --bg-3:       #e8e2dd;
+      --ink:        #2a2420;
+      --ink-mid:    #4a4238;
+      --ink-soft:   #7a7068;
+      --ink-dim:    #aaa096;
+      --slate:      #4a5568;
+      --slate-2:    #2d3748;
+      --amber:      #d97706;
+      --amber-2:    #b45309;
+      --amber-pale: rgba(217,119,6,0.08);
+      --border:     rgba(42,36,32,0.12);
+      --border-2:   rgba(42,36,32,0.06);
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--ink);font-family:'Work Sans',sans-serif;font-weight:300;line-height:1.8;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.012'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1.25rem,5vw,4rem);background:rgba(249,247,245,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Work Sans',sans-serif;font-size:.95rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink);text-decoration:none;font-weight:600}
+    .nav-right{display:flex;align-items:center;gap:2rem}
+    .nav-link{font-size:.78rem;color:var(--ink-soft);text-decoration:none;letter-spacing:.05em;transition:color .2s}
+    .nav-link:hover{color:var(--amber)}
+    .nav-cta{padding:.5rem 1.25rem;background:var(--slate);color:#fff;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:background .2s;font-weight:500}
+    .nav-cta:hover{background:var(--slate-2)}
+
+    /* Hero — analytical, comparative */
+    .hero{min-height:64vh;display:flex;flex-direction:column;justify-content:flex-end;padding:9rem clamp(1.25rem,8vw,8rem) 4rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:0;right:0;width:50%;height:100%;background:linear-gradient(225deg, var(--amber-pale) 0%, transparent 70%);pointer-events:none}
+    .hero-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:1.5rem;opacity:0;animation:fadeUp .6s .1s forwards;position:relative}
+    h1{font-family:'Work Sans',sans-serif;font-size:clamp(2.4rem,6vw,5.8rem);font-weight:400;line-height:1.08;color:var(--ink);margin-bottom:1.5rem;max-width:800px;opacity:0;animation:fadeUp .8s .2s forwards;position:relative}
+    h1 em{font-style:italic;font-weight:600;color:var(--slate)}
+    .hero-sub{font-size:clamp(.95rem,1.7vw,1.1rem);color:var(--ink-soft);max-width:540px;line-height:1.8;opacity:0;animation:fadeUp .8s .35s forwards;position:relative}
+    .hero-meta{display:flex;align-items:center;gap:1.5rem;margin-top:2rem;opacity:0;animation:fadeUp .6s .5s forwards;position:relative}
+    .hero-tag{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);border:1px solid rgba(217,119,6,0.3);padding:.25rem .7rem}
+    .hero-date,.hero-read{font-size:.72rem;color:var(--ink-dim)}
+
+    .article-wrap{display:grid;grid-template-columns:1fr min(680px,100%) 1fr;padding:0 clamp(1.25rem,5vw,2rem)}
+    .article-wrap>*{grid-column:2}
+    article{padding:4rem 0 6rem}
+
+    .prose h2{font-family:'Work Sans',sans-serif;font-size:clamp(1.7rem,3vw,2.6rem);font-weight:500;color:var(--ink);margin:3.5rem 0 1.2rem;line-height:1.15}
+    .prose h3{font-family:'Work Sans',sans-serif;font-size:1.25rem;font-style:italic;color:var(--slate);margin:2.5rem 0 .8rem;font-weight:500}
+    .prose p{font-size:1.05rem;color:var(--ink-mid);margin-bottom:1.6rem;line-height:1.9}
+    .prose p strong{color:var(--ink);font-weight:500}
+    .prose p em{font-style:italic}
+    .prose ul,.prose ol{margin:1rem 0 1.8rem 1.2rem}
+    .prose li{font-size:1rem;color:var(--ink-mid);margin-bottom:.7rem;line-height:1.8;padding-left:.4rem}
+    .prose li::marker{color:var(--amber)}
+    .prose code{font-family:'IBM Plex Mono',monospace;background:var(--bg-2);padding:.2rem .5rem;border-radius:3px;font-size:0.9rem;color:var(--slate);font-weight:500}
+
+    /* Comparison table */
+    .comparison-table{margin:2.5rem 0;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+    .comparison-table table{width:100%;border-collapse:collapse;font-size:.9rem}
+    .comparison-table th{background:var(--slate);color:#fff;padding:1rem;text-align:left;font-weight:600;border-bottom:1px solid var(--border)}
+    .comparison-table td{padding:1rem;border-bottom:1px solid var(--border);color:var(--ink-mid)}
+    .comparison-table tr:hover{background:var(--bg-2)}
+    .comparison-table .yes{color:var(--slate);font-weight:500}
+    .comparison-table .no{color:#999;font-weight:400}
+    .comparison-table .partial{color:var(--amber);font-weight:500}
+
+    /* Pull quote */
+    .pull-quote{border-left:4px solid var(--amber);padding:1.5rem 2rem;margin:3rem 0;background:var(--amber-pale)}
+    .pull-quote p{font-family:'Work Sans',sans-serif;font-size:clamp(1.2rem,2.2vw,1.75rem);font-weight:500;color:var(--ink);margin:0;line-height:1.45}
+
+    /* Architecture cards */
+    .arch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--border);margin:2.5rem 0}
+    .arch-card{background:var(--bg);padding:1.75rem}
+    .arch-type{font-family:'Work Sans',sans-serif;font-size:.95rem;color:var(--slate);margin-bottom:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+    .arch-example{font-size:.9rem;color:var(--ink-soft);line-height:1.7;margin-bottom:1rem}
+    .arch-note{font-size:.82rem;color:var(--ink-dim);border-top:1px solid var(--border);padding-top:.75rem;margin-top:.75rem}
+
+    /* Evaluation framework */
+    .eval-framework{margin:2.5rem 0;background:var(--bg-2);border:1px solid var(--border);padding:2.5rem;display:flex;flex-direction:column;gap:1.5rem}
+    .eval-title{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.5rem;font-weight:500}
+    .eval-items{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+    .eval-item{background:var(--bg);padding:1.5rem;display:flex;gap:1rem}
+    .eval-icon{font-size:1.4rem;flex-shrink:0;opacity:.6}
+    .eval-content{flex:1}
+    .eval-name{font-size:.95rem;color:var(--ink);margin-bottom:.3rem;font-weight:500}
+    .eval-desc{font-size:.85rem;color:var(--ink-soft);line-height:1.6}
+
+    /* Steps */
+    .steps{display:flex;flex-direction:column;gap:1px;margin:2.5rem 0;background:var(--border)}
+    .step{display:flex;gap:1.5rem;background:var(--bg);padding:1.75rem 2rem}
+    .step-num{font-family:'IBM Plex Mono',monospace;font-size:1.8rem;color:rgba(74,85,104,0.15);line-height:1;flex-shrink:0;width:2.5rem;text-align:center;font-weight:600}
+    .step-content h4{font-family:'Work Sans',sans-serif;font-size:1.05rem;color:var(--ink);margin:0 0 .3rem 0;font-weight:500}
+    .step-content p{font-size:.92rem;color:var(--ink-soft);margin:0;line-height:1.75}
+
+    .section-divider{display:flex;align-items:center;gap:1rem;margin:3rem 0;color:var(--ink-dim)}
+    .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .section-divider span{font-size:.7rem;letter-spacing:.15em}
+
+    .article-cta{margin-top:4rem;padding:3rem;background:linear-gradient(135deg, var(--slate) 0%, var(--slate-2) 100%);text-align:center;position:relative;overflow:hidden}
+    .article-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 120%,rgba(249,247,245,0.1) 0%,transparent 70%);pointer-events:none}
+    .article-cta-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1rem;font-weight:500}
+    .article-cta h3{font-family:'Work Sans',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);color:rgba(255,255,255,0.95);margin-bottom:.8rem;font-weight:500}
+    .article-cta p{font-size:.92rem;color:rgba(255,255,255,0.55);max-width:400px;margin:0 auto 2rem;line-height:1.75}
+    .btn-cta{display:inline-flex;align-items:center;padding:.9rem 2.5rem;background:#fff;color:var(--slate);font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;font-family:'Work Sans',sans-serif;transition:opacity .2s,transform .2s}
+    .btn-cta:hover{opacity:.88;transform:translateY(-1px)}
+
+    footer{border-top:1px solid var(--border);padding:2rem clamp(1.25rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .footer-logo{font-family:'Work Sans',sans-serif;font-size:.95rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink);text-decoration:none;font-weight:600}
+    .footer-copy{font-size:.72rem;color:var(--ink-dim)}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @media(max-width:600px){.article-cta{padding:2rem 1.5rem}.step{flex-direction:column;gap:.5rem}.comparison-table{font-size:.8rem}}
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Main navigation">
+    <a href="https://chronos-snowy.vercel.app/" class="nav-logo">CHRONOS</a>
+    <div class="nav-right">
+      <a href="https://chronos-snowy.vercel.app/blog/blog-index.html" class="nav-link">All Articles</a>
+      <a href="https://chronos-snowy.vercel.app/" class="nav-cta">Open App</a>
+    </div>
+  </nav>
+
+  <header class="hero" aria-label="Article header">
+    <p class="hero-label">Pillar 3 · Evaluation</p>
+    <h1>Truly private <em>note-taking</em><br/>on the web</h1>
+    <p class="hero-sub">Not all "private" note apps are equal. Some encrypt but the server sees metadata. Some sync but the key is in the cloud. Some claim privacy but monetize anyway. Here's how to evaluate real privacy and which approaches actually work.</p>
+    <div class="hero-meta">
+      <span class="hero-tag">Comparison & Analysis</span>
+      <span class="hero-date">April 25, 2026</span>
+      <span class="hero-read">14 min read</span>
+    </div>
+  </header>
+
+  <div class="article-wrap">
+    <article class="prose">
+
+      <p>You've heard the marketing: "End-to-end encrypted. Your privacy is our priority. Bank-level security."</p>
+
+      <p>But privacy claims are easy. Implementation is hard.</p>
+
+      <p>This article cuts through the marketing. Here's how to evaluate real privacy in note-taking apps and which architectural approaches actually deliver it.</p>
+
+      <div class="pull-quote reveal">
+        <p>Privacy is not a feature. Privacy is an architecture. You can't bolt it on. You have to build it in from the beginning.</p>
+      </div>
+
+      <h2>The evaluation framework: Four dimensions of privacy</h2>
+
+      <p>When evaluating a note-taking app, ask four questions:</p>
+
+      <div class="eval-framework reveal">
+        <p class="eval-title">Privacy evaluation criteria</p>
+        <div class="eval-items">
+          <div class="eval-item">
+            <div class="eval-icon">🔐</div>
+            <div class="eval-content">
+              <div class="eval-name">Encryption: Is plaintext ever visible to the server?</div>
+              <div class="eval-desc">Client-side encryption before transmission = good. Server-side encryption with company-held keys = bad. No encryption = terrible.</div>
+            </div>
+          </div>
+          <div class="eval-item">
+            <div class="eval-icon">🔑</div>
+            <div class="eval-content">
+              <div class="eval-name">Key ownership: Who holds the encryption keys?</div>
+              <div class="eval-desc">User holds keys = good. Company derives keys from passwords = acceptable. Company holds keys = bad. Company can always decrypt if they hold keys.</div>
+            </div>
+          </div>
+          <div class="eval-item">
+            <div class="eval-icon">👁️</div>
+            <div class="eval-content">
+              <div class="eval-name">Metadata: What does the server see?</div>
+              <div class="eval-desc">Server sees encrypted blob only = best. Server sees timestamps, file sizes, sync patterns = still exposed. Server knows content categories = privacy leak.</div>
+            </div>
+          </div>
+          <div class="eval-item">
+            <div class="eval-icon">💰</div>
+            <div class="eval-content">
+              <div class="eval-name">Business model: How do they make money?</div>
+              <div class="eval-desc">Subscription (user pays) = aligned incentive. Ad-supported = incentive to use data. Free with "optional" monetization = suspicious. Selling data = terrible.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>The three architectural approaches to private notes</h2>
+
+      <div class="arch-grid reveal">
+        <div class="arch-card">
+          <div class="arch-type">📱 Local-only</div>
+          <div class="arch-example">Examples: Apple Notes (local), Simplenote (optional sync), plain text files.</div>
+          <div class="arch-note">Privacy: Perfect. Sync: None. Trade-off: Works on one device or manual backup.</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-type">🔗 Sync-optional encrypted</div>
+          <div class="arch-example">Examples: Logseq, Obsidian, CHRONOS.</div>
+          <div class="arch-note">Privacy: Excellent. Sync: User-controlled. Trade-off: Requires setup and device management.</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-type">☁️ Cloud with encryption</div>
+          <div class="arch-example">Examples: OneNote (alleged), Notion (claimed), Evernote (some).</div>
+          <div class="arch-note">Privacy: Claimed (often weak). Sync: Automatic. Trade-off: Trust company's encryption claims.</div>
+        </div>
+      </div>
+
+      <h2>Comparing popular apps: The truth about privacy claims</h2>
+
+      <div class="comparison-table reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>App</th>
+              <th>Encryption</th>
+              <th>Key owner</th>
+              <th>Metadata visible</th>
+              <th>Real privacy?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Apple Notes</strong></td>
+              <td class="partial">iCloud encryption</td>
+              <td class="no">Apple holds keys</td>
+              <td class="partial">Partial (timestamps visible)</td>
+              <td class="partial">Weak</td>
+            </tr>
+            <tr>
+              <td><strong>Google Keep</strong></td>
+              <td class="partial">Transport only (HTTPS)</td>
+              <td class="no">None (plaintext in Google DB)</td>
+              <td class="no">All visible</td>
+              <td class="no">No</td>
+            </tr>
+            <tr>
+              <td><strong>Notion</strong></td>
+              <td class="no">None client-side</td>
+              <td class="no">None (plaintext in Notion DB)</td>
+              <td class="no">All visible</td>
+              <td class="no">No</td>
+            </tr>
+            <tr>
+              <td><strong>OneNote</strong></td>
+              <td class="partial">Transport + at-rest</td>
+              <td class="no">Microsoft holds keys</td>
+              <td class="partial">Partial (visible to Microsoft)</td>
+              <td class="partial">Weak</td>
+            </tr>
+            <tr>
+              <td><strong>Standard Notes</strong></td>
+              <td class="yes">Client-side AES-256</td>
+              <td class="yes">User password-derived</td>
+              <td class="yes">Server sees blob only</td>
+              <td class="yes">Strong</td>
+            </tr>
+            <tr>
+              <td><strong>Logseq</strong></td>
+              <td class="yes">Client-side (optional)</td>
+              <td class="yes">User-controlled</td>
+              <td class="yes">Blob only (if encrypted)</td>
+              <td class="yes">Strong</td>
+            </tr>
+            <tr>
+              <td><strong>Obsidian</strong></td>
+              <td class="yes">Local storage</td>
+              <td class="yes">User-controlled</td>
+              <td class="yes">No server</td>
+              <td class="yes">Perfect</td>
+            </tr>
+            <tr>
+              <td><strong>CHRONOS</strong></td>
+              <td class="yes">Client-side AES-256-GCM</td>
+              <td class="yes">User password-derived</td>
+              <td class="yes">Server sees blob only</td>
+              <td class="yes">Strong</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pull-quote reveal">
+        <p>If the company claims to encrypt but holds the keys, they're not claiming privacy. They're claiming they *could* be trustworthy. That's marketing, not architecture.</p>
+      </div>
+
+      <h2>How to spot weak privacy claims</h2>
+
+      <p>Watch for these red flags:</p>
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">🚩</div>
+          <div class="step-content">
+            <h4>"We encrypt your data"</h4>
+            <p>They don't say how or where the keys are. If they don't explicitly say "client-side" or "you hold the keys," they probably encrypt but hold the keys. This is not privacy.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">🚩</div>
+          <div class="step-content">
+            <h4>"Military-grade encryption"</h4>
+            <p>All encryption is "military-grade" now (AES-256). This is marketing noise. Real privacy is about architecture and key management, not algorithm strength.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">🚩</div>
+          <div class="step-content">
+            <h4>"We can't see your data"</h4>
+            <p>If they hold the encryption keys, they can. They're saying they *won't* decrypt without a legal order. That's different from *can't*. If they hold keys, courts can compel decryption.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">🚩</div>
+          <div class="step-content">
+            <h4>Mentions of "end-to-end encryption" without key clarity</h4>
+            <p>E2EE between you and their servers isn't the same as zero-knowledge. You could have E2EE with the company still holding keys.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">🚩</div>
+          <div class="step-content">
+            <h4>Free product with no clear revenue model</h4>
+            <p>If you're not paying for the product, you're the product. Free note apps monetize through data. If privacy is real, how are they sustaining?</p>
+          </div>
+        </div>
+      </div>
+
+      <h2>The best architectures for real privacy</h2>
+
+      <p>There are two proven approaches:</p>
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Offline-first with optional sync</h4>
+            <p>Notes live on your device first. Sync is optional, encrypted, and user-controlled. Examples: Obsidian, Logseq, CHRONOS. You own your data entirely.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Zero-knowledge with strong keys</h4>
+            <p>Notes are encrypted on the client with a password-derived key before ever reaching a server. Server stores only ciphertext. Examples: Standard Notes, CHRONOS. You own your keys.</p>
+          </div>
+        </div>
+      </div>
+
+      <p>Both require one thing: you trust the code, not the company. This means open-source is better. You can audit the encryption. You can verify the keys are client-side.</p>
+
+      <h2>Questions to ask before choosing a note app</h2>
+
+      <ul>
+        <li><strong>Where are my encryption keys stored?</strong> (In your hands = good. On their servers = bad.)</li>
+        <li><strong>Can I export my notes?</strong> (Yes = good. Locked in = bad.)</li>
+        <li><strong>Is the code open-source?</strong> (Yes = auditable. No = trust required.)</li>
+        <li><strong>What does the server see?</strong> (Only encrypted blob = good. Metadata = bad.)</li>
+        <li><strong>What's the business model?</strong> (Subscription = aligned. Free = data monetization.)</li>
+        <li><strong>Who controls the keys?</strong> (You = good. Company = not actually private.)</li>
+      </ul>
+
+      <h2>The shift: From trusting companies to architecting privacy</h2>
+
+      <p>Privacy is shifting from "trust us" to "you can't see your data because it's encrypted."</p>
+
+      <p>The best note apps don't require trust. They require cryptography. You don't have to believe the company is ethical. The architecture prevents them from seeing your data even if they wanted to.</p>
+
+      <p>This is why offline-first and zero-knowledge are winning. They don't ask for trust. They eliminate the need for it.</p>
+
+      <div class="article-cta reveal">
+        <p class="article-cta-label">CHRONOS</p>
+        <h3>Your notes.<br/>Architecture proves it.</h3>
+        <p>Client-side encryption, zero-knowledge design. We literally cannot read your vault.</p>
+        <a href="https://chronos-snowy.vercel.app/" class="btn-cta">Open CHRONOS</a>
+      </div>
+
+    </article>
+  </div>
+
+  <link rel="stylesheet" href="/blog/blog-styles.css" />
+  <section id="chronos-related-section" style="color: var(--ink);">
+    <div id="chronos-related"></div>
+  </section>
+  <script src="/blog/blog-components.js"></script>
+
+  <footer>
+    <a href="https://chronos-snowy.vercel.app/" class="footer-logo">CHRONOS</a>
+    <p class="footer-copy">© 2026 CHRONOS · Curating Continuity</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)} });
+    },{threshold:0.1});
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
