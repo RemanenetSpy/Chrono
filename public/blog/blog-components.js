@@ -247,7 +247,7 @@ const CHRONOS_ARTICLES = [
     url:   "/blog/private-note-taking-web.html",
     title: "How to achieve truly private note-taking on the web",
     tag:   "Pillar 3 · Privacy",
-    live:  false
+    live:  true
   },
   {
     url:   "/blog/pwa-bypass-app-store.html",
