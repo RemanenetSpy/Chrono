@@ -1,6 +1,6 @@
 
 /**
- * Proprietary Chronos Archive Service
+ * Proprietary Kaal Archive Service
  * Implements app-bound encryption and integrity checks.
  */
 
@@ -11,8 +11,8 @@ const SALT_LENGTH = 16;
 const IV_LENGTH = 12;
 const ITERATIONS = 120000;
 
-// App-bound internal salt - ensures files are useless without Chronos logic
-const CHRONOS_IDENTITY_PREFIX = "CHRONOS_INTERNAL_VAULT_v1_";
+// App-bound internal salt - ensures files are useless without Kaal logic
+const KAAL_IDENTITY_PREFIX = "KAAL_INTERNAL_VAULT_v1_";
 
 const bufferToHex = (buffer: ArrayBuffer): string => {
   return Array.from(new Uint8Array(buffer))
@@ -55,8 +55,8 @@ export const encryptVault = async (data: string, passphrase: string): Promise<st
   const salt = window.crypto.getRandomValues(new Uint8Array(SALT_LENGTH));
   const iv = window.crypto.getRandomValues(new Uint8Array(IV_LENGTH));
 
-  // Combine user passphrase with app identity for "Chronos-only" bound key
-  const combinedSecret = encoder.encode(CHRONOS_IDENTITY_PREFIX + passphrase);
+  // Combine user passphrase with app identity for "Kaal-only" bound key
+  const combinedSecret = encoder.encode(KAAL_IDENTITY_PREFIX + passphrase);
 
   const baseKey = await window.crypto.subtle.importKey(
     'raw',
@@ -109,7 +109,7 @@ export const encryptVault = async (data: string, passphrase: string): Promise<st
 
   const vault = {
     v: "2.0",
-    identity: "chronos-sealed",
+    identity: "kaal-sealed",
     salt: bufferToHex(salt),
     iv: bufferToHex(iv),
     payload: bufferToHex(encryptedData),
@@ -130,7 +130,7 @@ export const decryptVault = async (base64Vault: string, passphrase: string): Pro
   const vaultJson = decoder.decode(vaultBytes);
   const vault = JSON.parse(vaultJson);
 
-  if (vault.v !== "2.0" || vault.identity !== "chronos-sealed") {
+  if (vault.v !== "2.0" || vault.identity !== "kaal-sealed") {
     throw new Error('Incompatible vault format');
   }
 
@@ -139,7 +139,7 @@ export const decryptVault = async (base64Vault: string, passphrase: string): Pro
   const payload = hexToBuffer(vault.payload);
   const signature = hexToBuffer(vault.signature);
 
-  const combinedSecret = encoder.encode(CHRONOS_IDENTITY_PREFIX + passphrase);
+  const combinedSecret = encoder.encode(KAAL_IDENTITY_PREFIX + passphrase);
 
   const baseKey = await window.crypto.subtle.importKey(
     'raw',
