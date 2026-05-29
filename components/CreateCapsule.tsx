@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { Capsule, UserProfile } from '../types';
 import { Button } from './Button';
-import { KeyIcon } from './KeyIcon';
+import { HourglassIcon } from './HourglassIcon';
 import { TIME_OPTIONS } from '../constants';
 import { analytics } from '../services/analytics';
 
@@ -124,8 +124,8 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, profile,
   return (
     <div className="fade-up pb-8 max-w-2xl mx-auto">
       <div className="flex justify-between items-baseline mb-8 border-b border-black/[0.03] pb-4">
-        <h2 className="serif text-3xl md:text-4xl font-light text-neutral-800">Compose</h2>
-        <button onClick={handleCancel} className="text-neutral-400 hover:text-black transition-colors text-[8px] tracking-[0.3em] uppercase font-bold">Discard Entry</button>
+        <h2 className="serif text-3xl md:text-4xl font-light text-neutral-800">Offer to the Void</h2>
+        <button onClick={handleCancel} className="text-neutral-400 hover:text-black transition-colors text-[8px] tracking-[0.3em] uppercase font-bold">Discard Fragment</button>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
@@ -156,7 +156,7 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, profile,
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-6 border-y border-black/[0.03]">
           <div className="space-y-3 relative">
-            <p className="text-[8px] tracking-[0.3em] uppercase text-neutral-400 font-bold">Time Horizon</p>
+            <p className="text-[8px] tracking-[0.3em] uppercase text-neutral-400 font-bold">Abyssal Depth</p>
             <div className="flex flex-wrap gap-x-4 gap-y-2">
               {TIME_OPTIONS.map((opt) => {
                 const isMoon = opt.value === MOON_DURATION;
@@ -271,9 +271,9 @@ export const CreateCapsule: React.FC<CreateCapsuleProps> = ({ capsules, profile,
             className="group flex flex-col items-center gap-3 transition-all"
           >
             <div className="w-14 h-14 rounded-full border border-black/5 flex items-center justify-center group-hover:bg-black group-hover:scale-110 transition-all duration-700 shadow-lg shadow-black/5">
-              <KeyIcon className="h-5 w-auto text-neutral-300 group-hover:text-white transition-colors" />
+              <HourglassIcon className="h-5 w-auto text-neutral-300 group-hover:text-white transition-colors" />
             </div>
-            <span className="text-[7px] tracking-[0.4em] uppercase text-neutral-400 group-hover:text-black transition-colors font-bold">Seal this moment</span>
+            <span className="text-[7px] tracking-[0.4em] uppercase text-neutral-400 group-hover:text-black transition-colors font-bold">Surrender to Time</span>
           </button>
         </div>
       </form>

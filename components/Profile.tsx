@@ -34,7 +34,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
       return;
     }
     try {
-      setStatus("Sealing the vault...");
+      setStatus("Sealing the void...");
       const dataToStore = { profile, capsules };
       const encrypted = await encryptVault(JSON.stringify(dataToStore), passphrase);
       
@@ -42,16 +42,16 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `chronos_archive_${new Date().toISOString().split('T')[0]}.chronosarchive`;
+      link.download = `kaal_archive_${new Date().toISOString().split('T')[0]}.kaalarchive`;
       link.click();
       URL.revokeObjectURL(url);
       
-      setStatus("Vault sealed and exported.");
+      setStatus("Void sealed and exported.");
       setBackupMode('IDLE');
       setPassphrase('');
     } catch (e) {
       console.error('Export failed:', e);
-      setStatus("Failed to generate proprietary vault.");
+      setStatus("Failed to generate proprietary void.");
     }
   };
 
@@ -70,7 +70,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
       const text = (await file.text()).trim();
       
       await new Promise(r => setTimeout(r, 600));
-      setStatus("Checking vault integrity...");
+      setStatus("Checking void integrity...");
       
       await new Promise(r => setTimeout(r, 600));
       setStatus("Decrypting with your key...");
@@ -82,18 +82,18 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
       const data = JSON.parse(decrypted);
 
       if (!data || typeof data !== 'object') {
-        throw new Error("Invalid vault data format.");
+        throw new Error("Invalid void data format.");
       }
 
       if (!Array.isArray(data.capsules)) {
-        throw new Error("Vault is missing the capsule archive.");
+        throw new Error("Vault is missing the fragment archive.");
       }
 
       setPendingVault({
         profile: data.profile || profile, // Use current profile if missing in vault
         capsules: data.capsules
       });
-      setStatus("Vault verified. Merge required to finalize.");
+      setStatus("Void verified. Merge required to finalize.");
     } catch (e: any) {
       console.error('Import failed:', e);
       if (e.message?.includes('Integrity') || e.message?.includes('tampered') || e.message?.includes('Incorrect security key')) {
@@ -129,7 +129,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
   return (
     <div className="fade-up space-y-12 max-w-3xl mx-auto pb-8">
       <div className="flex justify-between items-baseline border-b border-black/[0.03] pb-4">
-        <h2 className="serif text-3xl md:text-4xl font-light text-neutral-800">Memoir</h2>
+        <h2 className="serif text-3xl md:text-4xl font-light text-neutral-800">Echoes</h2>
         <button onClick={onBack} className="text-neutral-400 hover:text-black transition-colors text-[8px] tracking-[0.4em] uppercase font-bold">Return</button>
       </div>
 
@@ -158,7 +158,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                     />
                   </div>
                   <div className="flex gap-4">
-                    <button onClick={() => { onUpdate({...profile, name, bio}); setIsEditing(false); }} className="text-[8px] tracking-widest uppercase font-black text-black">Save Memoir</button>
+                    <button onClick={() => { onUpdate({...profile, name, bio}); setIsEditing(false); }} className="text-[8px] tracking-widest uppercase font-black text-black">Save Chronicles</button>
                     <button onClick={() => setIsEditing(false)} className="text-[8px] tracking-widest uppercase font-bold text-neutral-300">Cancel</button>
                   </div>
                 </div>
@@ -200,9 +200,9 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
             {pendingVault ? (
               <div className="space-y-6 animate-in fade-in zoom-in-95 duration-500 bg-white p-8 border border-black/5 shadow-sm">
                 <div className="space-y-2 text-center">
-                  <p className="text-[8px] tracking-[0.4em] uppercase text-amber-600 font-bold">Incoming Vault Detected</p>
+                  <p className="text-[8px] tracking-[0.4em] uppercase text-amber-600 font-bold">Incoming Void Detected</p>
                   <h3 className="serif text-2xl text-neutral-800">Archive belonging to "{pendingVault.profile?.name || 'Unknown'}"</h3>
-                  <p className="serif italic text-neutral-400">Contains {pendingVault.capsules.length} chronological entries.</p>
+                  <p className="serif italic text-neutral-400">Contains {pendingVault.capsules.length} chronological fragments.</p>
                 </div>
                 
                 <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-black/[0.03]">
@@ -216,7 +216,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                     onClick={rejectVault}
                     className="flex-1 py-4 border border-black/5 text-neutral-400 text-[8px] tracking-[0.4em] uppercase font-bold hover:text-black transition-all"
                   >
-                    Reject Vault
+                    Reject Void
                   </button>
                 </div>
               </div>
@@ -225,7 +225,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                 <button 
                   onClick={() => { 
                     if (!profile.isPremium) {
-                      onRequestPremium('Chronos Archive Export');
+                      onRequestPremium('Kaal Archive Export');
                       return;
                     }
                     setBackupMode('EXPORT'); 
@@ -242,7 +242,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                 <button 
                   onClick={() => { 
                     if (!profile.isPremium) {
-                      onRequestPremium('Chronos Archive Import');
+                      onRequestPremium('Kaal Archive Import');
                       return;
                     }
                     setBackupMode('IMPORT'); 
@@ -253,7 +253,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                   <div className="w-12 h-12 rounded-full bg-neutral-50 flex items-center justify-center mb-4 group-hover:bg-neutral-900 group-hover:scale-110 transition-all duration-500">
                     <i className="fa-solid fa-file-import text-neutral-400 group-hover:text-white transition-colors"></i>
                   </div>
-                  <span className="text-[9px] tracking-[0.3em] uppercase font-bold text-neutral-500 group-hover:text-black transition-colors">Restore Vault</span>
+                  <span className="text-[9px] tracking-[0.3em] uppercase font-bold text-neutral-500 group-hover:text-black transition-colors">Restore Void</span>
                   {!profile.isPremium && <i className="fa-solid fa-lock absolute top-5 right-5 text-[10px] text-amber-600/40 group-hover:text-amber-600 transition-colors"></i>}
                 </button>
               </div>
@@ -269,7 +269,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                     placeholder="Enter key to sign the vault..."
                     className={`w-full bg-white border border-black/5 px-4 py-3 serif italic focus:outline-none focus:border-black/10 text-lg transition-all duration-700 placeholder:text-[#433422]/50 ${passphrase ? 'text-[#1a1a1a]' : 'text-[#433422]/50'}`}
                   />
-                  <p className="text-[6px] tracking-widest text-neutral-300 uppercase">Vaults are identity-locked to Chronos. They cannot be opened by standard software.</p>
+                  <p className="text-[6px] tracking-widest text-neutral-300 uppercase">Voids are identity-locked to Kaal. They cannot be opened by standard software.</p>
                 </div>
                 
                 <div className="flex justify-between items-center">
@@ -284,11 +284,11 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
                     </button>
                   ) : (
                     <label className="cursor-pointer text-[8px] tracking-[0.3em] uppercase font-black text-black border-b border-black pb-0.5">
-                      Select .chronosarchive File
+                      Select .kaalarchive File
                       <input 
                         ref={fileInputRef}
                         type="file" 
-                        accept=".chronosarchive" 
+                        accept=".kaalarchive" 
                         className="hidden" 
                         onChange={handleImport} 
                       />
@@ -311,7 +311,7 @@ export const Profile: React.FC<ProfileProps> = ({ profile, capsules, onUpdate, o
               onClick={onClearData}
               className="text-[7px] tracking-[0.4em] uppercase text-neutral-200 hover:text-red-400 transition-colors font-bold"
             >
-              Burn the archive
+              Burn the void
             </button>
         </section>
       </div>

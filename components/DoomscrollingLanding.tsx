@@ -36,7 +36,7 @@ const DoomscrollingLanding: React.FC = () => {
             </p>
             
             <p>
-              Chronos is a strictly local-first, zero-knowledge digital vault. It bypasses the cloud entirely. It exists to do one thing: force you to write exactly <em className="serif italic">one</em> sentence before bed to seal the day. That tiny bit of intentional friction acts as a temporal anchor. It tells your nervous system the day is actually over.
+              Kaal is a strictly local-first, zero-knowledge digital void. It bypasses the cloud entirely. It exists to do one thing: force you to write exactly <em className="serif italic">one</em> sentence before bed to seal the day. That tiny bit of intentional friction acts as a temporal anchor. It tells your nervous system the day is actually over.
             </p>
           </div>
 

@@ -11,23 +11,17 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
   const [message, setMessage] = useState('');
 
   const dateStr = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-  const structuredBody = `From the Desk of: ${senderName || 'A Time Traveler'}\nDate: ${dateStr}\n\nDear Archivist,\n\n${message}\n\n---\nDispatched via Chronos`;
+  const structuredBody = `From the Desk of: ${senderName || 'A Voyager'}\nDate: ${dateStr}\n\nDear Absolute,\n\n${message}\n\n---\nDispatched via Kaal`;
 
-  const encodedSubject = encodeURIComponent(`[Chronos Protocol] ${subject || 'A Message from Chronos'}`);
+  const encodedSubject = encodeURIComponent(`[Kaal Protocol] ${subject || 'A Message to the Absolute'}`);
   const encodedBody = encodeURIComponent(structuredBody);
-  const mailtoLink = `mailto:chronosvaults@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+  const mailtoLink = `mailto:kaal@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+  const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=kaal@gmail.com&su=${encodedSubject}&body=${encodedBody}`;
 
   const isFormValid = message.trim().length > 0 && subject.trim().length > 0;
 
-  const handleDispatch = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSuccess = () => {
     if (!isFormValid) return;
-
-    // We use Gmail web compose as the primary since default mail clients are often unconfigured
-    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=chronosvaults@gmail.com&su=${encodedSubject}&body=${encodedBody}`;
-    window.open(gmailLink, '_blank');
-    
-    // Smooth transition back to manifesto after a brief delay
     setTimeout(() => {
       setView('manifesto');
       setMessage('');
@@ -56,21 +50,21 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
               <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center mb-4 text-neutral-800 bg-white shadow-sm">
                 <i className="fa-regular fa-envelope text-xl"></i>
               </div>
-              <h2 className="serif text-3xl font-light text-neutral-900 tracking-wide text-center">The Manifesto</h2>
+              <h2 className="serif text-3xl font-light text-neutral-900 tracking-wide text-center">The Scroll of Kaal</h2>
               <div className="w-8 h-px bg-black/20 mt-4"></div>
             </div>
 
             <div className="space-y-6 serif text-neutral-600 leading-relaxed font-light">
               <p>
-                Chronos is a sanctuary for your present thoughts, designed to be read exclusively by your future self. We act as custodians of time, holding onto the fragments you seal away until their designated hour arrives.
+                Kaal is a sanctuary for your present thoughts, designed to be read exclusively by your future self. We act as custodians of time, holding onto the fragments you seal away until their designated hour arrives.
               </p>
               
               <div className="bg-white p-6 border border-black/[0.02] shadow-sm rounded-lg space-y-4">
                 <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold text-neutral-900 font-sans">The Application</h3>
                 <ol className="list-decimal list-inside space-y-3 font-sans text-sm font-normal text-neutral-500">
                   <li><strong className="font-bold text-neutral-800">Draft:</strong> Pour your current state of mind into a letter. Attach an image or a voice echo if words are not enough.</li>
-                  <li><strong className="font-bold text-neutral-800">Seal:</strong> Choose a time horizon. Once sealed, a capsule cannot be prematurely opened.</li>
-                  <li><strong className="font-bold text-neutral-800">Wait:</strong> Trust time. Let the archive securely hold your memory until you are ready to receive it again.</li>
+                  <li><strong className="font-bold text-neutral-800">Seal:</strong> Choose a time horizon. Once sealed, a fragment cannot be prematurely opened.</li>
+                  <li><strong className="font-bold text-neutral-800">Wait:</strong> Trust time. Let the void securely hold your memory until you are ready to receive it again.</li>
                 </ol>
               </div>
 
@@ -79,7 +73,7 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
                   <i className="fa-solid fa-feather-pointed"></i> Correspondence & Support
                 </h3>
                 <p className="mb-6 font-serif italic text-sm">
-                  Whether you have found a tear in the fabric of the app (a bug), wish to request a new feature, or simply need support with your archive—we await your letter.
+                  Whether you have found a tear in the fabric of the app (a bug), wish to request a new feature, or simply need support with your void—we await your letter.
                 </p>
                 <div className="flex flex-col items-center">
                   <button 
@@ -89,17 +83,17 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center group-hover:bg-black group-hover:scale-105 transition-all duration-700 shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-black/[0.02]">
                       <i className="fa-solid fa-pen-nib text-neutral-400 group-hover:text-white transition-colors text-lg"></i>
                     </div>
-                    <span className="text-[8px] tracking-[0.3em] uppercase text-neutral-500 group-hover:text-black transition-colors font-bold font-sans">Write to the Archivist</span>
+                    <span className="text-[8px] tracking-[0.3em] uppercase text-neutral-500 group-hover:text-black transition-colors font-bold font-sans">Write to the Absolute</span>
                   </button>
                   <p className="mt-4 text-[7px] tracking-[0.3em] uppercase text-neutral-300 font-bold font-sans select-all">
-                    Direct Address: chronosvaults@gmail.com
+                    Direct Address: kaal@gmail.com
                   </p>
                 </div>
               </div>
             </div>
           </div>
         ) : (
-          <form onSubmit={handleDispatch} className="animate-[fadeIn_0.5s_ease-out_forwards] flex flex-col h-full">
+          <div className="animate-[fadeIn_0.5s_ease-out_forwards] flex flex-col h-full">
             <div className="flex items-center justify-between mb-8 border-b border-black/[0.03] pb-4">
               <button 
                 type="button" 
@@ -119,7 +113,7 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
                     type="text" 
                     value={senderName}
                     onChange={(e) => setSenderName(e.target.value)}
-                    placeholder="Anonymous Time Traveler"
+                    placeholder="Anonymous Voyager"
                     className="w-full bg-transparent border-b border-black/10 py-2 text-base serif focus:outline-none focus:border-black transition-all duration-500 placeholder:text-neutral-300 text-neutral-800"
                   />
                 </div>
@@ -141,7 +135,7 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
                   <i className="fa-regular fa-envelope"></i> Letter Contents
                 </label>
                 <div className="bg-white p-6 border border-black/5 shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)] min-h-[250px] relative">
-                  <p className="serif italic text-neutral-400 mb-6 pb-4 border-b border-black/[0.03]">Dear Archivist,</p>
+                  <p className="serif italic text-neutral-400 mb-6 pb-4 border-b border-black/[0.03]">Dear Absolute,</p>
                   <textarea 
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -154,16 +148,24 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
             </div>
 
             <div className="flex justify-center pt-8 mt-4 border-t border-black/5">
-              <button 
-                type="submit" 
-                disabled={!isFormValid}
-                className={`group flex flex-col items-center gap-3 transition-all relative z-10 outline-none focus:outline-none [-webkit-tap-highlight-color:transparent] ${!isFormValid ? 'opacity-50 cursor-not-allowed' : ''}`}
+              <a 
+                href={isFormValid ? gmailLink : '#'}
+                target={isFormValid ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  if (!isFormValid) {
+                    e.preventDefault();
+                    return;
+                  }
+                  handleSuccess();
+                }}
+                className={`group flex flex-col items-center gap-3 transition-all relative z-10 outline-none focus:outline-none [-webkit-tap-highlight-color:transparent] ${!isFormValid ? 'opacity-50 cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}
               >
                 <div className="w-14 h-14 bg-neutral-900 rounded-full flex items-center justify-center group-hover:bg-black group-[&:not(.opacity-50)]:hover:scale-105 transition-all duration-700 shadow-lg shadow-black/10">
                   <i className="fa-brands fa-google text-white text-base group-[&:not(.opacity-50)]:hover:-translate-y-0.5 group-[&:not(.opacity-50)]:hover:translate-x-0.5 transition-transform duration-500"></i>
                 </div>
                 <span className="text-[8px] tracking-[0.3em] uppercase text-neutral-500 group-[&:not(.opacity-50)]:hover:text-black transition-colors font-bold font-sans">Dispatch via Gmail</span>
-              </button>
+              </a>
             </div>
             
             <div className="flex flex-col items-center gap-2 mt-6">
@@ -171,13 +173,20 @@ export const GuideEnvelope: React.FC<GuideEnvelopeProps> = ({ onClose }) => {
                 Requires a Google Account
               </p>
               <a 
-                href={mailtoLink} 
-                className="text-center text-[7px] tracking-[0.3em] uppercase text-neutral-400 hover:text-black font-sans border-b border-black/5 pb-0.5 transition-colors no-underline"
+                href={isFormValid ? mailtoLink : '#'}
+                onClick={(e) => {
+                  if (!isFormValid) {
+                    e.preventDefault();
+                    return;
+                  }
+                  handleSuccess();
+                }}
+                className={`text-center text-[7px] tracking-[0.3em] uppercase text-neutral-400 font-sans border-b border-black/5 pb-0.5 transition-colors no-underline ${!isFormValid ? 'opacity-50 pointer-events-none' : 'hover:text-black'}`}
               >
                 Or open native mail app
               </a>
             </div>
-          </form>
+          </div>
         )}
         
       </div>

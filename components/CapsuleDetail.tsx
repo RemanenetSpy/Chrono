@@ -41,7 +41,7 @@ export const CapsuleDetail: React.FC<CapsuleDetailProps> = ({ capsule, onClose, 
     <div className="fade-up max-w-2xl mx-auto pb-10">
       <div className="flex justify-between items-center mb-8 border-b border-black/[0.04] pb-4">
         <button onClick={onClose} className="text-neutral-400 hover:text-black transition-colors text-[8px] tracking-[0.4em] uppercase font-bold">
-          <i className="fa-solid fa-arrow-left-long mr-3"></i> The Vault
+          <i className="fa-solid fa-arrow-left-long mr-3"></i> The Void
         </button>
         <div className="text-[7px] tracking-[0.4em] uppercase text-neutral-300 font-bold">
           No. {capsule.id.slice(0, 4)}
@@ -51,7 +51,7 @@ export const CapsuleDetail: React.FC<CapsuleDetailProps> = ({ capsule, onClose, 
       {!isUnlocked ? (
         <div className="py-16 text-center space-y-8">
           <div className="w-16 h-16 border border-black/[0.03] rounded-full flex items-center justify-center mx-auto shadow-lg shadow-black/5">
-            <i className="fa-solid fa-hourglass-start text-neutral-200 animate-pulse text-lg"></i>
+            <i className="fa-solid fa-circle-notch text-neutral-200 animate-[spin_4s_linear_infinite] text-lg"></i>
           </div>
           <div className="space-y-3">
             <h3 className="serif text-2xl font-light text-neutral-800">Still Sealed</h3>
@@ -65,7 +65,7 @@ export const CapsuleDetail: React.FC<CapsuleDetailProps> = ({ capsule, onClose, 
               onClick={() => setShowShareCard(true)}
               className="text-[9px] tracking-[0.3em] uppercase text-neutral-500 hover:text-black transition-colors font-bold border border-black/10 px-6 py-3 rounded-full"
             >
-              <i className="fa-solid fa-share-nodes mr-2"></i> Share the Void
+              <i className="fa-solid fa-share-nodes mr-2"></i> Share the Seal
             </button>
           </div>
         </div>
@@ -135,9 +135,9 @@ export const CapsuleDetail: React.FC<CapsuleDetailProps> = ({ capsule, onClose, 
               onClick={handleDelete}
               className="text-[7px] tracking-[0.3em] uppercase text-red-400 font-bold"
             >
-              Burn this record
+              Burn this fragment
             </button>
-            <span className="text-[6px] tracking-[0.4em] uppercase text-neutral-300 font-bold">Private Archive System</span>
+            <span className="text-[6px] tracking-[0.4em] uppercase text-neutral-300 font-bold">Private Void System</span>
           </div>
         </div>
       )}

@@ -59,7 +59,7 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({ onClose, onUpgrade, 
           <div className="space-y-2">
             <h3 className="serif text-2xl text-neutral-900">Unlock {featureName}</h3>
             <p className="text-sm text-neutral-500 leading-relaxed">
-              Upgrade to Chronos Premium to access long-term horizons, unlimited Moon capsules, and secure import/export functionality.
+              Upgrade to Kaal Premium to access long-term horizons, unlimited Moon fragments, and secure import/export functionality.
             </p>
           </div>
 
@@ -70,11 +70,11 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({ onClose, onUpgrade, 
             </div>
             <div className="flex items-center gap-3">
               <i className="fa-solid fa-check text-amber-600 text-xs"></i>
-              <span className="text-sm text-neutral-700">Unlimited Monthly Capsules</span>
+              <span className="text-sm text-neutral-700">Unlimited Monthly Fragments</span>
             </div>
             <div className="flex items-center gap-3">
               <i className="fa-solid fa-check text-amber-600 text-xs"></i>
-              <span className="text-sm text-neutral-700">Chronos Archive Import & Export</span>
+              <span className="text-sm text-neutral-700">Kaal Archive Import & Export</span>
             </div>
           </div>
 

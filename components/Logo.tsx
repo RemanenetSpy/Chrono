@@ -1,5 +1,5 @@
 import React from 'react';
-import { KeyIcon } from './KeyIcon';
+import { HourglassIcon } from './HourglassIcon';
 
 interface LogoProps {
   className?: string;
@@ -24,28 +24,22 @@ export const Logo: React.FC<LogoProps> = ({ className = '', variant = 'full' }) 
         <circle cx="50" cy="50" r="46" fill="none" stroke="#1a1a1a" strokeWidth="1" />
         <circle cx="50" cy="50" r="42" fill="none" stroke="#1a1a1a" strokeWidth="0.5" strokeDasharray="1 2" />
 
-        <g className="origin-[50px_50px] animate-[flip_10s_ease-in-out_infinite]">
-          <path d="M35 30 L65 30 L50 50 Z" fill="none" stroke="#1a1a1a" strokeWidth="1.2" />
-          <path d="M35 70 L65 70 L50 50 Z" fill="none" stroke="#1a1a1a" strokeWidth="1.2" />
-          
-          <rect x="49.5" y="50" width="1" height="20" fill="#1a1a1a">
-            <animate attributeName="height" from="0" to="20" dur="2s" repeatCount="indefinite" />
-          </rect>
+        <g className="origin-[50px_50px] animate-[pulse_10s_ease-in-out_infinite]">
+          <circle cx="50" cy="50" r="18" fill="#1a1a1a" />
+          <circle cx="50" cy="50" r="24" fill="none" stroke="#1a1a1a" strokeWidth="1.5" opacity="0.6" strokeDasharray="4 2" />
+          <circle cx="50" cy="50" r="32" fill="none" stroke="#1a1a1a" strokeWidth="0.8" opacity="0.3" strokeDasharray="2 4" />
         </g>
       </svg>
       
       <div className={`text-[#1a1a1a] ${isCompact ? 'flex items-center tracking-[0.3em]' : 'flex items-center justify-center gap-2 sm:gap-4 md:gap-6 w-full'}`}>
         <span className={`serif ${isCompact ? 'text-xl font-bold uppercase' : (isSplash ? 'text-2xl sm:text-4xl md:text-5xl tracking-wide' : 'text-2xl tracking-wide')} text-[#1a1a1a]`}>
-          {isCompact ? 'CHRONOS' : 'Chronos'}
+          {isCompact ? 'KAAL' : 'Kaal'}
         </span>
         
         {!isCompact && (
           <>
-            <div className="flex flex-col items-center justify-center text-[#1a1a1a] opacity-80">
-              <KeyIcon className={`${isSplash ? "h-8 sm:h-10 w-auto animate-key-turn" : "h-7 w-auto"}`} />
-            </div>
             <span className={`serif ${isSplash ? 'text-xl sm:text-3xl md:text-4xl tracking-wide' : 'text-xl tracking-wide'} text-[#1a1a1a] whitespace-nowrap`}>
-              Letters to The Future
+              the absolute
             </span>
           </>
         )}

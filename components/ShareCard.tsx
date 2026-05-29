@@ -30,7 +30,7 @@ export const ShareCard: React.FC<ShareCardProps> = ({ capsule, onClose }) => {
       
       const image = canvas.toDataURL('image/png', 1.0);
       const link = document.createElement('a');
-      link.download = `chronos-sealed-${capsule.id.substring(0, 8)}.png`;
+      link.download = `kaal-sealed-${capsule.id.substring(0, 8)}.png`;
       link.href = image;
       link.click();
     } catch (err) {
@@ -51,7 +51,7 @@ export const ShareCard: React.FC<ShareCardProps> = ({ capsule, onClose }) => {
         </button>
 
         <div className="text-center mb-6">
-          <h3 className="serif text-2xl font-medium text-neutral-900">Share the Void</h3>
+          <h3 className="serif text-2xl font-medium text-neutral-900">Share the Seal</h3>
         </div>
 
         {/* The Card to be captured */}
@@ -78,7 +78,7 @@ export const ShareCard: React.FC<ShareCardProps> = ({ capsule, onClose }) => {
               className="text-white/90 text-2xl md:text-3xl leading-relaxed mb-10 max-w-[280px] mx-auto"
               style={{ fontFamily: 'var(--f-spectral)' }}
             >
-              "A piece of the present has been entrusted to the future."
+              "A fragment of the present has been surrendered to time."
             </p>
 
             <div className="flex flex-col items-center gap-2">
@@ -97,10 +97,10 @@ export const ShareCard: React.FC<ShareCardProps> = ({ capsule, onClose }) => {
           {/* Footer */}
           <div className="flex justify-between items-end relative z-10">
             <div className="uppercase tracking-[0.3em] text-white/30 text-[10px] font-light">
-              Chronos
+              Kaal
             </div>
             <div className="text-white/30 text-[10px] font-mono tracking-wider">
-              chronos-snowy.vercel.app
+              kaal-the-absolute.vercel.app
             </div>
           </div>
         </div>
