@@ -30,7 +30,7 @@ async function startServer() {
             price_data: {
               currency: "usd",
               product_data: {
-                name: "Chronos Lifetime Premium",
+                name: "Kaal Lifetime Premium",
                 description: "Unlock Year, Decade, unlimited Moon capsules, and Import/Export features.",
               },
               unit_amount: 3900, // $39.00

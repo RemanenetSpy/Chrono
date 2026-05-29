@@ -1,19 +1,19 @@
 
-# Chronos: Temporal Legacy Vault
+# Kaal: Temporal Legacy Vault
 
 > "Capturing the fragments of today for the clarity of tomorrow."
 
-**Chronos** is a luxury minimalist digital sanctuary designed for intentional reflection. It acts as a **nervous system regulator**—an anti-doomscrolling tool that allows you to compose letters, attach "visual echoes" (photos), and record audio to be delivered to your future self. By locking memories behind a temporal gate, Chronos transforms social posting into a private ritual of mindfulness, quarantining your mental noise.
+**Kaal** is a luxury minimalist digital sanctuary designed for intentional reflection. It acts as a **nervous system regulator**—an anti-doomscrolling tool that allows you to compose letters, attach "visual echoes" (photos), and record audio to be delivered to your future self. By locking memories behind a temporal gate, Kaal transforms social posting into a private ritual of mindfulness, quarantining your mental noise.
 
 ---
 
 ## 📜 The Purpose
 
-In an era of instant gratification and ephemeral content, Chronos asks you to slow down. Human brains hate "open loops." If you have an intrusive thought and put it in a standard notes app, you just keep re-reading it. If you lock it in Chronos and the math physically refuses to let you see it for a month, your brain is forced to drop the loop. 
+In an era of instant gratification and ephemeral content, Kaal asks you to slow down. Human brains hate "open loops." If you have an intrusive thought and put it in a standard notes app, you just keep re-reading it. If you lock it in Kaal and the math physically refuses to let you see it for a month, your brain is forced to drop the loop. 
 
 ## ✨ Key Features
 
-- **Compose Across Time**: Write rich, serif-styled letters to the future with an elegant editor.
+- **Compose Across Time**: Write rich, serif-styled the absolute with an elegant editor.
 - **Visual & Voice Echoes**: Attach images and audio recordings to your capsules to ground your memories in reality.
 - **Temporal Gates**: Choose your horizon—from a single "Moment" (1 day) to a full "Decade."
 - **The Vault**: A curated gallery of your pending and revealed history, styled as an elegant stationery collection with a dramatic editorial layout.
@@ -25,7 +25,7 @@ In an era of instant gratification and ephemeral content, Chronos asks you to sl
 
 ## ⚙️ Technical Deep Dive & Architecture
 
-Chronos is built as a **Local-First Single Page Application (SPA)**. The architecture is designed to prioritize absolute user privacy, meaning the application logic runs entirely within the client's browser.
+Kaal is built as a **Local-First Single Page Application (SPA)**. The architecture is designed to prioritize absolute user privacy, meaning the application logic runs entirely within the client's browser.
 
 ### 1. Data Persistence & Media Handling
 - **Storage Engine**: Data is persisted using the browser's native `localStorage` API. 
@@ -39,7 +39,7 @@ Chronos is built as a **Local-First Single Page Application (SPA)**. The archite
 - *MVP Note*: The current iteration uses a static client-side key for AES encryption. A production release will implement PBKDF2 to derive a unique encryption key from a user-provided master password.
 
 ### 3. "Share the Void" Card Generation
-To allow users to share their commitment on social media without compromising privacy, Chronos features a client-side image generator.
+To allow users to share their commitment on social media without compromising privacy, Kaal features a client-side image generator.
 - **html2canvas**: When a user clicks "Share the Void", the app renders a hidden DOM element containing the "tombstone" design (using the *Spectral* typeface).
 - **Canvas Export**: `html2canvas` traverses this DOM node, paints it to an HTML5 `<canvas>` at 3x scale for high-resolution retina displays, and exports it as an `image/png` Data URI, triggering a native browser download.
 

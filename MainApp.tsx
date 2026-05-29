@@ -7,7 +7,7 @@ import { CapsuleDetail } from './components/CapsuleDetail';
 import { Profile } from './components/Profile';
 import { Button } from './components/Button';
 import { Logo } from './components/Logo';
-import { KeyIcon } from './components/KeyIcon';
+import { HourglassIcon } from './components/HourglassIcon';
 import { SplashScreen } from './components/SplashScreen';
 import { GuideEnvelope } from './components/GuideEnvelope';
 import { analytics } from './services/analytics';
@@ -29,8 +29,8 @@ const MainApp: React.FC = () => {
   const [showGuide, setShowGuide] = useState(false);
 
   useEffect(() => {
-    const savedCapsules = localStorage.getItem('chronos_capsules');
-    const savedProfile = localStorage.getItem('chronos_profile');
+    const savedCapsules = localStorage.getItem('kaal_capsules');
+    const savedProfile = localStorage.getItem('kaal_profile');
     if (savedCapsules) {
       try {
         const parsed = JSON.parse(savedCapsules);
@@ -56,11 +56,11 @@ const MainApp: React.FC = () => {
 
   useEffect(() => {
     const encryptedCapsules = capsules.map(cap => encryptCapsuleData(cap));
-    localStorage.setItem('chronos_capsules', JSON.stringify(encryptedCapsules));
+    localStorage.setItem('kaal_capsules', JSON.stringify(encryptedCapsules));
   }, [capsules]);
 
   useEffect(() => {
-    localStorage.setItem('chronos_profile', JSON.stringify(profile));
+    localStorage.setItem('kaal_profile', JSON.stringify(profile));
   }, [profile]);
 
   const navigateTo = (view: ViewState) => {
@@ -104,7 +104,7 @@ const MainApp: React.FC = () => {
   };
 
   const handleClearData = () => {
-    if (window.confirm('This will permanently erase all entries and your memoir. Are you absolutely certain you wish to burn the archive?')) {
+    if (window.confirm('This will permanently erase all fragments and your echoes. Are you absolutely certain you wish to burn the void?')) {
       analytics.burnArchive();
       localStorage.clear();
       window.location.reload();
@@ -134,7 +134,7 @@ const MainApp: React.FC = () => {
             onClick={() => navigateTo('PROFILE')}
             className={`text-[8px] tracking-[0.4em] uppercase transition-all font-bold ${currentView === 'PROFILE' ? 'text-black' : 'text-neutral-300 hover:text-neutral-500'}`}
           >
-            Memoir
+            Echoes
           </button>
           <button 
             onClick={() => navigateTo('CREATE')}
@@ -157,9 +157,9 @@ const MainApp: React.FC = () => {
             {capsules.length === 0 ? (
               <div className="py-24 text-center border-y border-black/[0.03] flex flex-col items-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neutral-100/30 to-transparent opacity-50"></div>
-                <h3 className="serif text-3xl mb-4 text-neutral-800 font-light relative z-10">The archive awaits.</h3>
+                <h3 className="serif text-3xl mb-4 text-neutral-800 font-light relative z-10">The absolute awaits.</h3>
                 <p className="text-neutral-400 text-sm font-light mb-12 max-w-md leading-relaxed relative z-10">
-                  Capture a fragment of the present. Whether it is a cherished memory, a quiet promise, or a fleeting thought—entrust it to the vault and let time reveal its meaning.
+                  Capture a fragment of the present. Whether it is a cherished memory, a quiet promise, or a fleeting thought—entrust it to the void and let time reveal its meaning.
                 </p>
                 <button 
                   onClick={() => navigateTo('CREATE')}
@@ -170,7 +170,7 @@ const MainApp: React.FC = () => {
                       <i className="fa-solid fa-feather-pointed text-neutral-400 group-hover:text-white transition-colors text-xl"></i>
                     </div>
                   </div>
-                  <span className="text-[9px] tracking-[0.4em] uppercase text-neutral-500 group-hover:text-black transition-colors font-bold">Draft a Letter</span>
+                  <span className="text-[9px] tracking-[0.4em] uppercase text-neutral-500 group-hover:text-black transition-colors font-bold">Offer to the Void</span>
                 </button>
               </div>
             ) : (
@@ -229,11 +229,11 @@ const MainApp: React.FC = () => {
            className="text-[9px] tracking-[0.3em] uppercase text-neutral-500 hover:text-black font-bold flex items-center gap-2 transition-colors pb-1 border-b border-black/5 hover:border-black/30 outline-none focus:outline-none [-webkit-tap-highlight-color:transparent]"
         >
           <i className="fa-regular fa-envelope"></i>
-          Manifesto & Correspondence
+          The Scroll of Kaal
         </button>
         <div className="flex flex-col items-center gap-2">
           <p className="text-[7px] tracking-[0.6em] uppercase text-neutral-400 font-black">
-            Curating Continuity
+            surrender to time.
           </p>
           <p className="text-[6px] tracking-[0.3em] uppercase text-neutral-300 font-bold">
             Released under MIT License
