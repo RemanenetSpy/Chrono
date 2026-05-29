@@ -4,4 +4,4 @@ Allow: /
 User-agent: Googlebot
 Allow: /sitemap.xml
 
-Sitemap: https://chronos-snowy.vercel.app/sitemap.xml
+Sitemap: https://kaal-the-absolute.vercel.app/sitemap.xml
