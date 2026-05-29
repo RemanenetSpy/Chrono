@@ -1,5 +1,5 @@
 
-# Kaal: Temporal Legacy Vault
+# Kaal: The Absolute
 
 > "Capturing the fragments of today for the clarity of tomorrow."
 
