@@ -1,5 +1,5 @@
 // ============================================================
-// CHRONOS BLOG REGISTRY
+// KAAL BLOG REGISTRY
 // ============================================================
 // When a new article goes live:
 //   1. Find the entry below
@@ -11,7 +11,7 @@
 //   Keep order: oldest at top, newest at bottom
 // ============================================================
 
-const CHRONOS_ARTICLES = [
+const KAAL_ARTICLES = [
 
   // ── PILLAR 1 — Pain Points (Mental Health & Anxiety) ─────
 
@@ -382,8 +382,8 @@ const CHRONOS_ARTICLES = [
     live:  false
   },
   {
-    url:   "/blog/chronos-ultimate-guide.html",
-    title: "Using CHRONOS: The ultimate guide to the offline time-vault",
+    url:   "/blog/kaal-ultimate-guide.html",
+    title: "Using KAAL: The ultimate guide to the offline time-vault",
     tag:   "Pillar 5 · Use Cases",
     live:  false
   }
@@ -395,20 +395,20 @@ const CHRONOS_ARTICLES = [
 // ============================================================
 
 (function () {
-  const container = document.getElementById("chronos-related");
+  const container = document.getElementById("kaal-related");
   if (!container) return;
 
   const currentUrl = window.location.pathname;
-  const currentIndex = CHRONOS_ARTICLES.findIndex(a => a.url === currentUrl);
+  const currentIndex = KAAL_ARTICLES.findIndex(a => a.url === currentUrl);
 
-  const others   = CHRONOS_ARTICLES.filter(a => a.url !== currentUrl);
+  const others   = KAAL_ARTICLES.filter(a => a.url !== currentUrl);
   const live     = others.filter(a => a.live);
   const upcoming = others.filter(a => !a.live);
 
   // Sort live articles by proximity to the current article in the registry
   const sortedLive = live.slice().sort((a, b) => {
-    const ai = CHRONOS_ARTICLES.findIndex(x => x.url === a.url);
-    const bi = CHRONOS_ARTICLES.findIndex(x => x.url === b.url);
+    const ai = KAAL_ARTICLES.findIndex(x => x.url === a.url);
+    const bi = KAAL_ARTICLES.findIndex(x => x.url === b.url);
     return Math.abs(ai - currentIndex) - Math.abs(bi - currentIndex);
   });
 
@@ -420,20 +420,20 @@ const CHRONOS_ARTICLES = [
 
   const cards = toShow.map(article => {
     if (article.live) {
-      return `<a href="${article.url}" class="chronos-related-card">
-        <p class="chronos-related-tag">${article.tag}</p>
+      return `<a href="${article.url}" class="kaal-related-card">
+        <p class="kaal-related-tag">${article.tag}</p>
         <h4>${article.title}</h4>
       </a>`;
     }
-    return `<div class="chronos-related-card chronos-related-dead">
-      <p class="chronos-related-tag">${article.tag}</p>
+    return `<div class="kaal-related-card kaal-related-dead">
+      <p class="kaal-related-tag">${article.tag}</p>
       <h4>${article.title}</h4>
-      <p class="chronos-coming-soon">Coming soon</p>
+      <p class="kaal-coming-soon">Coming soon</p>
     </div>`;
   }).join('');
 
   container.innerHTML = `
-    <p class="chronos-related-label">Continue Reading</p>
-    <div class="chronos-related-grid">${cards}</div>
+    <p class="kaal-related-label">Continue Reading</p>
+    <div class="kaal-related-grid">${cards}</div>
   `;
 })();

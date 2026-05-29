@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How to Build Zero-Knowledge on Vercel | CHRONOS</title>
+  <title>How to Build Zero-Knowledge on Vercel | KAAL</title>
   <meta name="description" content="Zero-knowledge architecture: build apps where servers can't read user data, even under subpoena. Here's how to implement it on Vercel with code examples." />
   <meta name="keywords" content="zero-knowledge architecture, zero-knowledge proof, client-side encryption Vercel, end-to-end encrypted app, serverless encryption, secure backend, privacy-first backend" />
-  <meta name="author" content="CHRONOS" />
-  <link rel="canonical" href="https://chronos-snowy.vercel.app/blog/zero-knowledge-web-app.html" />
+  <meta name="author" content="KAAL" />
+  <link rel="canonical" href="https://kaal-the-absolute.vercel.app/blog/zero-knowledge-web-app.html" />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://chronos-snowy.vercel.app/blog/zero-knowledge-web-app.html" />
+  <meta property="og:url" content="https://kaal-the-absolute.vercel.app/blog/zero-knowledge-web-app.html" />
   <meta property="og:title" content="How to Build Zero-Knowledge on Vercel" />
   <meta property="og:description" content="Build apps where servers can't read user data. Here's the architecture + code." />
-  <meta property="og:image" content="https://chronos-snowy.vercel.app/og-image.png" />
-  <meta property="og:site_name" content="CHRONOS" />
+  <meta property="og:image" content="https://kaal-the-absolute.vercel.app/og-image.png" />
+  <meta property="og:site_name" content="KAAL" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="How to Build Zero-Knowledge on Vercel" />
   <meta name="twitter:description" content="Zero-knowledge backend: build with Vercel + client-side encryption." />
-  <meta name="twitter:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta name="twitter:image" content="https://kaal-the-absolute.vercel.app/og-image.png" />
   <meta name="twitter:site" content="@Shivsha44422762" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Build Zero-Knowledge on Vercel","description":"Zero-knowledge architecture: build apps where servers can't read user data, even under subpoena. Here's how to implement it on Vercel with code examples.","author":{"@type":"Organization","name":"CHRONOS"},"publisher":{"@type":"Organization","name":"CHRONOS","url":"https://chronos-snowy.vercel.app"},"datePublished":"2026-04-15","dateModified":"2026-04-15","mainEntityOfPage":"https://chronos-snowy.vercel.app/blog/zero-knowledge-web-app.html"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Build Zero-Knowledge on Vercel","description":"Zero-knowledge architecture: build apps where servers can't read user data, even under subpoena. Here's how to implement it on Vercel with code examples.","author":{"@type":"Organization","name":"KAAL"},"publisher":{"@type":"Organization","name":"KAAL","url":"https://kaal-the-absolute.vercel.app"},"datePublished":"2026-04-15","dateModified":"2026-04-15","mainEntityOfPage":"https://kaal-the-absolute.vercel.app/blog/zero-knowledge-web-app.html"}</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -147,10 +147,10 @@
 <body>
 
   <nav aria-label="Main navigation">
-    <a href="https://chronos-snowy.vercel.app/" class="nav-logo">CHRONOS</a>
+    <a href="https://kaal-the-absolute.vercel.app/" class="nav-logo">KAAL</a>
     <div class="nav-right">
-      <a href="https://chronos-snowy.vercel.app/blog/blog-index.html" class="nav-link">All Articles</a>
-      <a href="https://chronos-snowy.vercel.app/" class="nav-cta">Open App</a>
+      <a href="https://kaal-the-absolute.vercel.app/blog/blog-index.html" class="nav-link">All Articles</a>
+      <a href="https://kaal-the-absolute.vercel.app/" class="nav-cta">Open App</a>
     </div>
   </nav>
 
@@ -172,7 +172,7 @@
 
       <p>True zero-knowledge means: the server cannot decrypt your data, even if it wanted to. Even if law enforcement subpoenas it. Even if the server gets hacked. The server sees only encrypted bytes.</p>
 
-      <p>This isn't theoretical. CHRONOS implements it. Here's how.</p>
+      <p>This isn't theoretical. KAAL implements it. Here's how.</p>
 
       <div class="pull-quote reveal">
         <p>Zero-knowledge isn't a feature. It's an architecture. Build it from the beginning or don't build it at all.</p>
@@ -191,7 +191,7 @@
             <div class="flow-num">1</div>
             <div class="flow-content">
               <div class="flow-label">Client: User writes</div>
-              <div class="flow-desc">User enters "My secret thought" in the CHRONOS app. This lives in plaintext in the browser.</div>
+              <div class="flow-desc">User enters "My secret thought" in the KAAL app. This lives in plaintext in the browser.</div>
             </div>
           </div>
           <div class="flow-step">
@@ -228,7 +228,7 @@
 
       <p>The critical insight: <strong>Vercel never holds the decryption key.</strong> The key stays on the user's device. The server cannot decrypt even if it tries.</p>
 
-      <h2>The technical implementation: How CHRONOS does it</h2>
+      <h2>The technical implementation: How KAAL does it</h2>
 
       <p>Here's the actual code pattern:</p>
 
@@ -338,9 +338,9 @@ const plaintext = await decryptVault(vault, userKey);
         </div>
       </div>
 
-      <p>CHRONOS uses <strong>Option 1</strong> (password-derived key) for simplicity + Option 2 (browser storage) for convenience. The tradeoff: passwords are the weakest link.</p>
+      <p>KAAL uses <strong>Option 1</strong> (password-derived key) for simplicity + Option 2 (browser storage) for convenience. The tradeoff: passwords are the weakest link.</p>
 
-      <p>This is why CHRONOS emphasizes: <strong>use a strong, unique password.</strong> Your encryption is only as strong as your password.</p>
+      <p>This is why KAAL emphasizes: <strong>use a strong, unique password.</strong> Your encryption is only as strong as your password.</p>
 
       <h2>Building zero-knowledge on Vercel: The architecture</h2>
 
@@ -390,7 +390,7 @@ const plaintext = await decryptVault(vault, userKey);
 
       <div class="info-callout reveal">
         <p class="info-label">Trade-off #2: No Server-Side Sync Without Trust</p>
-        <p>When you sync across devices, encrypted data must match. But "match" is hard to verify when you can't decrypt. CHRONOS solves this with device isolation + timestamps, but it's complex.</p>
+        <p>When you sync across devices, encrypted data must match. But "match" is hard to verify when you can't decrypt. KAAL solves this with device isolation + timestamps, but it's complex.</p>
       </div>
 
       <div class="info-callout reveal">
@@ -415,7 +415,7 @@ const plaintext = await decryptVault(vault, userKey);
         <li><strong>PBKDF2/Argon2:</strong> Derives encryption key from password. Slows down brute-force attacks. Argon2 is newer, stronger.</li>
       </ul>
 
-      <p>Together: <strong>AES-256-GCM with PBKDF2 key derivation</strong> is the industry standard for zero-knowledge apps. It's what Signal, Telegram (optional), and CHRONOS use.</p>
+      <p>Together: <strong>AES-256-GCM with PBKDF2 key derivation</strong> is the industry standard for zero-knowledge apps. It's what Signal, Telegram (optional), and KAAL use.</p>
 
       <p>The security is proven. The weakness is always the human side: password strength, key management, device security.</p>
 
@@ -498,29 +498,29 @@ const plaintext = await decryptVault(vault, userKey);
 
       <p>The new model doesn't require trust. It requires architecture.</p>
 
-      <p>This is why CHRONOS was built zero-knowledge from day one. Not because we're unusually ethical, but because the architecture is becoming table-stakes for apps handling sensitive data (journals, health records, financial data).</p>
+      <p>This is why KAAL was built zero-knowledge from day one. Not because we're unusually ethical, but because the architecture is becoming table-stakes for apps handling sensitive data (journals, health records, financial data).</p>
 
       <p>If you're building an app that stores user secrets, build it zero-knowledge. If you can't, acknowledge it. Don't claim privacy you don't have.</p>
 
       <div class="article-cta reveal">
-        <p class="article-cta-label">CHRONOS</p>
+        <p class="article-cta-label">KAAL</p>
         <h3>Built zero-knowledge<br/>from day one.</h3>
         <p>Your vault is encrypted on your device. We literally cannot read it. That's not a promise. It's an architecture.</p>
-        <a href="https://chronos-snowy.vercel.app/" class="btn-cta">Open CHRONOS</a>
+        <a href="https://kaal-the-absolute.vercel.app/" class="btn-cta">Open KAAL</a>
       </div>
 
     </article>
   </div>
 
   <link rel="stylesheet" href="/blog/blog-styles.css" />
-  <section id="chronos-related-section" style="color: var(--ink);">
-    <div id="chronos-related"></div>
+  <section id="kaal-related-section" style="color: var(--ink);">
+    <div id="kaal-related"></div>
   </section>
   <script src="/blog/blog-components.js"></script>
 
   <footer>
-    <a href="https://chronos-snowy.vercel.app/" class="footer-logo">CHRONOS</a>
-    <p class="footer-copy">© 2026 CHRONOS · Curating Continuity</p>
+    <a href="https://kaal-the-absolute.vercel.app/" class="footer-logo">KAAL</a>
+    <p class="footer-copy">© 2026 KAAL · surrender to time.</p>
   </footer>
 
   <script>

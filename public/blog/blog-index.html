@@ -4,31 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>The Chronicle — Writing from CHRONOS</title>
-  <meta name="description" content="Essays on cognitive offloading, digital minimalism, anxiety, focus, and the philosophy of time. From the makers of CHRONOS." />
-  <meta name="author" content="CHRONOS" />
-  <link rel="canonical" href="https://chronos-snowy.vercel.app/blog/" />
+  <title>The Chronicle — Writing from KAAL</title>
+  <meta name="description" content="Essays on cognitive offloading, digital minimalism, anxiety, focus, and the philosophy of time. From the makers of KAAL." />
+  <meta name="author" content="KAAL" />
+  <link rel="canonical" href="https://kaal-the-absolute.vercel.app/blog/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://chronos-snowy.vercel.app/blog/" />
-  <meta property="og:title" content="The Chronicle — Writing from CHRONOS" />
+  <meta property="og:url" content="https://kaal-the-absolute.vercel.app/blog/" />
+  <meta property="og:title" content="The Chronicle — Writing from KAAL" />
   <meta property="og:description" content="Essays on cognitive offloading, digital minimalism, anxiety, focus, and the philosophy of time." />
-  <meta property="og:image" content="https://chronos-snowy.vercel.app/og-image.png" />
-  <meta property="og:site_name" content="CHRONOS" />
+  <meta property="og:image" content="https://kaal-the-absolute.vercel.app/og-image.png" />
+  <meta property="og:site_name" content="KAAL" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="The Chronicle — Writing from CHRONOS" />
+  <meta name="twitter:title" content="The Chronicle — Writing from KAAL" />
   <meta name="twitter:description" content="Essays on cognitive offloading, digital minimalism, anxiety, focus, and the philosophy of time." />
-  <meta name="twitter:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta name="twitter:image" content="https://kaal-the-absolute.vercel.app/og-image.png" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Blog",
     "name": "The Chronicle",
-    "url": "https://chronos-snowy.vercel.app/blog/",
+    "url": "https://kaal-the-absolute.vercel.app/blog/",
     "description": "Essays on cognitive offloading, digital minimalism, anxiety, focus, and the philosophy of time.",
-    "publisher": { "@type": "Organization", "name": "CHRONOS", "url": "https://chronos-snowy.vercel.app" }
+    "publisher": { "@type": "Organization", "name": "KAAL", "url": "https://kaal-the-absolute.vercel.app" }
   }
   </script>
 
@@ -491,16 +491,16 @@
 
   <!-- NAV -->
   <nav aria-label="Main navigation">
-    <a href="https://chronos-snowy.vercel.app/" class="nav-logo">CHRONOS</a>
+    <a href="https://kaal-the-absolute.vercel.app/" class="nav-logo">KAAL</a>
     <div class="nav-right">
-      <a href="https://chronos-snowy.vercel.app/" class="nav-link">App</a>
-      <a href="https://chronos-snowy.vercel.app/waitlist.html" class="nav-cta">Request Key</a>
+      <a href="https://kaal-the-absolute.vercel.app/" class="nav-link">App</a>
+      <a href="https://kaal-the-absolute.vercel.app/waitlist.html" class="nav-cta">Request Key</a>
     </div>
   </nav>
 
   <!-- HEADER -->
   <header class="page-header">
-    <p class="header-eyebrow">From the makers of CHRONOS</p>
+    <p class="header-eyebrow">From the makers of KAAL</p>
     <h1 class="page-title">The Chronicle</h1>
     <p class="page-sub">Essays on cognitive offloading, digital minimalism, anxiety, focus, and the philosophy of time. One piece per day.</p>
   </header>
@@ -530,8 +530,8 @@
         const response = await fetch('/blog/blog-components.js');
         const text = await response.text();
         
-        // Extract CHRONOS_ARTICLES array
-        const match = text.match(/const CHRONOS_ARTICLES = \[([\s\S]*?)\];/);
+        // Extract KAAL_ARTICLES array
+        const match = text.match(/const KAAL_ARTICLES = \[([\s\S]*?)\];/);
         if (!match) {
           console.error('Could not parse blog-components.js');
           return;

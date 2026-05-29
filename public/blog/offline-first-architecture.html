@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>What is Offline-First Architecture in Web Development? | CHRONOS</title>
-  <meta name="description" content="Offline-first architecture is a design pattern where your app works without internet, syncing when reconnected. Here's how to build it, why it matters for privacy, and why CHRONOS was built this way." />
+  <title>What is Offline-First Architecture in Web Development? | KAAL</title>
+  <meta name="description" content="Offline-first architecture is a design pattern where your app works without internet, syncing when reconnected. Here's how to build it, why it matters for privacy, and why KAAL was built this way." />
   <meta name="keywords" content="offline-first architecture, offline-first web app, PWA offline functionality, local-first data, sync architecture, client-side storage, web app architecture, privacy-first design" />
-  <meta name="author" content="CHRONOS" />
-  <link rel="canonical" href="https://chronos-snowy.vercel.app/blog/offline-first-architecture.html" />
+  <meta name="author" content="KAAL" />
+  <link rel="canonical" href="https://kaal-the-absolute.vercel.app/blog/offline-first-architecture.html" />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://chronos-snowy.vercel.app/blog/offline-first-architecture.html" />
+  <meta property="og:url" content="https://kaal-the-absolute.vercel.app/blog/offline-first-architecture.html" />
   <meta property="og:title" content="What is Offline-First Architecture in Web Development?" />
   <meta property="og:description" content="Offline-first = your app works without internet, syncing when reconnected. Here's how to build it and why privacy matters." />
-  <meta property="og:image" content="https://chronos-snowy.vercel.app/og-image.png" />
-  <meta property="og:site_name" content="CHRONOS" />
+  <meta property="og:image" content="https://kaal-the-absolute.vercel.app/og-image.png" />
+  <meta property="og:site_name" content="KAAL" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="What is Offline-First Architecture in Web Development?" />
   <meta name="twitter:description" content="Offline-first architecture explained: why, how, and when to build it." />
-  <meta name="twitter:image" content="https://chronos-snowy.vercel.app/og-image.png" />
+  <meta name="twitter:image" content="https://kaal-the-absolute.vercel.app/og-image.png" />
   <meta name="twitter:site" content="@Shivsha44422762" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"What is Offline-First Architecture in Web Development?","description":"Offline-first architecture is a design pattern where your app works without internet, syncing when reconnected. Here's how to build it, why it matters for privacy, and why CHRONOS was built this way.","author":{"@type":"Organization","name":"CHRONOS"},"publisher":{"@type":"Organization","name":"CHRONOS","url":"https://chronos-snowy.vercel.app"},"datePublished":"2026-04-11","dateModified":"2026-04-11","mainEntityOfPage":"https://chronos-snowy.vercel.app/blog/offline-first-architecture.html"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"What is Offline-First Architecture in Web Development?","description":"Offline-first architecture is a design pattern where your app works without internet, syncing when reconnected. Here's how to build it, why it matters for privacy, and why KAAL was built this way.","author":{"@type":"Organization","name":"KAAL"},"publisher":{"@type":"Organization","name":"KAAL","url":"https://kaal-the-absolute.vercel.app"},"datePublished":"2026-04-11","dateModified":"2026-04-11","mainEntityOfPage":"https://kaal-the-absolute.vercel.app/blog/offline-first-architecture.html"}</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -149,10 +149,10 @@
 <body>
 
   <nav aria-label="Main navigation">
-    <a href="https://chronos-snowy.vercel.app/" class="nav-logo">CHRONOS</a>
+    <a href="https://kaal-the-absolute.vercel.app/" class="nav-logo">KAAL</a>
     <div class="nav-right">
-      <a href="https://chronos-snowy.vercel.app/blog/blog-index.html" class="nav-link">All Articles</a>
-      <a href="https://chronos-snowy.vercel.app/" class="nav-cta">Open App</a>
+      <a href="https://kaal-the-absolute.vercel.app/blog/blog-index.html" class="nav-link">All Articles</a>
+      <a href="https://kaal-the-absolute.vercel.app/" class="nav-cta">Open App</a>
     </div>
   </nav>
 
@@ -268,7 +268,7 @@
         </div>
       </div>
 
-      <p>CHRONOS implements all three layers. Your vault data lives in IndexedDB (Layer 1). When you connect, a sync engine (Layer 2) pushes encrypted data to Vercel (Layer 3). The server stores ciphertext. Even Vercel can't read your vaults.</p>
+      <p>KAAL implements all three layers. Your vault data lives in IndexedDB (Layer 1). When you connect, a sync engine (Layer 2) pushes encrypted data to Vercel (Layer 3). The server stores ciphertext. Even Vercel can't read your vaults.</p>
 
       <h2>Building offline-first: The technical patterns</h2>
 
@@ -293,12 +293,12 @@
           <div class="step-num">3</div>
           <div class="step-content">
             <h4>Sync-by-default (local + automatic sync)</h4>
-            <p>Data is local. Sync happens automatically when network available. Examples: CHRONOS, Apple Notes (with encryption), Google Docs offline mode. Advantages: convenience, cross-device access, backup is automatic. Disadvantages: requires infrastructure, must handle sync conflicts carefully.</p>
+            <p>Data is local. Sync happens automatically when network available. Examples: KAAL, Apple Notes (with encryption), Google Docs offline mode. Advantages: convenience, cross-device access, backup is automatic. Disadvantages: requires infrastructure, must handle sync conflicts carefully.</p>
           </div>
         </div>
       </div>
 
-      <p>CHRONOS uses pattern #3: sync-by-default with client-side encryption. You edit locally (instant). When you connect, changes sync to Vercel (encrypted). You can access from any device. The server never sees unencrypted data.</p>
+      <p>KAAL uses pattern #3: sync-by-default with client-side encryption. You edit locally (instant). When you connect, changes sync to Vercel (encrypted). You can access from any device. The server never sees unencrypted data.</p>
 
       <h2>The sync conflict problem (and how to solve it)</h2>
 
@@ -319,7 +319,7 @@
         <p class="academic-cite">Shapiro, M., Preguiça, N., Baquero, C., & Zawirski, M. (2011). Conflict-free replicated data types. In Proceedings of the 13th International Symposium on Stabilization, Safety, and Security of Distributed Systems.</p>
       </div>
 
-      <p>CHRONOS uses a simpler approach: <strong>device isolation</strong>. Each device has its own vault instance locally. Syncs are merge-safe because they're additive (new vault entries append, they don't modify existing ones). This avoids conflicts entirely.</p>
+      <p>KAAL uses a simpler approach: <strong>device isolation</strong>. Each device has its own vault instance locally. Syncs are merge-safe because they're additive (new vault entries append, they don't modify existing ones). This avoids conflicts entirely.</p>
 
       <h2>Why privacy requires offline-first</h2>
 
@@ -367,9 +367,9 @@
         <li><strong>Your data is truly public:</strong> Twitter posts, public wikis</li>
       </ul>
 
-      <h2>Building CHRONOS: A case study in offline-first</h2>
+      <h2>Building KAAL: A case study in offline-first</h2>
 
-      <p>CHRONOS was built offline-first because the use case demands it:</p>
+      <p>KAAL was built offline-first because the use case demands it:</p>
 
       <p><strong>Problem:</strong> People need a place to put thoughts they don't want anyone to see. Vaults for anxiety, anger, secrets, vulnerability.</p>
 
@@ -377,7 +377,7 @@
 
       <p><strong>Offline-first solution:</strong> Data never leaves your device unless you explicitly sync. Sync is encrypted. The server sees ciphertext, not your thoughts. You control when/if you sync.</p>
 
-      <p>Here's how CHRONOS implements it:</p>
+      <p>Here's how KAAL implements it:</p>
 
       <div class="code-block reveal">
 <code>// User creates a vault entry locally
@@ -401,7 +401,7 @@ await db.vaults.add(encrypted);
 </code>
       </div>
 
-      <p>The result: Your vault data is unreadable to CHRONOS, to Vercel, to anyone but you.</p>
+      <p>The result: Your vault data is unreadable to KAAL, to Vercel, to anyone but you.</p>
 
       <h2>The future of web apps: Local-first and offline-first</h2>
 
@@ -421,24 +421,24 @@ await db.vaults.add(encrypted);
       <p>Offline-first is the technical answer to the ownership question.</p>
 
       <div class="article-cta reveal">
-        <p class="article-cta-label">CHRONOS</p>
+        <p class="article-cta-label">KAAL</p>
         <h3>Your data stays<br/>on your device.</h3>
         <p>Offline-first architecture means your vaults are always yours. Even we can't read them.</p>
-        <a href="https://chronos-snowy.vercel.app/" class="btn-cta">Open CHRONOS</a>
+        <a href="https://kaal-the-absolute.vercel.app/" class="btn-cta">Open KAAL</a>
       </div>
 
     </article>
   </div>
 
   <link rel="stylesheet" href="/blog/blog-styles.css" />
-  <section id="chronos-related-section" style="color: var(--ink);">
-    <div id="chronos-related"></div>
+  <section id="kaal-related-section" style="color: var(--ink);">
+    <div id="kaal-related"></div>
   </section>
   <script src="/blog/blog-components.js"></script>
 
   <footer>
-    <a href="https://chronos-snowy.vercel.app/" class="footer-logo">CHRONOS</a>
-    <p class="footer-copy">© 2026 CHRONOS · Curating Continuity</p>
+    <a href="https://kaal-the-absolute.vercel.app/" class="footer-logo">KAAL</a>
+    <p class="footer-copy">© 2026 KAAL · surrender to time.</p>
   </footer>
 
   <script>
