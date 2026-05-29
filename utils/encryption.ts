@@ -5,7 +5,7 @@ import { Capsule } from '../types';
 // In a full production app with a backend, this would be derived from a user password
 // or a secure key exchange mechanism. For the local-storage MVP, this ensures
 // the data is AES-256 encrypted at rest.
-const SECRET_KEY = 'chronos_mvp_aes_256_secure_key_!@#';
+const SECRET_KEY = 'kaal_mvp_aes_256_secure_key_!@#';
 
 export const encryptCapsuleData = (capsule: Capsule & { _isEncrypted?: boolean }): Capsule => {
   // If it's already encrypted (e.g. decryption failed earlier), don't double-encrypt
